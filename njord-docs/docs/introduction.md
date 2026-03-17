@@ -1,26 +1,94 @@
 # Introduction
 
 ## Purpose of the Documentation
-The primary purpose of this documentation is to provide comprehensive guidance and understanding to all parties involved in the use and application of the Affiliate and Brand Marketing Web3 Protocol. 
+This documentation provides comprehensive guidance for all participants in the Njord Protocol - a decentralized affiliate and brand marketing system built on Solana.
 
-This document serves as a manual for developers, companies, affiliates, and end customers to familiarize themselves with the functionalities, methodologies, and best practices for the effective use of the protocol.
+It serves as the definitive reference for:
+- **Protocol developers** building on Njord
+- **Companies** launching affiliate campaigns
+- **Affiliates** earning commissions
+- **Bridge operators** providing fiat on/off ramps
+- **End customers** interacting with affiliate links
 
-## Overview of the Affiliate Marketing Protocol
-The Affiliate and Brand Marketing Web3 Protocol is a revolutionary system that brings affiliate and brand marketing on-chain. It leverages blockchain technology to create an open, transparent, and secure environment for conducting affiliate marketing campaigns. With this protocol, companies can initialize smart contracts specifying their campaign parameters such as budget, targets, and other details. Affiliates can participate in these campaigns, and end customers can make purchases or view content through affiliate-specific links. The protocol automatically handles attribution and commission payouts, ensuring a seamless and efficient process for all parties involved.
+## Overview of the Njord Protocol
+
+Njord is a decentralized affiliate marketing protocol built on **Solana**, designed for high-throughput, low-cost attribution and settlement. The protocol brings affiliate marketing on-chain while maintaining accessibility for non-crypto users through a network of independent bridge operators.
+
+### Core Principles
+
+1. **On-chain Transparency**: All campaigns, attributions, and payouts are recorded on Solana, providing immutable proof of marketing performance.
+
+2. **Decentralized Bridge Network**: Independent bridge operators handle fiat on/off ramps, allowing regular users to participate without touching cryptocurrency directly.
+
+3. **Real-time Settlement**: Solana's ~400ms block times enable near-instant commission attribution and payouts.
+
+4. **Open Participation**: Anyone can become a bridge operator by staking NJORD tokens and running the bridge infrastructure.
+
+### How It Works
+
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        NJORD PROTOCOL                           │
+│                     (Solana Smart Contracts)                    │
+│  ┌───────────────┐  ┌───────────────┐  ┌───────────────┐       │
+│  │   Campaign    │  │  Attribution  │  │   Escrow &    │       │
+│  │   Registry    │  │    Engine     │  │   Payouts     │       │
+│  └───────────────┘  └───────────────┘  └───────────────┘       │
+└─────────────────────────────┬───────────────────────────────────┘
+                              │
+        ┌─────────────────────┼─────────────────────┐
+        │                     │                     │
+        ▼                     ▼                     ▼
+┌───────────────┐     ┌───────────────┐     ┌───────────────┐
+│   Bridge A    │     │   Bridge B    │     │   Bridge C    │
+│   (US/EU)     │     │   (Asia)      │     │   (LATAM)     │
+│   Stripe      │     │   Razorpay    │     │   MercadoPago │
+└───────┬───────┘     └───────┬───────┘     └───────┬───────┘
+        │                     │                     │
+        ▼                     ▼                     ▼
+   End Users             End Users             End Users
+   (Fiat)                (Fiat)                (Fiat)
+```
+
+### Why Solana?
+
+| Factor | Benefit for Affiliate Marketing |
+|--------|--------------------------------|
+| ~400ms finality | Real-time attribution tracking |
+| ~$0.00025/tx | Economical micro-commissions |
+| 65,000 TPS | Scale to millions of clicks/purchases |
+| Rich ecosystem | USDC, wallet infrastructure, DEXs |
 
 ## Definitions of Key Terms
-** Protocol Creators:** The developers and maintainers of the Affiliate and Brand Marketing Web3 Protocol.
 
-Company: Any business entity that wishes to incentivize sales or traffic through the use of the protocol.
+**Njord Protocol**: The on-chain smart contracts and SDK that power decentralized affiliate marketing.
 
-Affiliate: An individual or entity that promotes a company's products or services and earns a commission for any sales or traffic they generate.
+**NJORD Token**: The native protocol token used for staking, governance, and bridge operator incentives.
 
-End Customer: The consumer who purchases or views the company's product or service.
+**Company**: Any business entity launching affiliate marketing campaigns through the protocol.
 
-Campaign: A marketing initiative created by a company through the protocol.
+**Affiliate**: An individual or entity promoting products/services and earning commissions.
 
-Smart Contract: A self-executing contract with the terms of the agreement between buyer and seller directly written into lines of code.
+**End Customer**: The consumer who purchases or engages through affiliate links.
 
-On-chain Attribution: A mechanism to track and attribute sales or traffic to a specific affiliate using blockchain technology.
+**Bridge Operator**: An independent entity running fiat on/off ramp infrastructure, staking NJORD tokens to participate.
 
-This documentation will provide detailed information and guidelines for each party involved in the protocol, thus ensuring that the system is used efficiently and effectively.
+**Campaign**: A marketing initiative with defined budget, commission rates, and attribution rules, deployed as an on-chain program.
+
+**Attribution**: The on-chain mechanism tracking which affiliate drove a specific customer action.
+
+**Escrow**: Smart contract-held funds that automatically distribute to affiliates based on verified attributions.
+
+**Settlement**: The process of converting attributed actions into affiliate payouts.
+
+## Document Structure
+
+| Document | Contents |
+|----------|----------|
+| [Stakeholders](stakeholders.md) | Roles and responsibilities of all participants |
+| [Protocol Flow](protocol_flow.md) | End-to-end transaction and attribution flow |
+| [Architecture](architecture.md) | Technical system design |
+| [Tokenomics](tokenomics.md) | NJORD token utility and bridge economics |
+| [Fraud Detection](fraud_detection.md) | Incentivized fraud prevention system |
+| [Roadmap](roadmap.md) | Development phases and milestones |
+| [Getting Started](getting_started.md) | Setup guides for each participant type |
