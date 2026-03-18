@@ -14,6 +14,8 @@ It serves as the definitive reference for:
 
 Njord is a decentralized affiliate marketing protocol built on **Solana**, designed for high-throughput, low-cost attribution and settlement. The protocol brings affiliate marketing on-chain while maintaining accessibility for non-crypto users through a network of independent bridge operators.
 
+**Primary Focus:** Digital products and services (SaaS, apps, digital content, subscriptions) where instant delivery eliminates return/refund complexity.
+
 ### Core Principles
 
 1. **On-chain Transparency**: All campaigns, attributions, and payouts are recorded on Solana, providing immutable proof of marketing performance.

@@ -1,0 +1,40 @@
+# Solana / Anchor
+target/
+.anchor/
+test-ledger/
+node_modules/
+
+# TypeScript
+dist/
+*.tsbuildinfo
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.uv/
+*.egg-info/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment
+.env
+.env.local
+*.pem
+keypair*.json
+
+# Logs
+*.log
+logs/
+
+# Build artifacts
+*.so

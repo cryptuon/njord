@@ -58,14 +58,18 @@ Campaign {
   commission_type: percentage | flat | tiered
   commission_rate: 10% (or specific tiers)
   attribution_model: last_click | first_click | multi_touch
-  target_action: purchase | signup | pageview | custom
+  target_action: purchase | signup | app_install | subscription | custom
   start_date: timestamp
   end_date: timestamp (optional)
   max_affiliates: 100 (optional)
+  min_affiliate_tier: new | verified | trusted | elite
+  custom_hold_period: 0-7 days (overrides tier default)
   auto_approve: true | false
   metadata_uri: ipfs://... (campaign details, creatives)
 }
 ```
+
+**Note:** Njord is optimized for digital products (SaaS, apps, subscriptions, digital content) where delivery is instant and returns are not applicable.
 
 **Paths:**
 - **Crypto-native**: Company connects Solana wallet, signs transaction

@@ -18,12 +18,17 @@ This document outlines Njord's incentivized fraud detection system, designed to 
 
 Affiliates build trust through staking and track record:
 
-| Tier | Stake Required | History | Settlement Speed | Campaign Access |
-|------|----------------|---------|------------------|-----------------|
-| **New** | 0 | <30 days | 7-day hold | Open campaigns only |
-| **Verified** | 100 NJORD | 30+ days, >10 conversions | 3-day hold | Standard campaigns |
-| **Trusted** | 1,000 NJORD | 90+ days, >100 conversions, <1% dispute rate | 24-hour hold | Premium campaigns |
+| Tier | Stake Required | History | Default Hold | Campaign Access |
+|------|----------------|---------|--------------|-----------------|
+| **New** | 0 | <30 days | 7 days | Open campaigns only |
+| **Verified** | 100 NJORD | 30+ days, >10 conversions | 3 days | Standard campaigns |
+| **Trusted** | 1,000 NJORD | 90+ days, >100 conversions, <1% dispute rate | 24 hours | Premium campaigns |
 | **Elite** | 10,000 NJORD | 180+ days, >1000 conversions, <0.5% dispute rate | Real-time | All campaigns |
+
+**Notes:**
+- Stake amounts are governance-adjustable based on token price
+- Companies can customize hold periods per campaign (override defaults)
+- Companies can set minimum tier requirements for their campaigns
 
 **Stake Slashing Schedule:**
 
@@ -32,7 +37,7 @@ Affiliates build trust through staking and track record:
 | Unverified fraud (challenged & lost) | 10% | 25% | 100% + ban |
 | Verified fraud (proven malicious) | 50% | 100% + ban | - |
 | Self-referral | 25% | 50% | 100% + ban |
-| Return abuse pattern | 15% | 30% | 75% |
+| Bot/fake traffic | 30% | 60% | 100% + ban |
 
 ### Bridge Operator Stakes
 
@@ -44,6 +49,15 @@ Bridges must maintain higher stakes and standards:
 | Silver | 50,000 NJORD | $100,000 | <1% dispute rate |
 | Gold | 200,000 NJORD | $1,000,000 | <0.5% dispute rate |
 | Platinum | 500,000 NJORD | Unlimited | <0.25% dispute rate |
+
+**Strict Liability Model:** Bridges are slashed for any fraud they submit, regardless of intent. This creates strong incentive to invest in detection infrastructure. Bridges that process fraudulent attributions face:
+
+| Fraud Submitted | Penalty |
+|-----------------|---------|
+| Per fraudulent attribution | 5% of attribution value (min 10 USDC) |
+| Exceeds fraud tolerance | 10% stake slash + tier downgrade |
+| Repeated violations | 50% slash + 30-day suspension |
+| Proven collusion | 100% slash + permanent ban |
 
 ---
 
@@ -117,10 +131,12 @@ Bridges must maintain higher stakes and standards:
 
 | Challenger | Can Challenge | Bond Required | Evidence Types |
 |------------|---------------|---------------|----------------|
-| **Company** | Their own campaign attributions | 5% of commission | Transaction data, customer info |
-| **Bridge** | Any attribution they processed | 10% of commission | Pattern data, IP analysis |
-| **Other Affiliate** | Same campaign attributions | 15% of commission | Public blockchain analysis |
+| **Company** | Their own campaign attributions | 5% of commission (min 5 USDC) | Transaction data, customer info |
+| **Bridge** | Any attribution they processed | 10% of commission (min 10 USDC) | Pattern data, IP analysis |
+| **Other Affiliate** | Same campaign attributions | 15% of commission (min 15 USDC) | Public blockchain analysis |
 | **Protocol (auto)** | Any attribution | No bond | Automated detection |
+
+**Bond Floor:** Minimum bond prevents spam challenges on micro-commissions. Floor amounts are governance-adjustable.
 
 ### Challenge Process
 
@@ -330,32 +346,33 @@ Uses:
 - Challenge by company (they see low intent signals)
 - Slash affiliate stake
 
-### Scenario 2: Return Abuse
-
-**Attack:** Affiliate drives purchases, earns commission, then customers return products.
-
-**Detection:**
-- Track return rates per affiliate (off-chain, reported by company)
-- Historical pattern analysis
-
-**Response:**
-- Extended hold period (matches return window)
-- Clawback mechanism for returned orders
-- Reputation penalty
-
-### Scenario 3: Fake Signups
+### Scenario 2: Fake Signups / Leads
 
 **Attack:** Affiliate creates fake accounts to earn per-signup commissions.
 
 **Detection:**
 - Email domain analysis (disposable emails)
 - Phone verification failure
-- No subsequent engagement
+- No subsequent engagement (for digital products: no login, no usage)
 
 **Response:**
 - Require verified email/phone for signup campaigns
-- Pay on activation, not just signup
+- Pay on activation/usage, not just signup
 - Pattern detection across affiliates
+
+### Scenario 3: Bot Traffic
+
+**Attack:** Affiliate uses bots to generate fake clicks or signups.
+
+**Detection:**
+- Device fingerprint anomalies
+- Behavioral analysis (inhuman patterns)
+- IP clustering / data center detection
+
+**Response:**
+- Bridge rejects submission
+- If submitted: both affiliate and bridge slashed
+- Reputation destroyed
 
 ### Scenario 4: Collusion (Affiliate + Bridge)
 
@@ -368,8 +385,8 @@ Uses:
 
 **Response:**
 - Company challenges with transaction records
-- Both affiliate and bridge slashed
-- Bridge loses license
+- Both affiliate and bridge slashed (strict liability)
+- Bridge permanently banned
 
 ---
 
