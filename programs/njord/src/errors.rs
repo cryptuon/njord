@@ -79,4 +79,48 @@ pub enum NjordError {
     ArithmeticOverflow,
     #[msg("Invalid timestamp")]
     InvalidTimestamp,
+
+    // Governance errors
+    #[msg("Lock duration too short (minimum 1 week)")]
+    LockDurationTooShort,
+    #[msg("Lock duration too long (maximum 4 years)")]
+    LockDurationTooLong,
+    #[msg("Invalid lock extension")]
+    InvalidLockExtension,
+    #[msg("Lock has expired")]
+    LockExpired,
+    #[msg("Lock has not expired yet")]
+    LockNotExpired,
+    #[msg("Insufficient voting power")]
+    InsufficientVotingPower,
+    #[msg("No voting power")]
+    NoVotingPower,
+    #[msg("Voting is not active")]
+    VotingNotActive,
+    #[msg("Voting has ended")]
+    VotingEnded,
+    #[msg("Voting has not ended yet")]
+    VotingNotEnded,
+    #[msg("Proposal is not active")]
+    ProposalNotActive,
+    #[msg("Proposal has not succeeded")]
+    ProposalNotSucceeded,
+    #[msg("Proposal is not queued")]
+    ProposalNotQueued,
+    #[msg("Timelock has not expired")]
+    TimelockNotExpired,
+    #[msg("Proposal already executed")]
+    ProposalAlreadyExecuted,
+    #[msg("Title too long (max 64 characters)")]
+    TitleTooLong,
+    #[msg("Description too long (max 64 characters)")]
+    DescriptionTooLong,
+    #[msg("Proposal data too large (max 128 bytes)")]
+    ProposalDataTooLarge,
+    #[msg("Invalid proposal data")]
+    InvalidProposalData,
+    #[msg("Invalid parameter ID")]
+    InvalidParameterId,
+    #[msg("Fee too high (max 10%)")]
+    FeeTooHigh,
 }

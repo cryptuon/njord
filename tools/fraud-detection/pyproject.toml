@@ -1,0 +1,17 @@
+[project]
+name = "njord-fraud-detection"
+version = "0.1.0"
+description = "ML-powered fraud detection for Njord Protocol bridge operators"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "httpx>=0.28.1",
+    "numpy>=2.4.0",
+    "pandas>=2.3.3",
+    "pydantic>=2.12.5",
+    "redis>=7.1.0",
+    "scikit-learn>=1.8.0",
+]
+
+[project.scripts]
+njord-fraud = "njord_fraud_detection.cli:main"

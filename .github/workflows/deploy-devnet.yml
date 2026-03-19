@@ -1,0 +1,84 @@
+name: Deploy to Devnet
+
+on:
+  workflow_dispatch:
+    inputs:
+      confirm:
+        description: 'Type "deploy" to confirm deployment'
+        required: true
+        default: ""
+
+jobs:
+  deploy:
+    name: Deploy to Solana Devnet
+    runs-on: ubuntu-latest
+    if: github.event.inputs.confirm == 'deploy'
+    environment: devnet
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Rust
+        uses: dtolnay/rust-action@stable
+        with:
+          toolchain: stable
+
+      - name: Cache Rust dependencies
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: programs/njord
+
+      - name: Install Solana CLI
+        run: |
+          sh -c "$(curl -sSfL https://release.solana.com/v1.18.26/install)"
+          echo "$HOME/.local/share/solana/install/active_release/bin" >> $GITHUB_PATH
+
+      - name: Install Anchor CLI
+        run: |
+          cargo install --git https://github.com/coral-xyz/anchor avm --locked --force
+          avm install 0.30.1
+          avm use 0.30.1
+
+      - name: Setup keypair
+        run: |
+          echo "${{ secrets.SOLANA_KEYPAIR }}" > ~/.config/solana/id.json
+          solana config set --url devnet
+          solana config set --keypair ~/.config/solana/id.json
+
+      - name: Check balance
+        run: |
+          BALANCE=$(solana balance | awk '{print $1}')
+          echo "Current balance: $BALANCE SOL"
+          if (( $(echo "$BALANCE < 1" | bc -l) )); then
+            echo "::warning::Low balance. Requesting airdrop..."
+            solana airdrop 2 || true
+          fi
+
+      - name: Build program
+        run: anchor build
+
+      - name: Deploy to devnet
+        run: |
+          anchor deploy --provider.cluster devnet
+          echo "Program deployed!"
+
+      - name: Save deployment info
+        run: |
+          echo "Deployment Time: $(date -u)" > deployment-info.txt
+          echo "Program ID: $(solana-keygen pubkey target/deploy/njord-keypair.json)" >> deployment-info.txt
+          echo "Cluster: devnet" >> deployment-info.txt
+          echo "Deployer: $(solana-keygen pubkey ~/.config/solana/id.json)" >> deployment-info.txt
+
+      - name: Upload deployment info
+        uses: actions/upload-artifact@v4
+        with:
+          name: deployment-info
+          path: deployment-info.txt
+          retention-days: 90
+
+      - name: Upload IDL
+        uses: actions/upload-artifact@v4
+        with:
+          name: devnet-idl
+          path: target/idl
+          retention-days: 90

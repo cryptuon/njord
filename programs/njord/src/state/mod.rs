@@ -3,12 +3,14 @@ pub mod affiliate;
 pub mod attribution;
 pub mod bridge;
 pub mod challenge;
+pub mod governance;
 
 pub use campaign::*;
 pub use affiliate::*;
 pub use attribution::*;
 pub use bridge::*;
 pub use challenge::*;
+pub use governance::*;
 
 /// Protocol configuration account (singleton)
 #[account]

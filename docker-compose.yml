@@ -1,0 +1,106 @@
+version: "3.8"
+
+services:
+  # PostgreSQL for indexer
+  postgres:
+    image: postgres:16-alpine
+    container_name: njord-postgres
+    environment:
+      POSTGRES_USER: njord
+      POSTGRES_PASSWORD: njord_dev
+      POSTGRES_DB: njord_indexer
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U njord -d njord_indexer"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Redis for caching and queues
+  redis:
+    image: redis:7-alpine
+    container_name: njord-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Solana local validator (optional, for testing)
+  solana-validator:
+    image: solanalabs/solana:v1.18.26
+    container_name: njord-solana
+    command: >
+      solana-test-validator
+      --reset
+      --quiet
+      --bind-address 0.0.0.0
+      --rpc-port 8899
+      --faucet-port 9900
+    ports:
+      - "8899:8899"  # RPC
+      - "8900:8900"  # WebSocket
+      - "9900:9900"  # Faucet
+    volumes:
+      - solana_data:/root/.config/solana
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8899/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  # Njord Indexer (built from local)
+  indexer:
+    build:
+      context: .
+      dockerfile: packages/indexer/Dockerfile
+    container_name: njord-indexer
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://njord:njord_dev@postgres:5432/njord_indexer
+      REDIS_URL: redis://redis:6379
+      SOLANA_RPC: http://solana-validator:8899
+      PROGRAM_ID: Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS
+      API_PORT: 4000
+    ports:
+      - "4000:4000"
+    profiles:
+      - full
+
+  # Njord Bridge API (built from local)
+  bridge:
+    build:
+      context: .
+      dockerfile: packages/bridge-sdk/Dockerfile
+    container_name: njord-bridge
+    depends_on:
+      redis:
+        condition: service_healthy
+    environment:
+      SOLANA_RPC: http://solana-validator:8899
+      REDIS_URL: redis://redis:6379
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    profiles:
+      - full
+
+volumes:
+  postgres_data:
+  redis_data:
+  solana_data:
+
+networks:
+  default:
+    name: njord-network
