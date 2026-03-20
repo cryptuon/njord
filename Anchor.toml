@@ -6,17 +6,20 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-njord = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+njord = "Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv"
 
 [programs.devnet]
-njord = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+njord = "Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv"
+
+[programs.mainnet]
+njord = "Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "Localnet"
-wallet = "~/.config/solana/id.json"
+cluster = "devnet"
+wallet = "~/.config/solana/njord-devnet-deployer.json"
 
 [scripts]
 test = "npx ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"

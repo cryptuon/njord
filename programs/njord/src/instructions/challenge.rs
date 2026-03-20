@@ -256,6 +256,12 @@ pub fn resolve_challenge(
     outcome: ChallengeOutcome,
 ) -> Result<()> {
     let clock = Clock::get()?;
+
+    // Get account info and values BEFORE mutable borrows
+    let challenge_account_info = ctx.accounts.challenge.to_account_info();
+    let challenge_key = ctx.accounts.challenge.key();
+    let bond_amount = ctx.accounts.challenge.bond_amount;
+
     let challenge = &mut ctx.accounts.challenge;
     let attribution = &mut ctx.accounts.attribution;
     let affiliate_profile = &mut ctx.accounts.affiliate_profile;
@@ -268,7 +274,6 @@ pub fn resolve_challenge(
         NjordError::InvalidAmount
     );
 
-    let challenge_key = challenge.key();
     let seeds = &[
         b"challenge_escrow",
         challenge_key.as_ref(),
@@ -280,20 +285,20 @@ pub fn resolve_challenge(
         ChallengeOutcome::FraudConfirmed => {
             // Challenger wins: bond back + 50% of commission
             let reward = attribution.commission_amount / 2;
-            let total_to_challenger = challenge.bond_amount + reward;
+            let _total_to_challenger = bond_amount + reward;
 
             // Return bond + reward to challenger
             let cpi_accounts = Transfer {
                 from: ctx.accounts.challenge_escrow.to_account_info(),
                 to: ctx.accounts.challenger_token_account.to_account_info(),
-                authority: ctx.accounts.challenge.to_account_info(),
+                authority: challenge_account_info.clone(),
             };
             let cpi_ctx = CpiContext::new_with_signer(
                 ctx.accounts.token_program.to_account_info(),
                 cpi_accounts,
                 signer
             );
-            token::transfer(cpi_ctx, challenge.bond_amount)?;
+            token::transfer(cpi_ctx, bond_amount)?;
 
             // Refund remaining to campaign
             campaign.spent = campaign.spent.saturating_sub(attribution.commission_amount);
@@ -333,18 +338,18 @@ pub fn resolve_challenge(
             let cpi_accounts = Transfer {
                 from: ctx.accounts.challenge_escrow.to_account_info(),
                 to: ctx.accounts.campaign_escrow.to_account_info(),
-                authority: ctx.accounts.challenge.to_account_info(),
+                authority: challenge_account_info.clone(),
             };
             let cpi_ctx = CpiContext::new_with_signer(
                 ctx.accounts.token_program.to_account_info(),
                 cpi_accounts,
                 signer
             );
-            token::transfer(cpi_ctx, challenge.bond_amount)?;
+            token::transfer(cpi_ctx, bond_amount)?;
 
             // Add bond to affiliate's pending (will be claimed on settlement)
             affiliate_registration.pending_earnings = affiliate_registration.pending_earnings
-                .checked_add(challenge.bond_amount)
+                .checked_add(bond_amount)
                 .ok_or(NjordError::ArithmeticOverflow)?;
 
             // Restore attribution to pending
@@ -358,14 +363,14 @@ pub fn resolve_challenge(
             let cpi_accounts = Transfer {
                 from: ctx.accounts.challenge_escrow.to_account_info(),
                 to: ctx.accounts.challenger_token_account.to_account_info(),
-                authority: ctx.accounts.challenge.to_account_info(),
+                authority: challenge_account_info.clone(),
             };
             let cpi_ctx = CpiContext::new_with_signer(
                 ctx.accounts.token_program.to_account_info(),
                 cpi_accounts,
                 signer
             );
-            token::transfer(cpi_ctx, challenge.bond_amount)?;
+            token::transfer(cpi_ctx, bond_amount)?;
 
             // Reduce commission by 50%
             let reduced_commission = attribution.net_commission / 2;

@@ -12,9 +12,9 @@ import {
   SEEDS,
 } from "./types";
 
-// Program ID - update after deployment
+// Program ID - deployed to devnet
 export const NJORD_PROGRAM_ID = new PublicKey(
-  "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+  "Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv"
 );
 
 export interface NjordClientConfig {

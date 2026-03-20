@@ -23,3 +23,7 @@ codegen-units = 1
 opt-level = 3
 incremental = false
 codegen-units = 1
+
+# Pin constant_time_eq to version compatible with Solana platform-tools Rust 1.84
+[patch.crates-io]
+constant_time_eq = { git = "https://github.com/cesarb/constant_time_eq", tag = "0.3.1" }

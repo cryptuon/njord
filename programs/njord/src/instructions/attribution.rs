@@ -294,11 +294,13 @@ pub fn settle_attribution(ctx: Context<SettleAttribution>) -> Result<()> {
     let bridge = &mut ctx.accounts.bridge;
 
     // Transfer net commission to affiliate
-    let campaign_key = ctx.accounts.campaign.key();
+    // Campaign is the escrow authority (a PDA), use campaign's seeds to sign
+    let campaign = &ctx.accounts.campaign;
+    let campaign_id_bytes = campaign.campaign_id.to_le_bytes();
     let seeds = &[
-        b"escrow",
-        campaign_key.as_ref(),
-        &[ctx.bumps.escrow],
+        b"campaign",
+        campaign_id_bytes.as_ref(),
+        &[campaign.bump],
     ];
     let signer = &[&seeds[..]];
 

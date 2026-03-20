@@ -1,6 +1,6 @@
 use anchor_lang::prelude::*;
 
-#[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq, Default)]
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq, Default, Debug)]
 pub enum BridgeStatus {
     #[default]
     Active,
@@ -9,7 +9,7 @@ pub enum BridgeStatus {
     Unbonding,
 }
 
-#[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq, Default, PartialOrd, Ord)]
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq, Default, PartialOrd, Ord, Debug)]
 pub enum BridgeTier {
     #[default]
     Bronze,

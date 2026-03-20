@@ -32,7 +32,7 @@ pub enum TargetAction {
     Subscription,
 }
 
-#[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq, Default, PartialOrd, Ord)]
+#[derive(AnchorSerialize, AnchorDeserialize, Clone, Copy, PartialEq, Eq, Default, PartialOrd, Ord, Debug)]
 pub enum AffiliateTier {
     #[default]
     New,

@@ -7,7 +7,7 @@ pub mod state;
 use instructions::*;
 use state::*;
 
-declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
+declare_id!("Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv");
 
 #[program]
 pub mod njord {

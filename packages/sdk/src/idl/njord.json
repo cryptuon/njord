@@ -1,0 +1,5615 @@
+{
+  "address": "Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv",
+  "metadata": {
+    "name": "njord",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Njord - Decentralized Affiliate Marketing Protocol",
+    "repository": "https://github.com/njord-protocol/njord"
+  },
+  "instructions": [
+    {
+      "name": "approve_affiliate",
+      "discriminator": [
+        44,
+        36,
+        167,
+        100,
+        37,
+        234,
+        100,
+        144
+      ],
+      "accounts": [
+        {
+          "name": "company",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "campaign"
+          ]
+        },
+        {
+          "name": "campaign",
+          "relations": [
+            "registration"
+          ]
+        },
+        {
+          "name": "registration",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  102,
+                  102,
+                  105,
+                  108,
+                  105,
+                  97,
+                  116,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "campaign"
+              },
+              {
+                "kind": "account",
+                "path": "profile"
+              }
+            ]
+          }
+        },
+        {
+          "name": "profile"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "cancel_proposal",
+      "discriminator": [
+        106,
+        74,
+        128,
+        146,
+        19,
+        65,
+        39,
+        23
+      ],
+      "accounts": [
+        {
+          "name": "proposal",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  112,
+                  111,
+                  115,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "proposal_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "governance_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "canceler",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "proposal_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "cast_vote",
+      "discriminator": [
+        20,
+        212,
+        15,
+        189,
+        69,
+        180,
+        69,
+        151
+      ],
+      "accounts": [
+        {
+          "name": "proposal",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  112,
+                  111,
+                  115,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "proposal_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "vote_record",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  111,
+                  116,
+                  101
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "proposal_id"
+              },
+              {
+                "kind": "account",
+                "path": "voter"
+              }
+            ]
+          }
+        },
+        {
+          "name": "voting_escrow",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  111,
+                  116,
+                  105,
+                  110,
+                  103,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "voter"
+              }
+            ]
+          }
+        },
+        {
+          "name": "protocol_params",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108,
+                  95,
+                  112,
+                  97,
+                  114,
+                  97,
+                  109,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "voter",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "proposal_id",
+          "type": "u64"
+        },
+        {
+          "name": "vote_choice",
+          "type": {
+            "defined": {
+              "name": "VoteChoice"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_affiliate_profile",
+      "discriminator": [
+        211,
+        72,
+        63,
+        142,
+        182,
+        26,
+        197,
+        98
+      ],
+      "accounts": [
+        {
+          "name": "wallet",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "profile",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  102,
+                  102,
+                  105,
+                  108,
+                  105,
+                  97,
+                  116,
+                  101,
+                  95,
+                  112,
+                  114,
+                  111,
+                  102,
+                  105,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "create_campaign",
+      "discriminator": [
+        111,
+        131,
+        187,
+        98,
+        160,
+        193,
+        114,
+        244
+      ],
+      "accounts": [
+        {
+          "name": "company",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "campaign",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  97,
+                  109,
+                  112,
+                  97,
+                  105,
+                  103,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "config.total_campaigns",
+                "account": "ProtocolConfig"
+              }
+            ]
+          }
+        },
+        {
+          "name": "payment_mint",
+          "docs": [
+            "Payment token mint (e.g., USDC)"
+          ]
+        },
+        {
+          "name": "escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "campaign"
+              }
+            ]
+          }
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "params",
+          "type": {
+            "defined": {
+              "name": "CreateCampaignParams"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "create_challenge",
+      "discriminator": [
+        170,
+        244,
+        47,
+        1,
+        1,
+        15,
+        173,
+        239
+      ],
+      "accounts": [
+        {
+          "name": "challenger",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "campaign",
+          "relations": [
+            "attribution"
+          ]
+        },
+        {
+          "name": "attribution",
+          "writable": true
+        },
+        {
+          "name": "challenge",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  104,
+                  97,
+                  108,
+                  108,
+                  101,
+                  110,
+                  103,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "attribution"
+              }
+            ]
+          }
+        },
+        {
+          "name": "challenger_token_account",
+          "writable": true
+        },
+        {
+          "name": "challenge_escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  104,
+                  97,
+                  108,
+                  108,
+                  101,
+                  110,
+                  103,
+                  101,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "challenge"
+              }
+            ]
+          }
+        },
+        {
+          "name": "payment_mint"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "challenger_type",
+          "type": {
+            "defined": {
+              "name": "ChallengerType"
+            }
+          }
+        },
+        {
+          "name": "evidence_uri",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "create_proposal",
+      "discriminator": [
+        132,
+        116,
+        68,
+        174,
+        216,
+        160,
+        198,
+        22
+      ],
+      "accounts": [
+        {
+          "name": "proposal",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  112,
+                  111,
+                  115,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "governance_config.proposal_count",
+                "account": "GovernanceConfig"
+              }
+            ]
+          }
+        },
+        {
+          "name": "governance_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "voting_escrow",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  111,
+                  116,
+                  105,
+                  110,
+                  103,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "proposer"
+              }
+            ]
+          }
+        },
+        {
+          "name": "protocol_params",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108,
+                  95,
+                  112,
+                  97,
+                  114,
+                  97,
+                  109,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "proposer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "name": "description_hash",
+          "type": "string"
+        },
+        {
+          "name": "proposal_type",
+          "type": {
+            "defined": {
+              "name": "ProposalType"
+            }
+          }
+        },
+        {
+          "name": "proposal_data",
+          "type": "bytes"
+        }
+      ]
+    },
+    {
+      "name": "create_voting_escrow",
+      "discriminator": [
+        24,
+        136,
+        184,
+        3,
+        35,
+        83,
+        237,
+        168
+      ],
+      "accounts": [
+        {
+          "name": "voting_escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  111,
+                  116,
+                  105,
+                  110,
+                  103,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "governance_config"
+        },
+        {
+          "name": "owner_token_account",
+          "writable": true
+        },
+        {
+          "name": "escrow_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "lock_duration",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "end_campaign",
+      "discriminator": [
+        6,
+        152,
+        36,
+        161,
+        147,
+        29,
+        30,
+        90
+      ],
+      "accounts": [
+        {
+          "name": "company",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "campaign"
+          ]
+        },
+        {
+          "name": "campaign",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "execute_proposal",
+      "discriminator": [
+        186,
+        60,
+        116,
+        133,
+        108,
+        128,
+        111,
+        28
+      ],
+      "accounts": [
+        {
+          "name": "proposal",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  112,
+                  111,
+                  115,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "proposal_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "protocol_params",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108,
+                  95,
+                  112,
+                  97,
+                  114,
+                  97,
+                  109,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "governance_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "executor",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "proposal_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "extend_lock",
+      "discriminator": [
+        68,
+        151,
+        140,
+        144,
+        139,
+        122,
+        118,
+        170
+      ],
+      "accounts": [
+        {
+          "name": "voting_escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  111,
+                  116,
+                  105,
+                  110,
+                  103,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "new_lock_end",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "finalize_proposal",
+      "discriminator": [
+        23,
+        68,
+        51,
+        167,
+        109,
+        173,
+        187,
+        164
+      ],
+      "accounts": [
+        {
+          "name": "proposal",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  112,
+                  111,
+                  115,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "proposal_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "governance_config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "finalizer",
+          "docs": [
+            "Anyone can finalize after voting ends"
+          ],
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "proposal_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "fund_campaign",
+      "discriminator": [
+        109,
+        57,
+        56,
+        239,
+        99,
+        111,
+        221,
+        121
+      ],
+      "accounts": [
+        {
+          "name": "company",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "campaign"
+          ]
+        },
+        {
+          "name": "campaign",
+          "writable": true
+        },
+        {
+          "name": "company_token_account",
+          "writable": true
+        },
+        {
+          "name": "escrow",
+          "writable": true,
+          "relations": [
+            "campaign"
+          ]
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "increase_lock_amount",
+      "discriminator": [
+        206,
+        251,
+        114,
+        148,
+        41,
+        88,
+        205,
+        9
+      ],
+      "accounts": [
+        {
+          "name": "voting_escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  111,
+                  116,
+                  105,
+                  110,
+                  103,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "governance_config"
+        },
+        {
+          "name": "owner_token_account",
+          "writable": true
+        },
+        {
+          "name": "escrow_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "signer": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "initialize",
+      "discriminator": [
+        175,
+        175,
+        109,
+        31,
+        13,
+        152,
+        155,
+        237
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury"
+        },
+        {
+          "name": "njord_mint",
+          "docs": [
+            "NJORD token mint"
+          ]
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "protocol_fee_bps",
+          "type": "u16"
+        },
+        {
+          "name": "min_challenge_bond",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "initialize_governance",
+      "discriminator": [
+        171,
+        87,
+        101,
+        237,
+        27,
+        107,
+        201,
+        57
+      ],
+      "accounts": [
+        {
+          "name": "governance_config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  103,
+                  111,
+                  118,
+                  101,
+                  114,
+                  110,
+                  97,
+                  110,
+                  99,
+                  101
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "protocol_params",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108,
+                  95,
+                  112,
+                  97,
+                  114,
+                  97,
+                  109,
+                  115
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "njord_mint"
+        },
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "proposal_threshold",
+          "type": "u64"
+        },
+        {
+          "name": "quorum_bps",
+          "type": "u16"
+        },
+        {
+          "name": "voting_period",
+          "type": "i64"
+        },
+        {
+          "name": "timelock_delay",
+          "type": "i64"
+        }
+      ]
+    },
+    {
+      "name": "initiate_unstake",
+      "discriminator": [
+        229,
+        79,
+        19,
+        159,
+        232,
+        206,
+        96,
+        210
+      ],
+      "accounts": [
+        {
+          "name": "wallet",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "profile"
+          ]
+        },
+        {
+          "name": "profile",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  102,
+                  102,
+                  105,
+                  108,
+                  105,
+                  97,
+                  116,
+                  101,
+                  95,
+                  112,
+                  114,
+                  111,
+                  102,
+                  105,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "stake",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  102,
+                  102,
+                  105,
+                  108,
+                  105,
+                  97,
+                  116,
+                  101,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "profile"
+              }
+            ]
+          }
+        },
+        {
+          "name": "affiliate_profile",
+          "relations": [
+            "stake"
+          ]
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "initiate_unstake_bridge",
+      "discriminator": [
+        109,
+        238,
+        228,
+        57,
+        136,
+        11,
+        81,
+        254
+      ],
+      "accounts": [
+        {
+          "name": "operator",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "bridge"
+          ]
+        },
+        {
+          "name": "bridge",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  114,
+                  105,
+                  100,
+                  103,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "operator"
+              }
+            ]
+          },
+          "relations": [
+            "stake"
+          ]
+        },
+        {
+          "name": "stake",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  114,
+                  105,
+                  100,
+                  103,
+                  101,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "bridge"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "join_campaign",
+      "discriminator": [
+        139,
+        142,
+        101,
+        28,
+        183,
+        90,
+        68,
+        4
+      ],
+      "accounts": [
+        {
+          "name": "wallet",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "profile"
+          ]
+        },
+        {
+          "name": "profile",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  102,
+                  102,
+                  105,
+                  108,
+                  105,
+                  97,
+                  116,
+                  101,
+                  95,
+                  112,
+                  114,
+                  111,
+                  102,
+                  105,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "campaign",
+          "writable": true
+        },
+        {
+          "name": "registration",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  102,
+                  102,
+                  105,
+                  108,
+                  105,
+                  97,
+                  116,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "campaign"
+              },
+              {
+                "kind": "account",
+                "path": "profile"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "pause_campaign",
+      "discriminator": [
+        62,
+        247,
+        54,
+        192,
+        240,
+        158,
+        8,
+        161
+      ],
+      "accounts": [
+        {
+          "name": "company",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "campaign"
+          ]
+        },
+        {
+          "name": "campaign",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "queue_proposal",
+      "discriminator": [
+        168,
+        219,
+        139,
+        211,
+        205,
+        152,
+        125,
+        110
+      ],
+      "accounts": [
+        {
+          "name": "proposal",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  112,
+                  111,
+                  115,
+                  97,
+                  108
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "proposal_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "queuer",
+          "signer": true
+        }
+      ],
+      "args": [
+        {
+          "name": "proposal_id",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "record_attribution",
+      "discriminator": [
+        226,
+        192,
+        112,
+        45,
+        156,
+        82,
+        14,
+        31
+      ],
+      "accounts": [
+        {
+          "name": "bridge_operator",
+          "docs": [
+            "Bridge operator submitting the attribution"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "campaign",
+          "writable": true
+        },
+        {
+          "name": "affiliate_registration",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  102,
+                  102,
+                  105,
+                  108,
+                  105,
+                  97,
+                  116,
+                  101,
+                  95,
+                  114,
+                  101,
+                  103,
+                  105,
+                  115,
+                  116,
+                  114,
+                  97,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "campaign"
+              },
+              {
+                "kind": "account",
+                "path": "affiliate_profile"
+              }
+            ]
+          }
+        },
+        {
+          "name": "affiliate_profile",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  102,
+                  102,
+                  105,
+                  108,
+                  105,
+                  97,
+                  116,
+                  101,
+                  95,
+                  112,
+                  114,
+                  111,
+                  102,
+                  105,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "affiliate_profile.wallet",
+                "account": "AffiliateProfile"
+              }
+            ]
+          }
+        },
+        {
+          "name": "bridge",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  114,
+                  105,
+                  100,
+                  103,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "bridge_operator"
+              }
+            ]
+          }
+        },
+        {
+          "name": "attribution",
+          "writable": true
+        },
+        {
+          "name": "customer_attribution",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "params",
+          "type": {
+            "defined": {
+              "name": "RecordAttributionParams"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "register_bridge",
+      "discriminator": [
+        111,
+        142,
+        235,
+        236,
+        70,
+        9,
+        5,
+        133
+      ],
+      "accounts": [
+        {
+          "name": "operator",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "bridge",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  114,
+                  105,
+                  100,
+                  103,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "operator"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "region",
+          "type": {
+            "array": [
+              "u8",
+              4
+            ]
+          }
+        },
+        {
+          "name": "metadata_uri",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "resolve_challenge",
+      "discriminator": [
+        81,
+        191,
+        124,
+        119,
+        131,
+        248,
+        157,
+        109
+      ],
+      "accounts": [
+        {
+          "name": "resolver",
+          "docs": [
+            "Resolver (protocol authority for now, DAO in future)"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "authority",
+          "relations": [
+            "config"
+          ]
+        },
+        {
+          "name": "campaign",
+          "writable": true,
+          "relations": [
+            "attribution"
+          ]
+        },
+        {
+          "name": "attribution",
+          "writable": true
+        },
+        {
+          "name": "challenge",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  104,
+                  97,
+                  108,
+                  108,
+                  101,
+                  110,
+                  103,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "attribution"
+              }
+            ]
+          }
+        },
+        {
+          "name": "affiliate_registration",
+          "writable": true
+        },
+        {
+          "name": "affiliate_profile",
+          "writable": true
+        },
+        {
+          "name": "bridge",
+          "writable": true
+        },
+        {
+          "name": "challenge_escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  104,
+                  97,
+                  108,
+                  108,
+                  101,
+                  110,
+                  103,
+                  101,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "challenge"
+              }
+            ]
+          }
+        },
+        {
+          "name": "campaign_escrow",
+          "writable": true
+        },
+        {
+          "name": "challenger_token_account",
+          "writable": true
+        },
+        {
+          "name": "treasury",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "outcome",
+          "type": {
+            "defined": {
+              "name": "ChallengeOutcome"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "resume_campaign",
+      "discriminator": [
+        84,
+        91,
+        163,
+        83,
+        28,
+        24,
+        54,
+        2
+      ],
+      "accounts": [
+        {
+          "name": "company",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "campaign"
+          ]
+        },
+        {
+          "name": "campaign",
+          "writable": true
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "settle_attribution",
+      "discriminator": [
+        176,
+        160,
+        66,
+        224,
+        116,
+        198,
+        153,
+        5
+      ],
+      "accounts": [
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "campaign",
+          "relations": [
+            "attribution"
+          ]
+        },
+        {
+          "name": "attribution",
+          "writable": true
+        },
+        {
+          "name": "affiliate_registration",
+          "writable": true
+        },
+        {
+          "name": "affiliate_profile",
+          "writable": true
+        },
+        {
+          "name": "escrow",
+          "writable": true
+        },
+        {
+          "name": "affiliate_token_account",
+          "writable": true
+        },
+        {
+          "name": "treasury",
+          "writable": true
+        },
+        {
+          "name": "bridge",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "slash_bridge",
+      "discriminator": [
+        98,
+        104,
+        235,
+        54,
+        237,
+        79,
+        94,
+        209
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "docs": [
+            "Protocol authority"
+          ],
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "config"
+          ]
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "bridge",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  114,
+                  105,
+                  100,
+                  103,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "bridge.operator",
+                "account": "Bridge"
+              }
+            ]
+          },
+          "relations": [
+            "stake"
+          ]
+        },
+        {
+          "name": "stake",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  114,
+                  105,
+                  100,
+                  103,
+                  101,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "bridge"
+              }
+            ]
+          }
+        },
+        {
+          "name": "stake_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  114,
+                  105,
+                  100,
+                  103,
+                  101,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "stake"
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        },
+        {
+          "name": "reason",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "stake_bridge",
+      "discriminator": [
+        17,
+        172,
+        117,
+        169,
+        151,
+        228,
+        133,
+        212
+      ],
+      "accounts": [
+        {
+          "name": "operator",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "bridge"
+          ]
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "bridge",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  114,
+                  105,
+                  100,
+                  103,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "operator"
+              }
+            ]
+          }
+        },
+        {
+          "name": "stake",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  114,
+                  105,
+                  100,
+                  103,
+                  101,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "bridge"
+              }
+            ]
+          }
+        },
+        {
+          "name": "operator_token_account",
+          "writable": true
+        },
+        {
+          "name": "stake_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  114,
+                  105,
+                  100,
+                  103,
+                  101,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "stake"
+              }
+            ]
+          }
+        },
+        {
+          "name": "njord_mint"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "stake_njord",
+      "discriminator": [
+        35,
+        177,
+        236,
+        191,
+        90,
+        226,
+        246,
+        146
+      ],
+      "accounts": [
+        {
+          "name": "wallet",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "profile"
+          ]
+        },
+        {
+          "name": "profile",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  102,
+                  102,
+                  105,
+                  108,
+                  105,
+                  97,
+                  116,
+                  101,
+                  95,
+                  112,
+                  114,
+                  111,
+                  102,
+                  105,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "config",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "stake",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  102,
+                  102,
+                  105,
+                  108,
+                  105,
+                  97,
+                  116,
+                  101,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "profile"
+              }
+            ]
+          }
+        },
+        {
+          "name": "wallet_token_account",
+          "writable": true
+        },
+        {
+          "name": "stake_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  102,
+                  102,
+                  105,
+                  108,
+                  105,
+                  97,
+                  116,
+                  101,
+                  95,
+                  115,
+                  116,
+                  97,
+                  107,
+                  101,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "stake"
+              }
+            ]
+          }
+        },
+        {
+          "name": "njord_mint"
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "submit_counter_evidence",
+      "discriminator": [
+        221,
+        251,
+        230,
+        212,
+        168,
+        54,
+        162,
+        120
+      ],
+      "accounts": [
+        {
+          "name": "affiliate_wallet",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "affiliate_profile",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  97,
+                  102,
+                  102,
+                  105,
+                  108,
+                  105,
+                  97,
+                  116,
+                  101,
+                  95,
+                  112,
+                  114,
+                  111,
+                  102,
+                  105,
+                  108,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "affiliate_wallet"
+              }
+            ]
+          }
+        },
+        {
+          "name": "wallet",
+          "relations": [
+            "affiliate_profile"
+          ]
+        },
+        {
+          "name": "attribution"
+        },
+        {
+          "name": "affiliate_registration",
+          "relations": [
+            "attribution"
+          ]
+        },
+        {
+          "name": "affiliate",
+          "relations": [
+            "affiliate_registration"
+          ]
+        },
+        {
+          "name": "challenge",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  104,
+                  97,
+                  108,
+                  108,
+                  101,
+                  110,
+                  103,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "attribution"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "counter_evidence_uri",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "name": "update_bridge_metadata",
+      "discriminator": [
+        37,
+        59,
+        25,
+        250,
+        70,
+        122,
+        0,
+        17
+      ],
+      "accounts": [
+        {
+          "name": "operator",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "bridge"
+          ]
+        },
+        {
+          "name": "bridge",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  114,
+                  105,
+                  100,
+                  103,
+                  101
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "operator"
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "metadata_uri",
+          "type": {
+            "option": "string"
+          }
+        },
+        {
+          "name": "region",
+          "type": {
+            "option": {
+              "array": [
+                "u8",
+                4
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "update_config",
+      "discriminator": [
+        29,
+        158,
+        252,
+        191,
+        10,
+        83,
+        219,
+        99
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "config"
+          ]
+        },
+        {
+          "name": "config",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  114,
+                  111,
+                  116,
+                  111,
+                  99,
+                  111,
+                  108,
+                  95,
+                  99,
+                  111,
+                  110,
+                  102,
+                  105,
+                  103
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "args": [
+        {
+          "name": "new_protocol_fee_bps",
+          "type": {
+            "option": "u16"
+          }
+        },
+        {
+          "name": "new_min_challenge_bond",
+          "type": {
+            "option": "u64"
+          }
+        },
+        {
+          "name": "new_treasury",
+          "type": {
+            "option": "pubkey"
+          }
+        }
+      ]
+    },
+    {
+      "name": "withdraw_campaign_funds",
+      "discriminator": [
+        169,
+        74,
+        69,
+        245,
+        79,
+        226,
+        98,
+        206
+      ],
+      "accounts": [
+        {
+          "name": "company",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "campaign"
+          ]
+        },
+        {
+          "name": "campaign",
+          "writable": true
+        },
+        {
+          "name": "escrow",
+          "writable": true,
+          "relations": [
+            "campaign"
+          ]
+        },
+        {
+          "name": "company_token_account",
+          "writable": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "withdraw_unlocked",
+      "discriminator": [
+        213,
+        161,
+        76,
+        199,
+        38,
+        28,
+        209,
+        80
+      ],
+      "accounts": [
+        {
+          "name": "voting_escrow",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  111,
+                  116,
+                  105,
+                  110,
+                  103,
+                  95,
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "owner"
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner_token_account",
+          "writable": true
+        },
+        {
+          "name": "escrow_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "escrow_vault_authority",
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119,
+                  95,
+                  118,
+                  97,
+                  117,
+                  108,
+                  116,
+                  95,
+                  97,
+                  117,
+                  116,
+                  104
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "token_program",
+          "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "AffiliateProfile",
+      "discriminator": [
+        58,
+        138,
+        27,
+        170,
+        104,
+        181,
+        243,
+        226
+      ]
+    },
+    {
+      "name": "AffiliateRegistration",
+      "discriminator": [
+        242,
+        17,
+        88,
+        241,
+        191,
+        223,
+        12,
+        79
+      ]
+    },
+    {
+      "name": "AffiliateStake",
+      "discriminator": [
+        57,
+        148,
+        86,
+        210,
+        197,
+        0,
+        34,
+        218
+      ]
+    },
+    {
+      "name": "Attribution",
+      "discriminator": [
+        177,
+        237,
+        56,
+        9,
+        86,
+        246,
+        162,
+        76
+      ]
+    },
+    {
+      "name": "Bridge",
+      "discriminator": [
+        231,
+        232,
+        31,
+        98,
+        110,
+        3,
+        23,
+        59
+      ]
+    },
+    {
+      "name": "BridgeStake",
+      "discriminator": [
+        22,
+        132,
+        224,
+        228,
+        111,
+        84,
+        109,
+        46
+      ]
+    },
+    {
+      "name": "Campaign",
+      "discriminator": [
+        50,
+        40,
+        49,
+        11,
+        157,
+        220,
+        229,
+        192
+      ]
+    },
+    {
+      "name": "Challenge",
+      "discriminator": [
+        119,
+        250,
+        161,
+        121,
+        119,
+        81,
+        22,
+        208
+      ]
+    },
+    {
+      "name": "CustomerAttribution",
+      "discriminator": [
+        49,
+        21,
+        39,
+        138,
+        238,
+        119,
+        174,
+        193
+      ]
+    },
+    {
+      "name": "GovernanceConfig",
+      "discriminator": [
+        81,
+        63,
+        124,
+        107,
+        210,
+        100,
+        145,
+        70
+      ]
+    },
+    {
+      "name": "Proposal",
+      "discriminator": [
+        26,
+        94,
+        189,
+        187,
+        116,
+        136,
+        53,
+        33
+      ]
+    },
+    {
+      "name": "ProtocolConfig",
+      "discriminator": [
+        207,
+        91,
+        250,
+        28,
+        152,
+        179,
+        215,
+        209
+      ]
+    },
+    {
+      "name": "ProtocolParameters",
+      "discriminator": [
+        242,
+        29,
+        139,
+        140,
+        193,
+        208,
+        24,
+        223
+      ]
+    },
+    {
+      "name": "VoteRecord",
+      "discriminator": [
+        112,
+        9,
+        123,
+        165,
+        234,
+        9,
+        157,
+        167
+      ]
+    },
+    {
+      "name": "VotingEscrow",
+      "discriminator": [
+        209,
+        248,
+        90,
+        1,
+        14,
+        149,
+        9,
+        156
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "CampaignNotActive",
+      "msg": "Campaign is not active"
+    },
+    {
+      "code": 6001,
+      "name": "CampaignEnded",
+      "msg": "Campaign has ended"
+    },
+    {
+      "code": 6002,
+      "name": "CampaignNotStarted",
+      "msg": "Campaign has not started yet"
+    },
+    {
+      "code": 6003,
+      "name": "InsufficientBudget",
+      "msg": "Insufficient campaign budget"
+    },
+    {
+      "code": 6004,
+      "name": "MaxAffiliatesReached",
+      "msg": "Maximum affiliates reached for this campaign"
+    },
+    {
+      "code": 6005,
+      "name": "InvalidCommissionRate",
+      "msg": "Invalid commission rate"
+    },
+    {
+      "code": 6006,
+      "name": "InvalidHoldPeriod",
+      "msg": "Invalid hold period"
+    },
+    {
+      "code": 6007,
+      "name": "AffiliateNotRegistered",
+      "msg": "Affiliate not registered for this campaign"
+    },
+    {
+      "code": 6008,
+      "name": "AffiliateAlreadyRegistered",
+      "msg": "Affiliate already registered for this campaign"
+    },
+    {
+      "code": 6009,
+      "name": "AffiliateTierTooLow",
+      "msg": "Affiliate tier too low for this campaign"
+    },
+    {
+      "code": 6010,
+      "name": "AffiliateSuspended",
+      "msg": "Affiliate is suspended"
+    },
+    {
+      "code": 6011,
+      "name": "InsufficientAffiliateStake",
+      "msg": "Insufficient affiliate stake"
+    },
+    {
+      "code": 6012,
+      "name": "DuplicateAttribution",
+      "msg": "Duplicate attribution detected"
+    },
+    {
+      "code": 6013,
+      "name": "SelfReferral",
+      "msg": "Self-referral detected"
+    },
+    {
+      "code": 6014,
+      "name": "AttributionAlreadySettled",
+      "msg": "Attribution already settled"
+    },
+    {
+      "code": 6015,
+      "name": "AttributionUnderChallenge",
+      "msg": "Attribution is under challenge"
+    },
+    {
+      "code": 6016,
+      "name": "HoldPeriodNotElapsed",
+      "msg": "Hold period not elapsed"
+    },
+    {
+      "code": 6017,
+      "name": "InvalidAttributionProof",
+      "msg": "Invalid attribution proof"
+    },
+    {
+      "code": 6018,
+      "name": "BridgeNotRegistered",
+      "msg": "Bridge not registered"
+    },
+    {
+      "code": 6019,
+      "name": "BridgeNotActive",
+      "msg": "Bridge is not active"
+    },
+    {
+      "code": 6020,
+      "name": "InsufficientBridgeStake",
+      "msg": "Insufficient bridge stake"
+    },
+    {
+      "code": 6021,
+      "name": "BridgeStakeLocked",
+      "msg": "Bridge stake is locked"
+    },
+    {
+      "code": 6022,
+      "name": "BridgeVolumeLimitExceeded",
+      "msg": "Bridge daily volume limit exceeded"
+    },
+    {
+      "code": 6023,
+      "name": "BridgeFraudToleranceExceeded",
+      "msg": "Bridge fraud tolerance exceeded"
+    },
+    {
+      "code": 6024,
+      "name": "ChallengePeriodEnded",
+      "msg": "Challenge period has ended"
+    },
+    {
+      "code": 6025,
+      "name": "ChallengeAlreadyExists",
+      "msg": "Challenge already exists"
+    },
+    {
+      "code": 6026,
+      "name": "InsufficientChallengeBond",
+      "msg": "Insufficient challenge bond"
+    },
+    {
+      "code": 6027,
+      "name": "ChallengeNotFound",
+      "msg": "Challenge not found"
+    },
+    {
+      "code": 6028,
+      "name": "UnauthorizedChallengeResolution",
+      "msg": "Not authorized to resolve challenge"
+    },
+    {
+      "code": 6029,
+      "name": "Unauthorized",
+      "msg": "Unauthorized"
+    },
+    {
+      "code": 6030,
+      "name": "InvalidAmount",
+      "msg": "Invalid amount"
+    },
+    {
+      "code": 6031,
+      "name": "ArithmeticOverflow",
+      "msg": "Arithmetic overflow"
+    },
+    {
+      "code": 6032,
+      "name": "InvalidTimestamp",
+      "msg": "Invalid timestamp"
+    },
+    {
+      "code": 6033,
+      "name": "LockDurationTooShort",
+      "msg": "Lock duration too short (minimum 1 week)"
+    },
+    {
+      "code": 6034,
+      "name": "LockDurationTooLong",
+      "msg": "Lock duration too long (maximum 4 years)"
+    },
+    {
+      "code": 6035,
+      "name": "InvalidLockExtension",
+      "msg": "Invalid lock extension"
+    },
+    {
+      "code": 6036,
+      "name": "LockExpired",
+      "msg": "Lock has expired"
+    },
+    {
+      "code": 6037,
+      "name": "LockNotExpired",
+      "msg": "Lock has not expired yet"
+    },
+    {
+      "code": 6038,
+      "name": "InsufficientVotingPower",
+      "msg": "Insufficient voting power"
+    },
+    {
+      "code": 6039,
+      "name": "NoVotingPower",
+      "msg": "No voting power"
+    },
+    {
+      "code": 6040,
+      "name": "VotingNotActive",
+      "msg": "Voting is not active"
+    },
+    {
+      "code": 6041,
+      "name": "VotingEnded",
+      "msg": "Voting has ended"
+    },
+    {
+      "code": 6042,
+      "name": "VotingNotEnded",
+      "msg": "Voting has not ended yet"
+    },
+    {
+      "code": 6043,
+      "name": "ProposalNotActive",
+      "msg": "Proposal is not active"
+    },
+    {
+      "code": 6044,
+      "name": "ProposalNotSucceeded",
+      "msg": "Proposal has not succeeded"
+    },
+    {
+      "code": 6045,
+      "name": "ProposalNotQueued",
+      "msg": "Proposal is not queued"
+    },
+    {
+      "code": 6046,
+      "name": "TimelockNotExpired",
+      "msg": "Timelock has not expired"
+    },
+    {
+      "code": 6047,
+      "name": "ProposalAlreadyExecuted",
+      "msg": "Proposal already executed"
+    },
+    {
+      "code": 6048,
+      "name": "TitleTooLong",
+      "msg": "Title too long (max 64 characters)"
+    },
+    {
+      "code": 6049,
+      "name": "DescriptionTooLong",
+      "msg": "Description too long (max 64 characters)"
+    },
+    {
+      "code": 6050,
+      "name": "ProposalDataTooLarge",
+      "msg": "Proposal data too large (max 128 bytes)"
+    },
+    {
+      "code": 6051,
+      "name": "InvalidProposalData",
+      "msg": "Invalid proposal data"
+    },
+    {
+      "code": 6052,
+      "name": "InvalidParameterId",
+      "msg": "Invalid parameter ID"
+    },
+    {
+      "code": 6053,
+      "name": "FeeTooHigh",
+      "msg": "Fee too high (max 10%)"
+    }
+  ],
+  "types": [
+    {
+      "name": "AffiliateProfile",
+      "docs": [
+        "Global affiliate profile (one per wallet)"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "wallet",
+            "docs": [
+              "Affiliate wallet"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "tier",
+            "docs": [
+              "Current tier"
+            ],
+            "type": {
+              "defined": {
+                "name": "AffiliateTier"
+              }
+            }
+          },
+          {
+            "name": "stake_account",
+            "docs": [
+              "NJORD stake account"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "staked_amount",
+            "docs": [
+              "Amount staked"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "total_campaigns",
+            "docs": [
+              "Total campaigns joined"
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "total_attributions",
+            "docs": [
+              "Total attributions across all campaigns"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "total_earnings",
+            "docs": [
+              "Total earnings (in USDC smallest unit)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "dispute_rate_bps",
+            "docs": [
+              "Dispute rate in basis points"
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "disputes_lost",
+            "docs": [
+              "Number of successful challenges against this affiliate"
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "created_at",
+            "docs": [
+              "Account creation timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "last_active_at",
+            "docs": [
+              "Last activity timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "is_suspended",
+            "docs": [
+              "Is suspended"
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "suspension_ends_at",
+            "docs": [
+              "Suspension end timestamp (0 = permanent)"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AffiliateRegistration",
+      "docs": [
+        "Affiliate registration for a specific campaign"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "affiliate",
+            "docs": [
+              "Reference to affiliate profile"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "campaign",
+            "docs": [
+              "Reference to campaign"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "status",
+            "docs": [
+              "Registration status"
+            ],
+            "type": {
+              "defined": {
+                "name": "AffiliateStatus"
+              }
+            }
+          },
+          {
+            "name": "attributions_count",
+            "docs": [
+              "Total attributions for this campaign"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "earnings",
+            "docs": [
+              "Total earnings from this campaign"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "pending_earnings",
+            "docs": [
+              "Pending earnings (in hold period)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "joined_at",
+            "docs": [
+              "Joined timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AffiliateStake",
+      "docs": [
+        "Affiliate NJORD stake account"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "affiliate_profile",
+            "docs": [
+              "Affiliate profile"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "token_account",
+            "docs": [
+              "NJORD token account"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "docs": [
+              "Amount staked"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "unbonding_amount",
+            "docs": [
+              "Unbonding amount"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "unbonding_ends_at",
+            "docs": [
+              "Unbonding end timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AffiliateStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Active"
+          },
+          {
+            "name": "PendingApproval"
+          },
+          {
+            "name": "Suspended"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AffiliateTier",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "New"
+          },
+          {
+            "name": "Verified"
+          },
+          {
+            "name": "Trusted"
+          },
+          {
+            "name": "Elite"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Attribution",
+      "docs": [
+        "Attribution event account"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "campaign",
+            "docs": [
+              "Campaign reference"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "affiliate_registration",
+            "docs": [
+              "Affiliate registration reference"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "bridge",
+            "docs": [
+              "Bridge that submitted (if any)"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "action_value",
+            "docs": [
+              "Action value (e.g., purchase amount in USDC smallest unit)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "commission_amount",
+            "docs": [
+              "Calculated commission amount"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "protocol_fee",
+            "docs": [
+              "Protocol fee amount"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "bridge_fee",
+            "docs": [
+              "Bridge fee amount"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "net_commission",
+            "docs": [
+              "Net commission to affiliate"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "customer_hash",
+            "docs": [
+              "Customer hash (privacy-preserving identifier)"
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "status",
+            "docs": [
+              "Attribution status"
+            ],
+            "type": {
+              "defined": {
+                "name": "AttributionStatus"
+              }
+            }
+          },
+          {
+            "name": "fraud_score",
+            "docs": [
+              "Fraud score (0-100, set by bridge)"
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "created_at",
+            "docs": [
+              "Created timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "settles_at",
+            "docs": [
+              "Settlement timestamp (when hold period ends)"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "settled_at",
+            "docs": [
+              "Actual settlement timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "nonce",
+            "docs": [
+              "Unique nonce to prevent duplicates"
+            ],
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "attribution_id",
+            "docs": [
+              "Attribution ID (sequential per campaign)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AttributionModel",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "LastClick"
+          },
+          {
+            "name": "FirstClick"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AttributionStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Pending"
+          },
+          {
+            "name": "Challenged"
+          },
+          {
+            "name": "Settled"
+          },
+          {
+            "name": "Rejected"
+          },
+          {
+            "name": "Refunded"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Bridge",
+      "docs": [
+        "Bridge operator account"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "operator",
+            "docs": [
+              "Bridge operator wallet"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "stake_account",
+            "docs": [
+              "NJORD stake account"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "staked_amount",
+            "docs": [
+              "Amount staked"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "tier",
+            "docs": [
+              "Current tier"
+            ],
+            "type": {
+              "defined": {
+                "name": "BridgeTier"
+              }
+            }
+          },
+          {
+            "name": "status",
+            "docs": [
+              "Status"
+            ],
+            "type": {
+              "defined": {
+                "name": "BridgeStatus"
+              }
+            }
+          },
+          {
+            "name": "region",
+            "docs": [
+              "Region code (e.g., \"US\", \"IN\", \"BR\")"
+            ],
+            "type": {
+              "array": [
+                "u8",
+                4
+              ]
+            }
+          },
+          {
+            "name": "total_attributions",
+            "docs": [
+              "Total attributions processed"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "total_volume",
+            "docs": [
+              "Total volume processed (USDC smallest unit)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "daily_volume",
+            "docs": [
+              "Today's volume (resets daily)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "daily_volume_reset_at",
+            "docs": [
+              "Last volume reset timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "fraud_rate_bps",
+            "docs": [
+              "Fraud rate in basis points"
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "fraud_count",
+            "docs": [
+              "Fraud count (attributions challenged and confirmed as fraud)"
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "reputation_score",
+            "docs": [
+              "Reputation score (0-10000)"
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "total_fees_earned",
+            "docs": [
+              "Total fees earned"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "slashing_count",
+            "docs": [
+              "Slashing count"
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "last_slashed_at",
+            "docs": [
+              "Last slashing timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "unbonding_amount",
+            "docs": [
+              "Unbonding amount"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "unbonding_ends_at",
+            "docs": [
+              "Unbonding end timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "registered_at",
+            "docs": [
+              "Registration timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "last_active_at",
+            "docs": [
+              "Last active timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "metadata_uri",
+            "docs": [
+              "Metadata URI"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BridgeStake",
+      "docs": [
+        "Bridge stake account"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bridge",
+            "docs": [
+              "Bridge account"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "token_account",
+            "docs": [
+              "NJORD token account"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "amount",
+            "docs": [
+              "Amount staked"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "unbonding_amount",
+            "docs": [
+              "Unbonding amount"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "unbonding_ends_at",
+            "docs": [
+              "Unbonding end timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BridgeStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Active"
+          },
+          {
+            "name": "Inactive"
+          },
+          {
+            "name": "Suspended"
+          },
+          {
+            "name": "Unbonding"
+          }
+        ]
+      }
+    },
+    {
+      "name": "BridgeTier",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Bronze"
+          },
+          {
+            "name": "Silver"
+          },
+          {
+            "name": "Gold"
+          },
+          {
+            "name": "Platinum"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Campaign",
+      "docs": [
+        "Campaign account"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "company",
+            "docs": [
+              "Campaign creator (company)"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "payment_mint",
+            "docs": [
+              "Payment token mint (e.g., USDC)"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "escrow",
+            "docs": [
+              "Escrow token account holding campaign funds"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "budget",
+            "docs": [
+              "Total budget deposited"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "spent",
+            "docs": [
+              "Amount spent on commissions"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "commission_type",
+            "docs": [
+              "Commission type"
+            ],
+            "type": {
+              "defined": {
+                "name": "CommissionType"
+              }
+            }
+          },
+          {
+            "name": "commission_rate_bps",
+            "docs": [
+              "Commission rate in basis points (10000 = 100%)"
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "attribution_model",
+            "docs": [
+              "Attribution model"
+            ],
+            "type": {
+              "defined": {
+                "name": "AttributionModel"
+              }
+            }
+          },
+          {
+            "name": "target_action",
+            "docs": [
+              "Target action type"
+            ],
+            "type": {
+              "defined": {
+                "name": "TargetAction"
+              }
+            }
+          },
+          {
+            "name": "min_affiliate_tier",
+            "docs": [
+              "Minimum affiliate tier required"
+            ],
+            "type": {
+              "defined": {
+                "name": "AffiliateTier"
+              }
+            }
+          },
+          {
+            "name": "custom_hold_period",
+            "docs": [
+              "Custom hold period in seconds (0 = use tier default)"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "status",
+            "docs": [
+              "Campaign status"
+            ],
+            "type": {
+              "defined": {
+                "name": "CampaignStatus"
+              }
+            }
+          },
+          {
+            "name": "start_time",
+            "docs": [
+              "Start timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "end_time",
+            "docs": [
+              "End timestamp (0 = no end)"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "max_affiliates",
+            "docs": [
+              "Maximum number of affiliates (0 = unlimited)"
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "affiliate_count",
+            "docs": [
+              "Current number of affiliates"
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "total_attributions",
+            "docs": [
+              "Total attributions for this campaign"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "auto_approve",
+            "docs": [
+              "Auto-approve affiliate signups"
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "metadata_uri",
+            "docs": [
+              "Metadata URI (IPFS/Arweave)"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "campaign_id",
+            "docs": [
+              "Campaign ID (sequential)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "created_at",
+            "docs": [
+              "Created timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CampaignStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Active"
+          },
+          {
+            "name": "Paused"
+          },
+          {
+            "name": "Ended"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Challenge",
+      "docs": [
+        "Challenge account"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "attribution",
+            "docs": [
+              "Attribution being challenged"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "challenger",
+            "docs": [
+              "Challenger wallet"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "challenger_type",
+            "docs": [
+              "Challenger type"
+            ],
+            "type": {
+              "defined": {
+                "name": "ChallengerType"
+              }
+            }
+          },
+          {
+            "name": "bond_amount",
+            "docs": [
+              "Bond amount deposited"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "status",
+            "docs": [
+              "Challenge status"
+            ],
+            "type": {
+              "defined": {
+                "name": "ChallengeStatus"
+              }
+            }
+          },
+          {
+            "name": "outcome",
+            "docs": [
+              "Outcome (set when resolved)"
+            ],
+            "type": {
+              "defined": {
+                "name": "ChallengeOutcome"
+              }
+            }
+          },
+          {
+            "name": "evidence_uri",
+            "docs": [
+              "Evidence URI (IPFS/Arweave)"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "counter_evidence_uri",
+            "docs": [
+              "Counter-evidence URI"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "created_at",
+            "docs": [
+              "Created timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "evidence_deadline",
+            "docs": [
+              "Evidence deadline"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "resolution_deadline",
+            "docs": [
+              "Resolution deadline"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "resolved_at",
+            "docs": [
+              "Resolved timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "resolver",
+            "docs": [
+              "Resolver (if DAO/oracle resolved)"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ChallengeOutcome",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Pending"
+          },
+          {
+            "name": "FraudConfirmed"
+          },
+          {
+            "name": "ChallengeRejected"
+          },
+          {
+            "name": "Inconclusive"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ChallengeStatus",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Pending"
+          },
+          {
+            "name": "EvidenceSubmitted"
+          },
+          {
+            "name": "Resolved"
+          },
+          {
+            "name": "Expired"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ChallengerType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Company"
+          },
+          {
+            "name": "Bridge"
+          },
+          {
+            "name": "Affiliate"
+          },
+          {
+            "name": "Protocol"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CommissionType",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Percentage"
+          },
+          {
+            "name": "Flat"
+          },
+          {
+            "name": "Tiered"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CreateCampaignParams",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "commission_type",
+            "type": {
+              "defined": {
+                "name": "CommissionType"
+              }
+            }
+          },
+          {
+            "name": "commission_rate_bps",
+            "type": "u16"
+          },
+          {
+            "name": "attribution_model",
+            "type": {
+              "defined": {
+                "name": "AttributionModel"
+              }
+            }
+          },
+          {
+            "name": "target_action",
+            "type": {
+              "defined": {
+                "name": "TargetAction"
+              }
+            }
+          },
+          {
+            "name": "min_affiliate_tier",
+            "type": {
+              "defined": {
+                "name": "AffiliateTier"
+              }
+            }
+          },
+          {
+            "name": "custom_hold_period",
+            "type": "i64"
+          },
+          {
+            "name": "start_time",
+            "type": "i64"
+          },
+          {
+            "name": "end_time",
+            "type": "i64"
+          },
+          {
+            "name": "max_affiliates",
+            "type": "u32"
+          },
+          {
+            "name": "auto_approve",
+            "type": "bool"
+          },
+          {
+            "name": "metadata_uri",
+            "type": "string"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CustomerAttribution",
+      "docs": [
+        "Tracks customer attributions to prevent duplicates"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "campaign",
+            "docs": [
+              "Campaign reference"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "customer_hash",
+            "docs": [
+              "Customer hash"
+            ],
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "first_attribution",
+            "docs": [
+              "First attribution for this customer"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "last_attribution",
+            "docs": [
+              "Last attribution for this customer"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "attribution_count",
+            "docs": [
+              "Total attributions count"
+            ],
+            "type": "u32"
+          },
+          {
+            "name": "created_at",
+            "docs": [
+              "Created timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "GovernanceConfig",
+      "docs": [
+        "Governance configuration account"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "docs": [
+              "Authority that can update governance parameters (initially deployer, then DAO)"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "njord_mint",
+            "docs": [
+              "NJORD token mint for voting"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "proposal_threshold",
+            "docs": [
+              "Minimum tokens required to create a proposal"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "quorum_bps",
+            "docs": [
+              "Minimum quorum percentage (basis points, e.g., 400 = 4%)"
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "voting_period",
+            "docs": [
+              "Voting period in seconds"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "timelock_delay",
+            "docs": [
+              "Timelock delay for execution (seconds)"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "proposal_count",
+            "docs": [
+              "Total proposals created"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Proposal",
+      "docs": [
+        "Governance proposal"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "id",
+            "docs": [
+              "Unique proposal ID"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "proposer",
+            "docs": [
+              "Proposer address"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "title",
+            "docs": [
+              "Title (max 64 chars)"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "description_hash",
+            "docs": [
+              "Description hash (IPFS CID or similar)"
+            ],
+            "type": "string"
+          },
+          {
+            "name": "proposal_type",
+            "docs": [
+              "Proposal type"
+            ],
+            "type": {
+              "defined": {
+                "name": "ProposalType"
+              }
+            }
+          },
+          {
+            "name": "proposal_data",
+            "docs": [
+              "Proposal data (encoded instruction or parameter change)"
+            ],
+            "type": "bytes"
+          },
+          {
+            "name": "status",
+            "docs": [
+              "Current status"
+            ],
+            "type": {
+              "defined": {
+                "name": "ProposalStatus"
+              }
+            }
+          },
+          {
+            "name": "for_votes",
+            "docs": [
+              "For votes (token-weighted)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "against_votes",
+            "docs": [
+              "Against votes"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "abstain_votes",
+            "docs": [
+              "Abstain votes"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "start_time",
+            "docs": [
+              "Voting start time"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "end_time",
+            "docs": [
+              "Voting end time"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "execution_time",
+            "docs": [
+              "Execution time (after timelock)"
+            ],
+            "type": {
+              "option": "i64"
+            }
+          },
+          {
+            "name": "executed",
+            "docs": [
+              "Executed flag"
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "canceled",
+            "docs": [
+              "Canceled flag"
+            ],
+            "type": "bool"
+          },
+          {
+            "name": "created_at",
+            "docs": [
+              "Created timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProposalStatus",
+      "docs": [
+        "Proposal status"
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Pending"
+          },
+          {
+            "name": "Active"
+          },
+          {
+            "name": "Succeeded"
+          },
+          {
+            "name": "Defeated"
+          },
+          {
+            "name": "Queued"
+          },
+          {
+            "name": "Executed"
+          },
+          {
+            "name": "Canceled"
+          },
+          {
+            "name": "Expired"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProposalType",
+      "docs": [
+        "Types of governance proposals"
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "ParameterChange"
+          },
+          {
+            "name": "FeeUpdate"
+          },
+          {
+            "name": "TreasurySpend"
+          },
+          {
+            "name": "Emergency"
+          },
+          {
+            "name": "General"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProtocolConfig",
+      "docs": [
+        "Protocol configuration account (singleton)"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "docs": [
+              "Protocol authority (admin)"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "treasury",
+            "docs": [
+              "Treasury wallet for protocol fees"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "protocol_fee_bps",
+            "docs": [
+              "Protocol fee in basis points (e.g., 200 = 2%)"
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "min_challenge_bond",
+            "docs": [
+              "Minimum challenge bond in lamports"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "njord_mint",
+            "docs": [
+              "NJORD token mint"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "total_campaigns",
+            "docs": [
+              "Total campaigns created"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "total_attributions",
+            "docs": [
+              "Total attributions processed"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "total_volume",
+            "docs": [
+              "Total volume processed (in USDC smallest unit)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ProtocolParameters",
+      "docs": [
+        "Protocol parameters that can be changed via governance"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "authority",
+            "docs": [
+              "Authority (governance contract)"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "bronze_min_stake",
+            "docs": [
+              "Minimum stake for Bronze bridge tier"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "silver_min_stake",
+            "docs": [
+              "Minimum stake for Silver bridge tier"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "gold_min_stake",
+            "docs": [
+              "Minimum stake for Gold bridge tier"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "platinum_min_stake",
+            "docs": [
+              "Minimum stake for Platinum bridge tier"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "protocol_fee_bps",
+            "docs": [
+              "Protocol fee in basis points"
+            ],
+            "type": "u16"
+          },
+          {
+            "name": "min_challenge_bond",
+            "docs": [
+              "Minimum challenge bond floor (in USDC smallest units)"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "max_fraud_score",
+            "docs": [
+              "Maximum fraud score before auto-rejection"
+            ],
+            "type": "u8"
+          },
+          {
+            "name": "default_hold_period",
+            "docs": [
+              "Default hold period for attributions (seconds)"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "max_lock_time",
+            "docs": [
+              "Maximum lock time for voting escrow (seconds)"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "updated_at",
+            "docs": [
+              "Last updated timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "RecordAttributionParams",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "action_value",
+            "type": "u64"
+          },
+          {
+            "name": "customer_hash",
+            "type": {
+              "array": [
+                "u8",
+                32
+              ]
+            }
+          },
+          {
+            "name": "nonce",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "fraud_score",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TargetAction",
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "Purchase"
+          },
+          {
+            "name": "Signup"
+          },
+          {
+            "name": "AppInstall"
+          },
+          {
+            "name": "Subscription"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VoteChoice",
+      "docs": [
+        "Vote choices"
+      ],
+      "type": {
+        "kind": "enum",
+        "variants": [
+          {
+            "name": "For"
+          },
+          {
+            "name": "Against"
+          },
+          {
+            "name": "Abstain"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VoteRecord",
+      "docs": [
+        "Individual vote record"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "voter",
+            "docs": [
+              "Voter address"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "proposal_id",
+            "docs": [
+              "Proposal ID"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "vote",
+            "docs": [
+              "Vote choice"
+            ],
+            "type": {
+              "defined": {
+                "name": "VoteChoice"
+              }
+            }
+          },
+          {
+            "name": "voting_power",
+            "docs": [
+              "Voting power used"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "voted_at",
+            "docs": [
+              "Vote timestamp"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VotingEscrow",
+      "docs": [
+        "Token lock for voting power"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "owner",
+            "docs": [
+              "Owner of the locked tokens"
+            ],
+            "type": "pubkey"
+          },
+          {
+            "name": "locked_amount",
+            "docs": [
+              "Amount of NJORD tokens locked"
+            ],
+            "type": "u64"
+          },
+          {
+            "name": "lock_end",
+            "docs": [
+              "Lock end time (voting power decays toward unlock)"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "last_update",
+            "docs": [
+              "Last time voting power was calculated"
+            ],
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "docs": [
+              "Bump seed"
+            ],
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ]
+}

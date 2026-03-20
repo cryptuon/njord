@@ -266,14 +266,19 @@ pub struct SlashBridge<'info> {
 
 pub fn slash_bridge(ctx: Context<SlashBridge>, amount: u64, reason: String) -> Result<()> {
     let clock = Clock::get()?;
+
+    // Get account info BEFORE mutable borrows
+    let stake_account_info = ctx.accounts.stake.to_account_info();
+    let stake_key = ctx.accounts.stake.key();
+    let stake_amount = ctx.accounts.stake.amount;
+
     let bridge = &mut ctx.accounts.bridge;
     let stake = &mut ctx.accounts.stake;
 
-    let slash_amount = std::cmp::min(amount, stake.amount);
+    let slash_amount = std::cmp::min(amount, stake_amount);
     require!(slash_amount > 0, NjordError::InvalidAmount);
 
     // Transfer slashed amount to treasury
-    let stake_key = stake.key();
     let seeds = &[
         b"bridge_stake_vault",
         stake_key.as_ref(),
@@ -284,7 +289,7 @@ pub fn slash_bridge(ctx: Context<SlashBridge>, amount: u64, reason: String) -> R
     let cpi_accounts = Transfer {
         from: ctx.accounts.stake_vault.to_account_info(),
         to: ctx.accounts.treasury.to_account_info(),
-        authority: ctx.accounts.stake.to_account_info(),
+        authority: stake_account_info,
     };
     let cpi_ctx = CpiContext::new_with_signer(
         ctx.accounts.token_program.to_account_info(),

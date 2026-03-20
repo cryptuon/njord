@@ -240,11 +240,12 @@ pub fn withdraw_campaign_funds(ctx: Context<WithdrawCampaignFunds>) -> Result<()
     require!(remaining > 0, NjordError::InvalidAmount);
 
     // Transfer remaining funds back to company
-    let campaign_key = campaign.key();
+    // Campaign is the escrow authority (a PDA), use campaign's seeds to sign
+    let campaign_id_bytes = campaign.campaign_id.to_le_bytes();
     let seeds = &[
-        b"escrow",
-        campaign_key.as_ref(),
-        &[ctx.bumps.escrow],
+        b"campaign",
+        campaign_id_bytes.as_ref(),
+        &[campaign.bump],
     ];
     let signer = &[&seeds[..]];
 

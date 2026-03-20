@@ -25,7 +25,7 @@ pub struct InitializeGovernance<'info> {
     )]
     pub protocol_params: Account<'info, ProtocolParameters>,
 
-    /// NJORD token mint
+    /// CHECK: NJORD token mint - validated at protocol level, not enforced here
     pub njord_mint: UncheckedAccount<'info>,
 
     #[account(mut)]
