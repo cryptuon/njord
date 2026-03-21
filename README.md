@@ -4,6 +4,13 @@
 
 Njord is an on-chain affiliate marketing protocol that enables trustless, real-time commission payments with built-in fraud detection and decentralized bridge operators for fiat on/off ramps.
 
+## Deployment Status
+
+| Network | Program ID | Status |
+|---------|-----------|--------|
+| Devnet | [`Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv`](https://explorer.solana.com/address/Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv?cluster=devnet) | Live |
+| Mainnet | `Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv` | Pending |
+
 ## Features
 
 - **Real-time Settlement**: Sub-second commission payments on Solana
@@ -92,11 +99,19 @@ pnpm dev
 ```bash
 # Configure Solana CLI for devnet
 solana config set --url devnet
+solana config set --keypair ~/.config/solana/njord-devnet-deployer.json
 
-# Build and deploy
-anchor build
+# Build (requires platform-tools v1.52 for Rust edition 2024)
+anchor build -- --tools-version v1.52
+
+# Deploy
 anchor deploy --provider.cluster devnet
+
+# Initialize protocol
+pnpm init:devnet
 ```
+
+For detailed deployment instructions, see [Deployment Guide](./docs/DEPLOYMENT.md).
 
 ## Usage
 
@@ -181,6 +196,7 @@ npx njord-bridge serve
 - [Tokenomics](./njord-docs/docs/tokenomics.md)
 - [Fraud Detection](./njord-docs/docs/fraud_detection.md)
 - [Getting Started](./njord-docs/docs/getting_started.md)
+- [Deployment Guide](./docs/DEPLOYMENT.md)
 
 ## Development
 
@@ -220,6 +236,15 @@ pnpm anchor:build
 
 # Run Anchor tests
 pnpm anchor:test
+
+# Deploy to devnet
+pnpm anchor:deploy
+
+# Initialize protocol (devnet)
+pnpm init:devnet
+
+# Initialize protocol (mainnet)
+pnpm init:mainnet
 ```
 
 ## Contributing
