@@ -1,0 +1,36 @@
+{
+  "name": "@njord/dashboard",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@solana/wallet-adapter-base": "^0.9.23",
+    "@solana/wallet-adapter-wallets": "^0.19.32",
+    "@solana/web3.js": "^1.95.4",
+    "@urql/vue": "^1.4.1",
+    "chart.js": "^4.4.7",
+    "graphql": "^16.9.0",
+    "pinia": "^2.3.0",
+    "solana-wallets-vue": "^0.6.1",
+    "vue": "^3.5.13",
+    "vue-chartjs": "^5.3.2",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.1",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5",
+    "vite-plugin-node-polyfills": "^0.23.0",
+    "vue-tsc": "^2.2.0"
+  }
+}

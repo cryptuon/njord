@@ -1,260 +1,197 @@
-# Njord Protocol
+<p align="center">
+  <img src="assets/banner.png" alt="Njord Protocol" width="100%" />
+</p>
 
-**Decentralized Affiliate Marketing on Solana**
+<h1 align="center">Njord Protocol</h1>
 
-Njord is an on-chain affiliate marketing protocol that enables trustless, real-time commission payments with built-in fraud detection and decentralized bridge operators for fiat on/off ramps.
+<h3 align="center"><em>Where Every Click Pays. Instantly. On-Chain.</em></h3>
 
-## Deployment Status
+<p align="center">
+  <a href="https://explorer.solana.com/address/Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv?cluster=devnet"><img src="https://img.shields.io/badge/Solana-Devnet%20Live-blueviolet?logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzOTcuNyAzMTEuNyI+PHBhdGggZD0iTTY0LjYgMjM3LjlhMTIuMiAxMi4yIDAgMCAxIDguNi0zLjZoMzA5LjVhNi4xIDYuMSAwIDAgMSA0LjMgMTAuNGwtNTggNTguNGExMi4yIDEyLjIgMCAwIDEtOC42IDMuNkg0LjlhNi4xIDYuMSAwIDAgMS00LjMtMTAuNHoiIGZpbGw9IiNmZmYiLz48cGF0aCBkPSJNNjQuNiA4LjhhMTIuNiAxMi42IDAgMCAxIDguNi0zLjZoMzA5LjVhNi4xIDYuMSAwIDAgMSA0LjMgMTAuNGwtNTggNTguNGExMi4yIDEyLjIgMCAwIDEtOC42IDMuNkg0LjlBNi4xIDYuMSAwIDAgMSAuNiA2Ny4ybDU4LTU4LjR6IiBmaWxsPSIjZmZmIi8+PHBhdGggZD0iTTMzMy4xIDEyMC4xYTEyLjIgMTIuMiAwIDAgMC04LjYtMy42SDEzLjlhNi4xIDYuMSAwIDAgMC00LjMgMTAuNGw1OCA1OC40YTEyLjIgMTIuMiAwIDAgMCA4LjYgMy42aDMxMC42YTYuMSA2LjEgMCAwIDAgNC4zLTEwLjR6IiBmaWxsPSIjZmZmIi8+PC9zdmc+" alt="Solana Devnet" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT" /></a>
+  <a href="https://njord.cryptuon.com"><img src="https://img.shields.io/badge/Dashboard-Live-00c9c7" alt="Dashboard" /></a>
+  <img src="https://img.shields.io/badge/TypeScript-SDK-blue?logo=typescript" alt="TypeScript SDK" />
+  <img src="https://img.shields.io/badge/Anchor-0.32.1-orange" alt="Anchor" />
+</p>
 
-| Network | Program ID | Status |
-|---------|-----------|--------|
-| Devnet | [`Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv`](https://explorer.solana.com/address/Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv?cluster=devnet) | Live |
-| Mainnet | `Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv` | Pending |
+---
 
-## Features
+Njord is a decentralized affiliate marketing protocol on **Solana** that replaces opaque middlemen with transparent smart contracts. Companies fund campaigns with on-chain escrow, affiliates earn commissions settled in seconds, and independent bridge operators bring the whole world in through fiat on/off ramps.
 
-- **Real-time Settlement**: Sub-second commission payments on Solana
-- **Tiered Trust System**: Affiliates earn faster payouts as they build reputation
-- **Decentralized Bridges**: Independent operators handle fiat conversions
-- **Fraud Detection**: ML-powered scoring with economic challenge system
-- **Governance**: Token-weighted voting for protocol parameters
+**No more NET-90 payment terms. No more black-box tracking. No more trust issues.**
 
-## Architecture
+---
 
+## The Problem with Affiliate Marketing Today
+
+- **Slow payments** — Affiliates wait 30–90 days to get paid
+- **Opaque tracking** — Proprietary dashboards with no way to verify numbers
+- **High fees** — Networks take 15–30% of every commission
+- **Fraud with no accountability** — Bad actors thrive, honest participants suffer
+- **Regional gatekeeping** — KYC-heavy platforms lock out global talent
+
+---
+
+## How Njord Works
+
+```mermaid
+sequenceDiagram
+    participant Company
+    participant Njord as ⛓️ Njord Protocol
+    participant Affiliate
+    participant Customer
+    participant Bridge as 🌐 Bridge
+
+    Company->>Njord: Create campaign & fund escrow
+    Affiliate->>Njord: Join campaign
+    Affiliate->>Customer: Share tracking link
+    Customer->>Bridge: Complete purchase
+    Bridge->>Njord: Record attribution on Solana
+    Njord->>Affiliate: Commission released (~3 seconds)
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                         Companies                                │
-│                    (Campaign Creators)                          │
-└─────────────────────────┬───────────────────────────────────────┘
-                          │
-                          ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                    Njord Smart Contract                         │
-│  ┌─────────┐ ┌──────────┐ ┌───────────┐ ┌──────────┐           │
-│  │Campaign │ │Affiliate │ │Attribution│ │Challenge │           │
-│  │ Module  │ │  Module  │ │  Module   │ │  Module  │           │
-│  └─────────┘ └──────────┘ └───────────┘ └──────────┘           │
-│  ┌─────────┐ ┌──────────┐                                       │
-│  │ Bridge  │ │Governance│                                       │
-│  │ Module  │ │  Module  │                                       │
-│  └─────────┘ └──────────┘                                       │
-└─────────────────────────┬───────────────────────────────────────┘
-                          │
-          ┌───────────────┼───────────────┐
-          ▼               ▼               ▼
-    ┌──────────┐   ┌──────────┐   ┌──────────┐
-    │Affiliates│   │  Bridge  │   │ Indexer  │
-    │          │   │Operators │   │(GraphQL) │
-    └──────────┘   └──────────┘   └──────────┘
+
+---
+
+## Who Is Njord For?
+
+<table>
+<tr>
+<td width="33%" valign="top">
+
+### For Campaign Owners
+
+- Pay **only for verified results**
+- On-chain escrow protects your budget
+- Built-in fraud detection & challenge system
+- Real-time analytics on every conversion
+- Stake NJORD for up to 50% fee discounts
+
+</td>
+<td width="33%" valign="top">
+
+### For Affiliates
+
+- Commissions in **seconds, not months**
+- Build reputation → unlock faster payouts
+- No middlemen, no platform lock-in
+- Browse campaigns & generate links instantly
+- Earn in USDC or withdraw to bank via bridge
+
+</td>
+<td width="33%" valign="top">
+
+### For Bridge Operators
+
+- **Earn fees on every transaction** you process
+- Stake NJORD for higher volume tiers
+- Multiple revenue streams (fees + staking + spread)
+- Run infrastructure in any region
+- Plug-and-play SDK with Docker deployment
+
+</td>
+</tr>
+</table>
+
+---
+
+## Why Njord?
+
+| | Traditional Networks | Njord Protocol |
+|---|---|---|
+| **Payment Speed** | 30–90 days | ~3 seconds |
+| **Transparency** | Proprietary dashboards | On-chain, fully auditable |
+| **Platform Fee** | 15–30% | 2.5% protocol + 1% bridge |
+| **Fraud Handling** | Manual review, weeks | Automated scoring + economic challenges |
+| **Global Access** | Regional, KYC-heavy | Permissionless + optional bridge KYC |
+| **Trust Model** | "Trust the network" | Trustless smart contracts |
+| **Settlement** | Bank transfers | Direct USDC to wallet |
+
+---
+
+## Key Numbers
+
+| Metric | Value |
+|--------|-------|
+| Settlement time | **~3 seconds** |
+| Transaction cost | **~$0.00025** |
+| Protocol fee | **2.5%** |
+| Total NJORD supply | **1,000,000,000** |
+| Affiliate tiers | **4** (New → Verified → Trusted → Elite) |
+| Bridge tiers | **4** (Bronze → Silver → Gold → Platinum) |
+
+---
+
+## Ecosystem
+
+```mermaid
+flowchart LR
+    Companies["🏢 Companies"] --> Contracts["⛓️ Njord Smart Contracts"]
+    Affiliates["📢 Affiliates"] --> Contracts
+    Bridges["🌐 Bridge Operators"] --> Contracts
+    Contracts --> Escrow["💰 Escrow & Payouts"]
+    Contracts --> Fraud["🛡️ Fraud Detection"]
+    Contracts --> Gov["🗳️ Governance"]
+    NJORD["🪙 NJORD Token"] --> Gov
+    NJORD --> Bridges
 ```
+
+---
+
+## Get Started
+
+| I want to... | Go here |
+|-------------|---------|
+| Explore the network | [**Dashboard** →](https://njord.cryptuon.com) |
+| Read the full documentation | [**Documentation** →](documentation/docs/index.md) |
+| Understand how it works | [How It Works →](documentation/docs/how-it-works.md) |
+| Start as an affiliate | [For Affiliates →](documentation/docs/for-affiliates.md) |
+| Launch a campaign | [For Companies →](documentation/docs/for-companies.md) |
+| Run a bridge | [For Bridge Operators →](documentation/docs/for-bridge-operators.md) |
+| Understand the token | [Tokenomics →](documentation/docs/tokenomics.md) |
+
+---
 
 ## Packages
 
 | Package | Description |
 |---------|-------------|
-| `@njord/sdk` | Core TypeScript SDK for interacting with the protocol |
-| `@njord/react` | React hooks and components for frontend integration |
-| `@njord/bridge-sdk` | SDK for building bridge operator services |
-| `@njord/indexer` | Event indexer with PostgreSQL and GraphQL API |
+| [`@njord/sdk`](packages/sdk) | Core TypeScript SDK for protocol interaction |
+| [`@njord/react`](packages/react) | React hooks and components for frontend apps |
+| [`@njord/bridge-sdk`](packages/bridge-sdk) | SDK for building bridge operator services |
+| [`@njord/indexer`](packages/indexer) | Event indexer with GraphQL API |
 
-## Quick Start
+---
 
-### Prerequisites
+## Deployment
 
-- Node.js 18+
-- pnpm 9+
-- Rust (for Anchor development)
-- Solana CLI
-- Anchor CLI
+| Network | Program ID | Status |
+|---------|-----------|--------|
+| **Devnet** | [`Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv`](https://explorer.solana.com/address/Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv?cluster=devnet) | Live |
+| **Mainnet** | `Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv` | Pending |
 
-### Installation
+---
+
+## Quick Start (Developers)
 
 ```bash
-# Clone the repository
 git clone https://github.com/njord-protocol/njord.git
 cd njord
-
-# Install dependencies
 pnpm install
-
-# Build all packages
 pnpm build
 ```
 
-### Local Development
+For detailed setup, deployment, and API documentation, see the [Developer Guide](njord-docs/docs/getting_started.md).
 
-```bash
-# Start local infrastructure (Postgres, Redis, Solana validator)
-docker-compose up -d
-
-# Run tests
-pnpm test
-
-# Start development mode
-pnpm dev
-```
-
-### Deploy to Devnet
-
-```bash
-# Configure Solana CLI for devnet
-solana config set --url devnet
-solana config set --keypair ~/.config/solana/njord-devnet-deployer.json
-
-# Build (requires platform-tools v1.52 for Rust edition 2024)
-anchor build -- --tools-version v1.52
-
-# Deploy
-anchor deploy --provider.cluster devnet
-
-# Initialize protocol
-pnpm init:devnet
-```
-
-For detailed deployment instructions, see [Deployment Guide](./docs/DEPLOYMENT.md).
-
-## Usage
-
-### For Companies (Campaign Creators)
-
-```typescript
-import { NjordClient } from "@njord/sdk";
-
-const client = new NjordClient({
-  connection,
-  wallet,
-});
-
-// Create a campaign
-const { campaignPda } = await client.createCampaign({
-  name: "Summer Sale",
-  mint: usdcMint,
-  commissionType: "percentage",
-  commissionValue: 1000, // 10%
-  budget: 10000_000000, // $10,000 USDC
-  holdPeriod: 7 * 24 * 60 * 60, // 7 days
-});
-```
-
-### For Affiliates
-
-```typescript
-// Register as affiliate
-await client.createAffiliateProfile();
-
-// Join a campaign
-await client.registerAffiliate({ campaign: campaignPda });
-
-// Generate tracking link
-const link = `https://merchant.com?njord_c=${campaignId}&njord_a=${affiliateId}`;
-```
-
-### For React Apps
-
-```tsx
-import { NjordProvider, useCampaigns, useAffiliate } from "@njord/react";
-
-function App() {
-  return (
-    <NjordProvider indexerUrl="https://indexer.njord.io">
-      <Dashboard />
-    </NjordProvider>
-  );
-}
-
-function Dashboard() {
-  const { campaigns, loading } = useCampaigns();
-  const { affiliate, earnings } = useAffiliate();
-
-  return (
-    <div>
-      <h1>Your Earnings: ${earnings.total / 100}</h1>
-      <h2>Available Campaigns: {campaigns.length}</h2>
-    </div>
-  );
-}
-```
-
-### For Bridge Operators
-
-```bash
-# Initialize configuration
-npx njord-bridge init
-
-# Generate keypair
-npx njord-bridge keygen
-
-# Start the bridge server
-npx njord-bridge serve
-```
-
-## Documentation
-
-- [Introduction](./njord-docs/docs/introduction.md)
-- [Architecture](./njord-docs/docs/architecture.md)
-- [Protocol Flow](./njord-docs/docs/protocol_flow.md)
-- [Tokenomics](./njord-docs/docs/tokenomics.md)
-- [Fraud Detection](./njord-docs/docs/fraud_detection.md)
-- [Getting Started](./njord-docs/docs/getting_started.md)
-- [Deployment Guide](./docs/DEPLOYMENT.md)
-
-## Development
-
-### Project Structure
-
-```
-njord/
-├── programs/njord/          # Solana/Anchor smart contract
-├── packages/
-│   ├── sdk/                 # Core TypeScript SDK
-│   ├── react/               # React hooks & components
-│   ├── bridge-sdk/          # Bridge operator SDK
-│   └── indexer/             # Event indexer
-├── tools/
-│   └── fraud-detection/     # Python ML fraud detection
-├── njord-docs/              # Documentation
-└── tests/                   # Integration tests
-```
-
-### Commands
-
-```bash
-# Build all packages
-pnpm build
-
-# Run tests
-pnpm test
-
-# Lint code
-pnpm lint
-
-# Format code
-pnpm format
-
-# Build Anchor program
-pnpm anchor:build
-
-# Run Anchor tests
-pnpm anchor:test
-
-# Deploy to devnet
-pnpm anchor:deploy
-
-# Initialize protocol (devnet)
-pnpm init:devnet
-
-# Initialize protocol (mainnet)
-pnpm init:mainnet
-```
+---
 
 ## Contributing
 
-Contributions are welcome! Please read our [Contributing Guide](./CONTRIBUTING.md) for details.
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-## Security
+For security concerns, email security@njord.io or open a private security advisory.
 
-For security concerns, please email security@njord.io or open a private security advisory.
+---
 
 ## License
 
-MIT License - see [LICENSE](./LICENSE) for details.
+[MIT](LICENSE)

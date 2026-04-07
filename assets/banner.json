@@ -1,0 +1,17 @@
+{
+  "status": "success",
+  "model": "google/gemini-3.1-flash-image-preview",
+  "prompt": "A wide cinematic banner for a blockchain protocol. Abstract digital ocean with glowing network nodes connected by luminous pathways representing a decentralized network. Deep navy blue and teal color scheme with electric cyan accent nodes. Subtle geometric wave patterns. Modern clean tech-forward aesthetic. No text no words no letters. Professional sleek dark background with depth and dimension.",
+  "output_path": "assets/banner.png",
+  "file_size_bytes": 5836055,
+  "aspect_ratio": "16:9",
+  "image_size": "2K",
+  "generation_id": "gen-1775605142-X626qxkhaS2XdgEjdBZf",
+  "usage": {
+    "prompt_tokens": 66,
+    "completion_tokens": 1680,
+    "total_tokens": 1746
+  },
+  "generation_time_ms": 38887,
+  "was_edit": false
+}

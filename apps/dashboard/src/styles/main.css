@@ -1,0 +1,113 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-surface-900 text-gray-100;
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-surface-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-surface-700 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-surface-600;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-xl
+      bg-gradient-to-r from-njord-500 to-njord-600 text-white font-semibold
+      hover:from-njord-400 hover:to-njord-500 transition-all duration-200
+      shadow-lg shadow-njord-500/20 hover:shadow-njord-500/40
+      disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-xl
+      border border-surface-600 text-gray-300 font-medium
+      hover:bg-surface-800 hover:border-surface-600 transition-all duration-200
+      disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .card {
+    @apply bg-surface-800 rounded-2xl border border-surface-700 p-6;
+  }
+
+  .card-hover {
+    @apply card hover:border-njord-700/50 hover:shadow-lg hover:shadow-njord-950/20
+      transition-all duration-200 cursor-pointer;
+  }
+
+  .stat-card {
+    @apply card flex flex-col gap-2;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .badge-new {
+    @apply badge bg-gray-700 text-gray-300;
+  }
+  .badge-verified {
+    @apply badge bg-blue-900/50 text-blue-400;
+  }
+  .badge-trusted {
+    @apply badge bg-purple-900/50 text-purple-400;
+  }
+  .badge-elite {
+    @apply badge bg-amber-900/50 text-amber-400;
+  }
+
+  .badge-bronze {
+    @apply badge bg-amber-900/40 text-amber-500;
+  }
+  .badge-silver {
+    @apply badge bg-gray-600/40 text-gray-300;
+  }
+  .badge-gold {
+    @apply badge bg-yellow-900/40 text-yellow-400;
+  }
+  .badge-platinum {
+    @apply badge bg-gradient-to-r from-purple-500/20 to-njord-500/20 text-njord-300;
+  }
+
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-white;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-gray-400 max-w-2xl;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-njord-400 to-njord-200 bg-clip-text text-transparent;
+  }
+
+  .glass {
+    @apply bg-surface-800/60 backdrop-blur-xl border border-surface-700/50;
+  }
+
+  .input {
+    @apply w-full px-4 py-3 rounded-xl bg-surface-900 border border-surface-700
+      text-gray-100 placeholder-gray-500
+      focus:outline-none focus:ring-2 focus:ring-njord-500/50 focus:border-njord-600
+      transition-all duration-200;
+  }
+
+  .nav-link {
+    @apply text-gray-400 hover:text-white transition-colors duration-200 text-sm font-medium;
+  }
+
+  .nav-link-active {
+    @apply text-njord-400 font-semibold;
+  }
+}

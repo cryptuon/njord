@@ -1,0 +1,59 @@
+site_name: Njord Protocol
+site_description: Decentralized Affiliate Marketing on Solana — Where Every Click Pays. Instantly. On-Chain.
+site_url: https://docs.njord.io
+
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: teal
+    accent: cyan
+  font:
+    text: Inter
+    code: JetBrains Mono
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - content.tabs.link
+    - toc.integrate
+
+nav:
+  - Home: index.md
+  - How It Works: how-it-works.md
+  - For Affiliates: for-affiliates.md
+  - For Companies: for-companies.md
+  - For Bridge Operators: for-bridge-operators.md
+  - Tokenomics: tokenomics.md
+  - Fraud Protection: fraud-protection.md
+  - Roadmap: roadmap.md
+  - FAQ: faq.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.emoji
+  - tables
+  - attr_list
+  - md_in_html
+  - toc:
+      permalink: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/njord-protocol/njord
+  generator: false
+
+extra_javascript:
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+
+copyright: Njord Protocol — Built on Solana
