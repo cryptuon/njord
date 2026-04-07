@@ -42,7 +42,7 @@ Affiliates generate tracking links and share them through blogs, social media, v
 | Method | Format | Best For |
 |--------|--------|----------|
 | URL Parameter | `?njord=CAMPAIGN.AFFILIATE` | Web links |
-| Short Link | `njord.link/CAMPAIGN/AFFILIATE` | Social media |
+| Short Link | `njord.cryptuon.com/r/CAMPAIGN/AFFILIATE` | Social media |
 | Coupon Code | `AFFILIATE10` | Checkout flows |
 | SDK Embed | JavaScript snippet | In-app tracking |
 

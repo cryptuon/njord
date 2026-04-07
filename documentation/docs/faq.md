@@ -92,4 +92,4 @@ Controlled inflation funds staking rewards: 5% in Year 1, declining to 1% by Yea
 
 - Visit the [Dashboard](https://njord.cryptuon.com) to explore the network
 - Read the full [Documentation](index.md) for detailed guides
-- Join the community on Discord: `discord.gg/njord`
+- Email us: support@cryptuon.com

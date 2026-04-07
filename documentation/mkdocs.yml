@@ -1,6 +1,6 @@
 site_name: Njord Protocol
 site_description: Decentralized Affiliate Marketing on Solana — Where Every Click Pays. Instantly. On-Chain.
-site_url: https://docs.njord.io
+site_url: https://njord.cryptuon.com
 
 theme:
   name: material
@@ -56,4 +56,4 @@ extra:
 extra_javascript:
   - https://unpkg.com/mermaid@10/dist/mermaid.min.js
 
-copyright: Njord Protocol — Built on Solana
+copyright: Njord Protocol — Built on Solana — support@cryptuon.com

@@ -188,7 +188,7 @@ For detailed setup, deployment, and API documentation, see the [Developer Guide]
 
 Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-For security concerns, email security@njord.io or open a private security advisory.
+For security concerns, email support@cryptuon.com or open a private security advisory.
 
 ---
 
