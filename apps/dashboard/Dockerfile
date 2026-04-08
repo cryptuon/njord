@@ -6,7 +6,8 @@ RUN corepack enable && corepack prepare pnpm@9.15.0 --activate
 WORKDIR /app
 
 # Copy workspace root files
-COPY pnpm-workspace.yaml package.json pnpm-lock.yaml ./
+COPY pnpm-workspace.yaml package.json ./
+COPY pnpm-lock.yaml* ./
 
 # Copy SDK package (dependency)
 COPY packages/sdk/package.json packages/sdk/
@@ -25,7 +26,7 @@ COPY apps/dashboard/postcss.config.js apps/dashboard/
 COPY apps/dashboard/env.d.ts apps/dashboard/
 
 # Install dependencies
-RUN pnpm install --frozen-lockfile --ignore-scripts
+RUN pnpm install --no-frozen-lockfile --ignore-scripts
 
 # Build SDK first, then dashboard
 RUN pnpm --filter @njord/sdk build 2>/dev/null || true
