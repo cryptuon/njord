@@ -18,6 +18,7 @@
     "graphql": "^16.9.0",
     "pinia": "^2.3.0",
     "solana-wallets-vue": "^0.6.1",
+    "unenv": "^2.0.0-rc",
     "vue": "^3.5.13",
     "vue-chartjs": "^5.3.2",
     "vue-router": "^4.5.0"

@@ -16,19 +16,9 @@ export default defineConfig({
       '@': resolve(__dirname, 'src'),
     },
   },
-  define: {
-    'process.env': {},
-  },
   build: {
     target: 'es2020',
     rollupOptions: {
-      onwarn(warning, warn) {
-        // Suppress unresolved import warnings from node polyfills
-        if (warning.code === 'UNRESOLVED_IMPORT' && warning.exporter?.includes('unenv')) {
-          return
-        }
-        warn(warning)
-      },
       output: {
         manualChunks: {
           'vue-vendor': ['vue', 'vue-router', 'pinia'],
