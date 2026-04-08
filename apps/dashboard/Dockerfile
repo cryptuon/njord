@@ -7,7 +7,6 @@ WORKDIR /app
 
 # Copy workspace root files
 COPY pnpm-workspace.yaml package.json ./
-COPY pnpm-lock.yaml* ./
 
 # Copy SDK package (dependency)
 COPY packages/sdk/package.json packages/sdk/
