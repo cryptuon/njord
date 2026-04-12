@@ -1,7 +1,7 @@
 ---
 title: "Why Affiliate Payments Take 30-90 Days (And How Smart Contracts Fix It)"
 description: "Affiliate payment delays cost publishers billions in lost cash flow. Learn why networks pay NET-30 to NET-90 and how smart contract escrow enables 3-second settlement."
-pubDate: 2025-04-01
+pubDate: 2026-04-03
 author: "Njord Team"
 tags: ["affiliate-payments", "payment-delays", "smart-contracts", "cash-flow", "affiliate-marketing"]
 category: "thought-leadership"

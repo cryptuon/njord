@@ -1,7 +1,7 @@
 ---
 title: "How to Build a DeFi Referral Program on Solana"
 description: "A practical guide to building on-chain referral programs for DeFi projects on Solana. Covers architecture, reward structures, Sybil resistance, and using Njord Protocol as infrastructure."
-pubDate: 2025-04-05
+pubDate: 2026-04-09
 author: "Njord Team"
 tags: ["solana", "defi", "referral-program", "tutorial", "development"]
 category: "tutorial"

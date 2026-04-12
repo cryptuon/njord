@@ -1,7 +1,7 @@
 ---
 title: "Affiliate Marketing Fraud: $3.4 Billion Problem, On-Chain Solution"
 description: "Affiliate marketing fraud costs $3.4 billion annually. Learn the latest fraud statistics, how common schemes work, and why blockchain-based tracking is the most effective prevention strategy."
-pubDate: 2025-04-05
+pubDate: 2026-04-11
 author: "Njord Team"
 tags: ["affiliate-marketing", "fraud-prevention", "blockchain", "security", "industry-analysis"]
 category: "thought-leadership"

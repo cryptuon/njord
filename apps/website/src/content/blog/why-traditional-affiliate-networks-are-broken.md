@@ -1,7 +1,7 @@
 ---
 title: "Why Traditional Affiliate Networks Are Broken"
 description: "Traditional affiliate networks charge 15-30% fees, delay payments for months, and use opaque tracking. Here's a breakdown of the systemic problems in affiliate marketing and how decentralized protocols fix them."
-pubDate: 2025-02-01
+pubDate: 2026-03-19
 author: "Njord Team"
 tags: ["affiliate-marketing", "industry-analysis", "web3"]
 category: "thought-leadership"

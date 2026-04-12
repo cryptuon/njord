@@ -1,7 +1,7 @@
 ---
 title: "Smart Contract Affiliate Marketing: The Complete Guide"
 description: "Learn how smart contracts replace traditional affiliate networks. A complete guide to escrow, attribution, settlement, and dispute resolution on the blockchain."
-pubDate: 2025-04-01
+pubDate: 2026-04-05
 author: "Njord Team"
 tags: ["smart-contracts", "affiliate-marketing", "blockchain", "guide", "solana"]
 category: "guide"

@@ -39,6 +39,9 @@ logs/
 # Build artifacts
 *.so
 
+# Astro
+.astro/
+
 # Coverage
 coverage/
 .nyc_output/

@@ -1,7 +1,7 @@
 ---
 title: "NJORD Token: Staking, Governance, and Tier Benefits"
 description: "The NJORD token powers the Njord Protocol ecosystem through staking for tier access, governance voting, and protocol fee distribution. Learn about NJORD tokenomics and how staking unlocks premium features."
-pubDate: 2025-03-01
+pubDate: 2026-03-26
 author: "Njord Team"
 tags: ["tokenomics", "njord-token", "staking", "governance"]
 category: "protocol-update"

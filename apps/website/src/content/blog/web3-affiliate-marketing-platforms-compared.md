@@ -1,7 +1,7 @@
 ---
 title: "Web3 Affiliate Marketing Platforms Compared: Njord, Attrace, ShareMint, and More"
 description: "An honest comparison of the top web3 affiliate marketing platforms in 2025. Compare fees, settlement speed, blockchain, and features across Njord, Attrace, ShareMint, RefToken, and more."
-pubDate: 2025-04-05
+pubDate: 2026-04-07
 author: "Njord Team"
 tags: ["affiliate-marketing", "web3", "comparison", "blockchain", "defi"]
 category: "guide"

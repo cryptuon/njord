@@ -1,7 +1,7 @@
 ---
 title: "How On-Chain Affiliate Tracking Works on Solana"
 description: "A technical explanation of how Njord Protocol tracks affiliate conversions on the Solana blockchain. Learn about on-chain attribution, smart contract escrow, and why blockchain-based tracking is more reliable than traditional cookie-based methods."
-pubDate: 2025-01-20
+pubDate: 2026-03-17
 author: "Njord Team"
 tags: ["solana", "on-chain-tracking", "technical", "affiliate-marketing", "cookieless", "privacy"]
 category: "tutorial"

@@ -1,7 +1,7 @@
 ---
 title: "What is Decentralized Affiliate Marketing?"
 description: "Decentralized affiliate marketing uses blockchain smart contracts to replace traditional affiliate networks. Learn how on-chain tracking, instant settlements, and transparent commissions are changing the $17 billion affiliate industry."
-pubDate: 2025-01-15
+pubDate: 2026-03-14
 author: "Njord Team"
 tags: ["affiliate-marketing", "web3", "defi", "blockchain"]
 category: "thought-leadership"

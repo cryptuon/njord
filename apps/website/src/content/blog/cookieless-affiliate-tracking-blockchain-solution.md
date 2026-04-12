@@ -1,7 +1,7 @@
 ---
 title: "Cookieless Affiliate Tracking: How Blockchain Solves the Post-Cookie Crisis"
 description: "Third-party cookies are dead. Learn how blockchain-based wallet identity replaces cookie tracking for affiliate marketing with permanent, cross-device attribution."
-pubDate: 2025-04-01
+pubDate: 2026-04-01
 author: "Njord Team"
 tags: ["cookieless-tracking", "affiliate-marketing", "blockchain", "privacy", "web3"]
 category: "thought-leadership"

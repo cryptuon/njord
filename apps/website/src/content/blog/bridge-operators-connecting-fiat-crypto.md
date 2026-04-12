@@ -1,7 +1,7 @@
 ---
 title: "Bridge Operators: Connecting Fiat and Crypto Affiliate Payments"
 description: "Bridge operators are the infrastructure providers that connect fiat and crypto payments in Njord Protocol. Learn what bridge operators do, how they earn fees, and why they're essential to decentralized affiliate marketing."
-pubDate: 2025-02-20
+pubDate: 2026-03-24
 author: "Njord Team"
 tags: ["bridge-operators", "fiat", "infrastructure", "earning"]
 category: "guide"

@@ -1,7 +1,7 @@
 ---
 title: "Affiliate Marketing on Solana vs Ethereum: Why Speed Matters"
 description: "Why Solana is the better blockchain for decentralized affiliate marketing. Compare transaction speed, costs, and throughput between Solana and Ethereum for on-chain affiliate tracking and settlement."
-pubDate: 2025-03-10
+pubDate: 2026-03-28
 author: "Njord Team"
 tags: ["solana", "ethereum", "blockchain", "technical"]
 category: "thought-leadership"

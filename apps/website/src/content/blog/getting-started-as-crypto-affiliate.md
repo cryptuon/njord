@@ -1,7 +1,7 @@
 ---
 title: "Getting Started as a Crypto Affiliate: Complete Guide"
 description: "Step-by-step guide to becoming a crypto affiliate on Njord Protocol. Learn how to create your on-chain profile, find campaigns, generate tracking links, and earn instant commissions on Solana."
-pubDate: 2025-02-10
+pubDate: 2026-03-22
 author: "Njord Team"
 tags: ["affiliate-marketing", "guide", "solana", "earning"]
 category: "guide"
