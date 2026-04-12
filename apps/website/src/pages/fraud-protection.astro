@@ -1,0 +1,238 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Breadcrumbs from '../components/Breadcrumbs.astro'
+
+const siteUrl = 'https://njord.cryptuon.com'
+
+const principles = [
+  { title: 'Skin in the Game', desc: 'All participants stake value' },
+  { title: 'Profitable Detection', desc: 'Catching fraud is rewarded' },
+  { title: 'Decentralized', desc: 'Multiple parties can challenge' },
+  { title: 'Economic Deterrence', desc: 'Fraud costs more than gains' },
+  { title: 'Trust = Speed', desc: 'Higher trust, faster settlement' },
+]
+
+const states = [
+  { name: 'Submitted', color: 'bg-blue-400' },
+  { name: 'Pending', color: 'bg-amber-400' },
+  { name: 'Challenged', color: 'bg-red-400' },
+  { name: 'Settled', color: 'bg-green-400' },
+]
+
+const lifecycle = [
+  { name: 'Submitted', desc: 'Bridge submits event', color: 'bg-blue-600/20 text-blue-400' },
+  { name: 'Auto-Check', desc: 'Velocity & pattern checks', color: 'bg-surface-600 text-gray-300' },
+  { name: 'Pending', desc: 'Normal hold period', color: 'bg-amber-600/20 text-amber-400' },
+  { name: 'Challenge Window', desc: 'Open for disputes', color: 'bg-red-600/20 text-red-400' },
+  { name: 'Resolution', desc: 'Dispute resolved', color: 'bg-purple-600/20 text-purple-400' },
+  { name: 'Settled', desc: 'Commission paid', color: 'bg-green-600/20 text-green-400' },
+]
+
+const challengers = [
+  { who: 'Company', what: 'Challenge their own campaign attributions', bond: '5% of commission' },
+  { who: 'Bridge Operator', what: 'Challenge any attribution they processed', bond: '10% of commission' },
+  { who: 'Other Affiliate', what: 'Challenge same-campaign attributions', bond: '15% of commission' },
+  { who: 'Protocol (Auto)', what: 'Automated detection for any attribution', bond: 'No bond required' },
+]
+
+const fraudRanges = [
+  { range: '0-20', label: 'Auto-approve', action: 'Fast settlement', textColor: 'text-green-400', bgColor: 'bg-green-600/30' },
+  { range: '20-50', label: 'Standard', action: 'Normal hold period', textColor: 'text-amber-400', bgColor: 'bg-amber-600/30' },
+  { range: '50-80', label: 'Suspicious', action: 'Extended hold + review', textColor: 'text-orange-400', bgColor: 'bg-orange-600/30' },
+  { range: '80-100', label: 'Auto-reject', action: 'Requires verification', textColor: 'text-red-400', bgColor: 'bg-red-600/30' },
+]
+
+const scenarios = [
+  { name: 'Cookie Stuffing', desc: 'Hidden iframes dropping cookies on unsuspecting users', detection: 'Low click-to-conversion time, high volume with low engagement, IP/session mismatches' },
+  { name: 'Fake Signups', desc: 'Creating fake accounts to earn per-signup commissions', detection: 'Disposable email domains, phone verification failure, no subsequent platform engagement' },
+  { name: 'Bot Traffic', desc: 'Using bots to generate fake clicks or signups', detection: 'Device fingerprint anomalies, inhuman behavioral patterns, IP clustering from data centers' },
+  { name: 'Collusion', desc: 'Bridge operator and affiliate submitting fake attributions', detection: 'Cross-bridge comparison, unusual volume spikes, company transaction record mismatch' },
+]
+
+const faqItems = [
+  {
+    question: 'How does Njord prevent affiliate marketing fraud?',
+    answer: 'Njord uses a multi-layered approach combining economic staking, automated fraud scoring (0-100), a challenge system with bonds, and decentralized dispute resolution. All participants must stake value, making fraud economically irrational because the cost of getting caught exceeds the potential gains.',
+  },
+  {
+    question: 'What happens when fraud is detected in a campaign?',
+    answer: 'When fraud is confirmed through the challenge system, the affiliate loses their commission and has their stake slashed. The challenger receives their bond back plus 50% of the commission, while the company gets 50% refunded. This incentivizes active fraud detection across the network.',
+  },
+  {
+    question: 'Who can challenge a suspicious attribution?',
+    answer: 'Companies can challenge their own campaign attributions with a 5% bond, bridge operators can challenge any attribution they processed with a 10% bond, other affiliates can challenge same-campaign attributions with a 15% bond, and the protocol itself runs automated detection requiring no bond.',
+  },
+  {
+    question: 'How does the fraud scoring system work?',
+    answer: 'Each attribution receives a fraud score from 0-100 based on multiple signals. Scores 0-20 are auto-approved for fast settlement, 20-50 follow standard hold periods, 50-80 trigger extended holds and review, and 80-100 are auto-rejected requiring manual verification.',
+  },
+]
+
+const jsonLd = [
+  {
+    '@type': 'WebPage',
+    name: 'Fraud Protection - Njord Protocol',
+    description: 'Learn how Njord Protocol prevents affiliate marketing fraud through staking, challenge systems, automated fraud scoring, and economic deterrence on Solana.',
+    url: `${siteUrl}/fraud-protection`,
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map(item => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  },
+]
+---
+
+<BaseLayout
+  title="Fraud Protection - How Njord Prevents Affiliate Marketing Fraud"
+  description="Learn how Njord Protocol prevents affiliate marketing fraud through staking, challenge systems, automated fraud scoring, and economic deterrence on Solana blockchain."
+  jsonLd={jsonLd}
+>
+  <Breadcrumbs items={[{ name: 'Fraud Protection' }]} />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <header class="text-center mb-16">
+      <h1 class="section-title mb-4">How Does Njord Prevent Affiliate Marketing Fraud?</h1>
+      <p class="section-subtitle mx-auto">
+        Njord makes fraud economically irrational through staking, challenges, and automated detection
+      </p>
+    </header>
+
+    <!-- Design Principles -->
+    <section aria-label="Fraud prevention design principles" class="mb-20">
+      <h2 class="sr-only">Design Principles</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-4">
+        {principles.map(p => (
+          <article class="card text-center">
+            <h3 class="text-white font-medium text-sm mb-1">{p.title}</h3>
+            <p class="text-gray-500 text-xs">{p.desc}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Attribution Lifecycle -->
+    <section aria-label="Attribution lifecycle stages" class="mb-20">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">What Is the Attribution Lifecycle?</h2>
+      <div class="max-w-3xl mx-auto">
+        <div class="flex flex-wrap justify-center gap-3 mb-8">
+          {states.map(state => (
+            <div class="flex items-center gap-2">
+              <div class={`w-3 h-3 rounded-full ${state.color}`} />
+              <span class="text-sm text-gray-400">{state.name}</span>
+            </div>
+          ))}
+        </div>
+        <div class="grid sm:grid-cols-3 lg:grid-cols-6 gap-3">
+          {lifecycle.map((state, i) => (
+            <article class="card text-center relative">
+              <div class={`w-8 h-8 rounded-full mx-auto mb-2 flex items-center justify-center text-xs font-bold ${state.color}`}>
+                {i + 1}
+              </div>
+              <h3 class="text-white text-xs font-semibold">{state.name}</h3>
+              <p class="text-gray-500 text-xs mt-1">{state.desc}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Challenge System -->
+    <section aria-label="Challenge and dispute system" class="mb-20">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">How Does the Challenge System Work?</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-4">Who Can Challenge?</h3>
+          <div class="space-y-3">
+            {challengers.map(c => (
+              <article class="card">
+                <div class="flex justify-between items-start">
+                  <div>
+                    <h4 class="text-white font-medium text-sm">{c.who}</h4>
+                    <p class="text-gray-500 text-xs">{c.what}</p>
+                  </div>
+                  <span class="badge badge-new text-xs">{c.bond}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold text-white mb-4">Challenge Outcomes</h3>
+          <div class="space-y-3">
+            <article class="card border-red-900/50">
+              <h4 class="text-red-400 font-medium text-sm mb-1">Fraud Confirmed</h4>
+              <p class="text-gray-400 text-xs">Affiliate loses commission + stake slash. Challenger gets bond back + 50% of commission. Company gets 50% refunded.</p>
+            </article>
+            <article class="card border-green-900/50">
+              <h4 class="text-green-400 font-medium text-sm mb-1">Challenge Rejected</h4>
+              <p class="text-gray-400 text-xs">Affiliate gets commission + challenger's bond. Challenger loses bond. False accusations are penalized.</p>
+            </article>
+            <article class="card border-amber-900/50">
+              <h4 class="text-amber-400 font-medium text-sm mb-1">Inconclusive</h4>
+              <p class="text-gray-400 text-xs">Affiliate gets 50% commission. Challenger gets bond back (no reward). Company gets 50% refunded.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fraud Score -->
+    <section aria-label="Fraud scoring system" class="mb-20">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">How Does Fraud Scoring Work?</h2>
+      <div class="card max-w-2xl mx-auto">
+        <p class="text-gray-400 text-sm mb-6">Each attribution receives a fraud score from 0-100 based on multiple signals</p>
+        <div class="space-y-4">
+          {fraudRanges.map(range => (
+            <div class="flex items-center gap-4">
+              <div class="w-24 text-right">
+                <span class={`text-sm font-mono ${range.textColor}`}>{range.range}</span>
+              </div>
+              <div class={`flex-1 h-3 rounded-full ${range.bgColor}`} />
+              <div class="w-48">
+                <p class="text-white text-sm">{range.label}</p>
+                <p class="text-gray-500 text-xs">{range.action}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Common Scenarios -->
+    <section aria-label="Common fraud scenarios and detection methods" class="mb-16">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">What Fraud Scenarios Does Njord Detect?</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        {scenarios.map(s => (
+          <article class="card-hover">
+            <h3 class="text-white font-semibold mb-2">{s.name}</h3>
+            <p class="text-gray-400 text-sm mb-3">{s.desc}</p>
+            <div>
+              <p class="text-xs text-gray-500 font-medium mb-1">Detection:</p>
+              <p class="text-xs text-gray-400">{s.detection}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section aria-label="Frequently asked questions about fraud protection" class="mb-16">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">Frequently Asked Questions</h2>
+      <div class="max-w-3xl mx-auto space-y-6">
+        {faqItems.map(item => (
+          <article class="card">
+            <h3 class="text-white font-semibold mb-2">{item.question}</h3>
+            <p class="text-gray-400 text-sm">{item.answer}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+  </div>
+</BaseLayout>

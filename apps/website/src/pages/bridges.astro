@@ -1,0 +1,201 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Breadcrumbs from '../components/Breadcrumbs.astro'
+
+const title = 'Njord for Bridge Operators | Run Payment Infrastructure & Earn Fees'
+const description = 'Become a Njord Protocol bridge operator. Process fiat payments, submit on-chain attributions, and earn fees from affiliate marketing transactions on Solana. Stake NJORD tokens to unlock higher volume limits.'
+
+const bridgeTiers = [
+  { name: 'Bronze', stake: 10000, dailyMax: '$10K', color: 'amber' },
+  { name: 'Silver', stake: 50000, dailyMax: '$100K', color: 'gray' },
+  { name: 'Gold', stake: 200000, dailyMax: '$1M', color: 'yellow' },
+  { name: 'Platinum', stake: 500000, dailyMax: 'Unlimited', color: 'purple' },
+]
+
+const setupSteps = [
+  { title: 'Stake NJORD Tokens', desc: 'Acquire and stake minimum 10,000 NJORD tokens to register as a bridge operator.' },
+  { title: 'Set Up Infrastructure', desc: 'Deploy the bridge SDK on your server. Docker images are available for easy deployment.' },
+  { title: 'Integrate Payment Provider', desc: 'Connect Stripe, Razorpay, or other payment providers supported in your region.' },
+  { title: 'Configure & Register', desc: 'Set your fees, region, and supported payment methods. Register with the protocol on-chain.' },
+  { title: 'Start Processing', desc: 'Begin processing payments and earning fees. Monitor your dashboard for volume and reputation.' },
+]
+
+const faqs = [
+  {
+    question: 'What is a bridge operator in the Njord Protocol?',
+    answer: 'A bridge operator is the infrastructure layer that connects traditional fiat payments to the Njord on-chain protocol. Bridge operators accept credit cards, bank transfers, UPI, and other local payment methods from customers and companies, then submit attribution events to the Solana blockchain. They also facilitate withdrawals, helping affiliates convert their crypto earnings back to local currency. Think of bridge operators as the on-ramp and off-ramp between fiat and crypto for the affiliate marketing ecosystem.',
+  },
+  {
+    question: 'How much can I earn as a Njord bridge operator?',
+    answer: 'Bridge operators have four revenue streams: (1) Attribution fees of 1% on all commissions processed through your bridge, (2) Staking rewards from a pro-rata share of 30% of protocol fees, (3) Conversion spread of 0.5-2% on fiat-to-crypto conversions, and (4) Withdrawal fees charged to affiliates cashing out. As an example, a bridge processing $1M in monthly volume would earn approximately $10,000 from attribution fees alone, plus additional revenue from the other streams.',
+  },
+  {
+    question: 'What are the requirements to become a bridge operator?',
+    answer: 'The minimum requirement is staking 10,000 NJORD tokens (Bronze tier), which allows up to $10K in daily volume. You need server infrastructure to run the bridge SDK (Docker images are provided), integration with at least one payment provider (Stripe, Razorpay, etc.), and compliance with local regulations for payment processing in your region. Higher tiers (Silver at 50K, Gold at 200K, Platinum at 500K NJORD) unlock higher daily volume limits up to unlimited.',
+  },
+  {
+    question: 'How does fraud detection work for bridge operators?',
+    answer: 'Bridge operators are the first line of defense against fraud. You run detection infrastructure that filters suspicious activity before it reaches the blockchain. This includes velocity checks, device fingerprinting, and behavioral analysis. If a fraudulent attribution does make it on-chain, it can be challenged through the protocol\'s dispute system. Bridge operators with high fraud rates risk having their stake slashed, which creates a strong incentive to maintain quality fraud detection.',
+  },
+]
+
+const jsonLd = [
+  {
+    '@type': 'WebPage',
+    name: 'Njord Protocol for Bridge Operators',
+    description: description,
+    url: 'https://njord.cryptuon.com/bridges',
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  },
+]
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <Breadcrumbs items={[{ name: 'For Bridge Operators' }]} />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <header class="text-center mb-16">
+      <h1 class="section-title mb-4">How Do Bridge Operators Power Njord Protocol?</h1>
+      <p class="section-subtitle mx-auto">
+        Bridge operators are the backbone of mainstream adoption. Run payment infrastructure,
+        earn fees, and stake NJORD tokens for higher tiers.
+      </p>
+    </header>
+
+    <!-- What Bridges Do -->
+    <section aria-label="Bridge operator responsibilities" class="card mb-16">
+      <h2 class="text-xl font-bold text-white mb-6">What Do Bridge Operators Do?</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="space-y-4">
+          <article class="flex gap-3">
+            <span class="text-njord-400 mt-1">&#9679;</span>
+            <div>
+              <p class="text-white font-medium">Accept Fiat Payments</p>
+              <p class="text-gray-500 text-sm">Process credit cards, bank transfers, UPI, and other local payment methods from customers</p>
+            </div>
+          </article>
+          <article class="flex gap-3">
+            <span class="text-njord-400 mt-1">&#9679;</span>
+            <div>
+              <p class="text-white font-medium">Submit Attributions On-Chain</p>
+              <p class="text-gray-500 text-sm">Convert fiat transactions to on-chain attribution events on Solana</p>
+            </div>
+          </article>
+        </div>
+        <div class="space-y-4">
+          <article class="flex gap-3">
+            <span class="text-njord-400 mt-1">&#9679;</span>
+            <div>
+              <p class="text-white font-medium">Facilitate Withdrawals</p>
+              <p class="text-gray-500 text-sm">Help affiliates convert crypto earnings back to local currency</p>
+            </div>
+          </article>
+          <article class="flex gap-3">
+            <span class="text-njord-400 mt-1">&#9679;</span>
+            <div>
+              <p class="text-white font-medium">Detect Fraud</p>
+              <p class="text-gray-500 text-sm">Run detection infrastructure to prevent fraudulent attributions from reaching the chain</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bridge Tiers -->
+    <section aria-label="Bridge operator tiers" class="mb-20">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">What Are the Bridge Operator Tiers?</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {bridgeTiers.map((tier) => (
+          <article class="card-hover">
+            <span class={`badge mb-4 badge-${tier.color}`}>{tier.name}</span>
+            <dl class="space-y-3 text-sm">
+              <div class="flex justify-between">
+                <dt class="text-gray-400">Min Stake</dt>
+                <dd class="text-white font-medium">{tier.stake.toLocaleString()} NJORD</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-gray-400">Daily Volume</dt>
+                <dd class="text-white font-medium">{tier.dailyMax}</dd>
+              </div>
+            </dl>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Revenue Streams -->
+    <section aria-label="Revenue streams for bridge operators" class="mb-20">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">How Do Bridge Operators Earn Revenue?</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <article class="card-hover">
+          <h3 class="text-white font-semibold mb-2">Attribution Fees</h3>
+          <p class="text-gray-400 text-sm">1% of commissions processed through your bridge. Higher volume = higher revenue.</p>
+          <p class="text-njord-400 text-xs mt-2">Example: $1M monthly volume = $10,000 revenue</p>
+        </article>
+        <article class="card-hover">
+          <h3 class="text-white font-semibold mb-2">Staking Rewards</h3>
+          <p class="text-gray-400 text-sm">Pro-rata share of protocol inflation rewards based on your stake amount.</p>
+          <p class="text-njord-400 text-xs mt-2">Rewards distributed from 30% of protocol fees</p>
+        </article>
+        <article class="card-hover">
+          <h3 class="text-white font-semibold mb-2">Conversion Spread</h3>
+          <p class="text-gray-400 text-sm">Set your own fiat-to-crypto conversion rate. Typically 0.5-2%.</p>
+          <p class="text-njord-400 text-xs mt-2">Example: $100 converted = $0.50-$2.00 revenue</p>
+        </article>
+        <article class="card-hover">
+          <h3 class="text-white font-semibold mb-2">Withdrawal Fees</h3>
+          <p class="text-gray-400 text-sm">Charge per-withdrawal or percentage fees when affiliates cash out to fiat.</p>
+          <p class="text-njord-400 text-xs mt-2">Example: $1 flat fee or 0.5% per withdrawal</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Setup Steps -->
+    <section aria-label="How to set up a bridge" class="mb-20">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">How Do I Set Up a Bridge?</h2>
+      <div class="max-w-2xl mx-auto space-y-4">
+        {setupSteps.map((step, i) => (
+          <div class="flex gap-4 items-start">
+            <div class="w-8 h-8 rounded-full bg-njord-600/20 text-njord-400 flex items-center justify-center shrink-0 text-sm font-bold">
+              {i + 1}
+            </div>
+            <article class="card flex-1">
+              <h4 class="text-white font-medium">{step.title}</h4>
+              <p class="text-gray-400 text-sm">{step.desc}</p>
+            </article>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section aria-label="Frequently asked questions" class="mb-16 max-w-3xl mx-auto">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer text-white font-medium list-none">
+              <span>{faq.question}</span>
+              <span class="text-gray-400 group-open:rotate-45 transition-transform text-xl">+</span>
+            </summary>
+            <p class="text-gray-400 text-sm mt-4 leading-relaxed">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <div class="text-center">
+      <a href="/getting-started" class="btn-primary">Setup Guide</a>
+    </div>
+  </div>
+</BaseLayout>

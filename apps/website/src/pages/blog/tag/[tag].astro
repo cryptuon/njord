@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro'
+import Breadcrumbs from '../../../components/Breadcrumbs.astro'
+import { getCollection } from 'astro:content'
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog')
+  const allTags = [...new Set(posts.filter(p => !p.data.draft).flatMap(p => p.data.tags))]
+  return allTags.map(tag => ({
+    params: { tag },
+    props: {
+      tag,
+      posts: posts
+        .filter(p => !p.data.draft && p.data.tags.includes(tag))
+        .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()),
+    },
+  }))
+}
+
+const { tag, posts } = Astro.props
+---
+
+<BaseLayout
+  title={`Articles tagged "${tag}"`}
+  description={`Browse all Njord Protocol blog articles tagged with "${tag}". Insights about decentralized affiliate marketing on Solana.`}
+>
+  <Breadcrumbs items={[{ name: 'Blog', href: '/blog' }, { name: `Tag: ${tag}` }]} />
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-16">
+      <h1 class="section-title mb-4">Articles tagged &ldquo;{tag}&rdquo;</h1>
+      <p class="section-subtitle mx-auto">
+        <a href="/blog" class="text-njord-400 hover:underline">&larr; View all articles</a>
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {posts.map((post: any) => (
+        <a href={`/blog/${post.slug}`} class="card-hover group flex flex-col">
+          <div class="flex-1">
+            <div class="flex flex-wrap gap-2 mb-3">
+              <span class="badge bg-njord-600/20 text-njord-400 text-xs">{post.data.category}</span>
+            </div>
+            <h2 class="text-xl font-semibold text-white mb-2 group-hover:text-njord-400 transition-colors">
+              {post.data.title}
+            </h2>
+            <p class="text-gray-400 text-sm mb-4 line-clamp-3">{post.data.description}</p>
+          </div>
+          <div class="text-sm text-gray-500">
+            <time datetime={post.data.pubDate.toISOString()}>
+              {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </time>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

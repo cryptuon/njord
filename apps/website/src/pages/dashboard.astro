@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Breadcrumbs from '../components/Breadcrumbs.astro'
+
+const features = [
+  {
+    title: 'Campaign Management',
+    description: 'Create, fund, pause, and monitor affiliate marketing campaigns. Set commission rates, budgets, hold periods, and affiliate tier requirements.',
+    icon: '&#128202;',
+  },
+  {
+    title: 'Affiliate Portal',
+    description: 'Browse and join campaigns, track your conversions, view earnings, and manage your affiliate profile and tier progression.',
+    icon: '&#128279;',
+  },
+  {
+    title: 'Network Statistics',
+    description: 'View live protocol metrics including total volume, campaign counts, affiliate activity, and fraud challenge data with interactive charts.',
+    icon: '&#128200;',
+  },
+  {
+    title: 'Bridge Operations',
+    description: 'Manage bridge operator infrastructure, monitor attribution processing, track reputation scores, and view earnings from bridge fees.',
+    icon: '&#127760;',
+  },
+  {
+    title: 'Fraud Monitoring',
+    description: 'Review fraud scores, submit challenges against suspicious attributions, and track dispute resolution outcomes in real time.',
+    icon: '&#128737;',
+  },
+  {
+    title: 'Wallet & Escrow',
+    description: 'View on-chain balances, manage escrow deposits, track commission settlements, and monitor staking positions.',
+    icon: '&#128176;',
+  },
+]
+
+const wallets = [
+  { name: 'Phantom', url: 'https://phantom.app' },
+  { name: 'Solflare', url: 'https://solflare.com' },
+  { name: 'Backpack', url: 'https://backpack.app' },
+]
+---
+
+<BaseLayout
+  title="Njord Dashboard - Decentralized Affiliate Marketing on Solana"
+  description="Access the Njord Protocol dashboard to manage campaigns, track affiliates, view network stats, and monitor fraud protection. Requires a Solana wallet connection."
+  noindex={true}
+>
+  <Breadcrumbs items={[{ name: 'Dashboard' }]} />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <header class="text-center mb-16">
+      <h1 class="section-title mb-4">Njord Dashboard</h1>
+      <p class="section-subtitle mx-auto">
+        The full-featured dashboard for managing campaigns, tracking affiliates, and monitoring the Njord network
+      </p>
+    </header>
+
+    <!-- Wallet Required Notice -->
+    <section aria-label="Wallet connection requirement" class="mb-16">
+      <div class="card border-amber-600/30 max-w-3xl mx-auto text-center">
+        <div class="py-4">
+          <h2 class="text-xl font-semibold text-amber-400 mb-3">Wallet Connection Required</h2>
+          <p class="text-gray-400 text-sm mb-4">
+            The Njord dashboard is a decentralized application that requires a Solana wallet to authenticate and interact with on-chain data. Connect your wallet to access campaign management, affiliate tools, and network statistics.
+          </p>
+          <p class="text-gray-500 text-xs mb-6">Supported wallets:</p>
+          <div class="flex flex-wrap justify-center gap-3">
+            {wallets.map(wallet => (
+              <a
+                href={wallet.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-4 py-2 bg-surface-700 text-white rounded-lg text-sm hover:bg-surface-600 transition-colors"
+              >
+                {wallet.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dashboard Features -->
+    <section aria-label="Dashboard features overview" class="mb-16">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">Dashboard Features</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {features.map(feature => (
+          <article class="card">
+            <div class="text-2xl mb-3" set:html={feature.icon} />
+            <h3 class="text-white font-semibold mb-2">{feature.title}</h3>
+            <p class="text-gray-400 text-sm">{feature.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section aria-label="Quick links to learn more" class="max-w-3xl mx-auto">
+      <h2 class="text-2xl font-bold text-white text-center mb-8">Learn More</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        <a href="/getting-started" class="card-hover block text-center group">
+          <h3 class="text-white font-semibold group-hover:text-njord-400 transition-colors mb-1">Getting Started</h3>
+          <p class="text-gray-500 text-xs">Step-by-step setup guides</p>
+        </a>
+        <a href="/campaigns" class="card-hover block text-center group">
+          <h3 class="text-white font-semibold group-hover:text-njord-400 transition-colors mb-1">Campaigns</h3>
+          <p class="text-gray-500 text-xs">How campaigns work</p>
+        </a>
+        <a href="/fraud-protection" class="card-hover block text-center group">
+          <h3 class="text-white font-semibold group-hover:text-njord-400 transition-colors mb-1">Fraud Protection</h3>
+          <p class="text-gray-500 text-xs">Security and dispute system</p>
+        </a>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

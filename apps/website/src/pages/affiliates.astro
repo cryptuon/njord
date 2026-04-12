@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Breadcrumbs from '../components/Breadcrumbs.astro'
+
+const title = 'Njord for Affiliates | Earn Crypto Commissions on Solana'
+const description = 'Join Njord Protocol as an affiliate marketer. Browse campaigns, share tracking links, and earn instant USDC/SOL commissions settled on Solana in seconds. No middlemen, no delays.'
+
+const tiers = [
+  { name: 'New', stake: 0, holdDays: 7, access: 'Open campaigns only', color: 'gray' },
+  { name: 'Verified', stake: 100, holdDays: 3, access: 'Standard campaigns', color: 'blue' },
+  { name: 'Trusted', stake: 1000, holdDays: 1, access: 'Premium campaigns', color: 'purple' },
+  { name: 'Elite', stake: 10000, holdDays: 0, access: 'All campaigns, real-time settlement', color: 'amber' },
+]
+
+const affiliateTypes = [
+  { name: 'Content Creators', desc: 'YouTubers, bloggers, podcasters' },
+  { name: 'Influencers', desc: 'Social media personalities' },
+  { name: 'Comparison Sites', desc: 'Review and comparison platforms' },
+  { name: 'Coupon/Deal Sites', desc: 'Discount aggregators' },
+  { name: 'Email Marketers', desc: 'Newsletter operators' },
+  { name: 'App Developers', desc: 'In-app promotions' },
+]
+
+const faqs = [
+  {
+    question: 'How do I earn crypto as an affiliate on Njord?',
+    answer: 'You browse active campaigns, join ones that match your audience, and receive unique tracking links. When someone clicks your link and completes the target action (purchase, signup, app install), the smart contract automatically calculates your commission and pays it from the campaign escrow to your Solana wallet. The entire process takes about 3 seconds.',
+  },
+  {
+    question: 'What are the commission rates on Njord Protocol?',
+    answer: 'Commission rates are set by each company when they create a campaign. Rates vary by campaign and can be a percentage of the sale (commonly 5-20%), a flat fee per action, or tiered rates based on volume. You can filter campaigns by commission rate before joining. A small protocol fee (2.5%) and bridge fee (1%) are deducted from your commission automatically.',
+  },
+  {
+    question: 'How fast do I get paid as a Njord affiliate?',
+    answer: 'Payment speed depends on your affiliate tier. Elite affiliates (staking 10,000 NJORD) receive real-time settlement in about 3 seconds. Trusted affiliates have a 1-day hold period, Verified affiliates have 3 days, and New affiliates have a 7-day hold. You can upgrade your tier by staking more NJORD tokens.',
+  },
+  {
+    question: 'Do I need a crypto wallet to be an affiliate?',
+    answer: 'For the best experience with instant payouts, yes — you need a Solana wallet like Phantom or Solflare. However, you can also work through bridge operators who facilitate fiat withdrawals, allowing you to receive earnings in your local currency via bank transfer.',
+  },
+]
+
+const jsonLd = [
+  {
+    '@type': 'WebPage',
+    name: 'Njord Protocol for Affiliates',
+    description: description,
+    url: 'https://njord.cryptuon.com/affiliates',
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  },
+]
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <Breadcrumbs items={[{ name: 'For Affiliates' }]} />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <!-- Hero -->
+    <header class="text-center mb-16">
+      <h1 class="section-title mb-4">How Do Affiliates Earn Crypto Commissions on Njord?</h1>
+      <p class="section-subtitle mx-auto">
+        Join campaigns, share your unique links, and earn instant commissions settled on Solana.
+        Build your reputation to unlock higher tiers and faster payouts.
+      </p>
+    </header>
+
+    <!-- What Affiliates Do -->
+    <section aria-label="How affiliate marketing works on Njord" class="grid md:grid-cols-3 gap-6 mb-20">
+      <article class="card-hover text-center">
+        <div class="w-14 h-14 rounded-2xl bg-blue-600/20 text-blue-400 flex items-center justify-center mx-auto mb-4 text-xl">1</div>
+        <h3 class="text-lg font-semibold text-white mb-2">Browse Campaigns</h3>
+        <p class="text-gray-400 text-sm">Explore active campaigns from companies. Filter by category, commission rate, and requirements.</p>
+      </article>
+      <article class="card-hover text-center">
+        <div class="w-14 h-14 rounded-2xl bg-blue-600/20 text-blue-400 flex items-center justify-center mx-auto mb-4 text-xl">2</div>
+        <h3 class="text-lg font-semibold text-white mb-2">Promote & Share</h3>
+        <p class="text-gray-400 text-sm">Generate unique tracking links and share them through your blog, social media, videos, or newsletter.</p>
+      </article>
+      <article class="card-hover text-center">
+        <div class="w-14 h-14 rounded-2xl bg-blue-600/20 text-blue-400 flex items-center justify-center mx-auto mb-4 text-xl">3</div>
+        <h3 class="text-lg font-semibold text-white mb-2">Earn Instantly</h3>
+        <p class="text-gray-400 text-sm">When a customer converts, your commission is calculated and paid automatically from escrow in seconds.</p>
+      </article>
+    </section>
+
+    <!-- Tier System -->
+    <section aria-label="Affiliate tier system" class="mb-20">
+      <h2 class="section-title text-center mb-4">What Are the Affiliate Tiers and Benefits?</h2>
+      <p class="section-subtitle mx-auto text-center mb-10">Build your reputation over time to unlock faster settlements and premium campaigns</p>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {tiers.map((tier) => (
+          <article class="card-hover">
+            <div class="flex items-center gap-2 mb-4">
+              <span class={`badge badge-${tier.color}`}>{tier.name}</span>
+            </div>
+            <dl class="space-y-3 text-sm">
+              <div class="flex justify-between">
+                <dt class="text-gray-400">Stake Required</dt>
+                <dd class="text-white font-medium">{tier.stake === 0 ? 'None' : `${tier.stake.toLocaleString()} NJORD`}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-gray-400">Hold Period</dt>
+                <dd class="text-white font-medium">{tier.holdDays === 0 ? 'Real-time' : `${tier.holdDays} day${tier.holdDays > 1 ? 's' : ''}`}</dd>
+              </div>
+              <div class="flex justify-between">
+                <dt class="text-gray-400">Access</dt>
+                <dd class="text-white font-medium text-right text-xs">{tier.access}</dd>
+              </div>
+            </dl>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Types of Affiliates -->
+    <section aria-label="Who can be an affiliate" class="mb-20">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">Who Can Be a Njord Affiliate?</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {affiliateTypes.map((type) => (
+          <article class="flex items-start gap-3 p-4 rounded-xl bg-surface-800/50 border border-surface-700">
+            <span class="text-njord-400 mt-0.5">&#9679;</span>
+            <div>
+              <h4 class="text-white font-medium">{type.name}</h4>
+              <p class="text-gray-500 text-sm">{type.desc}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section aria-label="Frequently asked questions" class="mb-16 max-w-3xl mx-auto">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer text-white font-medium list-none">
+              <span>{faq.question}</span>
+              <span class="text-gray-400 group-open:rotate-45 transition-transform text-xl">+</span>
+            </summary>
+            <p class="text-gray-400 text-sm mt-4 leading-relaxed">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="text-center">
+      <a href="/campaigns" class="btn-primary mr-4">Browse Campaigns</a>
+      <a href="/getting-started" class="btn-secondary">Getting Started Guide</a>
+    </div>
+  </div>
+</BaseLayout>

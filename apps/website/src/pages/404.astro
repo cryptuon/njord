@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+
+const sections = [
+  { name: 'Home', href: '/', description: 'Return to the Njord Protocol homepage' },
+  { name: 'Getting Started', href: '/getting-started', description: 'Guides for affiliates, companies, and bridge operators' },
+  { name: 'Campaigns', href: '/campaigns', description: 'Learn how affiliate campaigns work on Njord' },
+  { name: 'Fraud Protection', href: '/fraud-protection', description: 'How Njord prevents affiliate marketing fraud' },
+  { name: 'Roadmap', href: '/roadmap', description: 'Development milestones and future plans' },
+  { name: 'Network Stats', href: '/stats', description: 'Live protocol statistics and metrics' },
+]
+---
+
+<BaseLayout
+  title="Page Not Found - Njord Protocol"
+  description="The page you are looking for could not be found. Browse Njord Protocol's decentralized affiliate marketing resources."
+  noindex={true}
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <header class="text-center mb-16">
+      <p class="text-njord-400 font-mono text-lg mb-4">404</p>
+      <h1 class="section-title mb-4">Page Not Found</h1>
+      <p class="section-subtitle mx-auto">
+        The page you are looking for does not exist or has been moved. Try one of the links below to find what you need.
+      </p>
+    </header>
+
+    <section aria-label="Site navigation links" class="max-w-3xl mx-auto">
+      <nav>
+        <ul class="grid sm:grid-cols-2 gap-4 list-none p-0">
+          {sections.map(section => (
+            <li>
+              <a href={section.href} class="card-hover block group">
+                <h2 class="text-white font-semibold group-hover:text-njord-400 transition-colors mb-1">{section.name}</h2>
+                <p class="text-gray-500 text-sm">{section.description}</p>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </section>
+
+    <div class="text-center mt-12">
+      <a href="/" class="inline-flex items-center gap-2 px-6 py-2.5 bg-njord-600 text-white rounded-lg font-medium text-sm hover:bg-njord-500 transition-colors">
+        Back to Home
+      </a>
+    </div>
+  </div>
+</BaseLayout>

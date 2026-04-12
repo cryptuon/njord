@@ -1,0 +1,131 @@
+---
+const navLinks = [
+  { name: 'Home', path: '/' },
+  { name: 'How It Works', path: '/how-it-works' },
+  { name: 'Network Stats', path: '/stats' },
+  { name: 'Campaigns', path: '/campaigns' },
+  { name: 'Getting Started', path: '/getting-started' },
+]
+
+const learnLinks = [
+  { name: 'For Affiliates', path: '/affiliates' },
+  { name: 'For Companies', path: '/companies' },
+  { name: 'For Bridges', path: '/bridges' },
+  { name: 'Tokenomics', path: '/tokenomics' },
+  { name: 'Fraud Protection', path: '/fraud-protection' },
+  { name: 'Roadmap', path: '/roadmap' },
+]
+
+const currentPath = Astro.url.pathname
+---
+
+<nav class="glass sticky top-0 z-50 border-b border-surface-700/50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-njord-400 to-njord-600 flex items-center justify-center">
+          <span class="text-white font-bold text-sm">N</span>
+        </div>
+        <span class="text-white font-bold text-lg hidden sm:block">Njord</span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <div class="hidden lg:flex items-center gap-6">
+        {navLinks.map(link => (
+          <a
+            href={link.path}
+            class:list={['nav-link', { 'nav-link-active': currentPath === link.path }]}
+          >
+            {link.name}
+          </a>
+        ))}
+        <div class="relative" id="learn-dropdown">
+          <button
+            id="learn-toggle"
+            class="nav-link flex items-center gap-1"
+          >
+            Learn
+            <svg class="w-4 h-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div
+            id="learn-menu"
+            class="hidden absolute top-full mt-2 right-0 w-48 py-2 bg-surface-800 border border-surface-700 rounded-xl shadow-xl"
+          >
+            {learnLinks.map(link => (
+              <a
+                href={link.path}
+                class="block px-4 py-2 text-sm text-gray-400 hover:text-white hover:bg-surface-700 transition-colors"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side -->
+      <div class="flex items-center gap-3">
+        <a href="/dashboard" class="btn-primary text-sm hidden sm:inline-flex">Dashboard</a>
+        <!-- Mobile Menu Toggle -->
+        <button id="mobile-toggle" class="lg:hidden p-2 text-gray-400 hover:text-white">
+          <svg id="menu-open-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="menu-close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Nav -->
+  <div id="mobile-nav" class="hidden lg:hidden border-t border-surface-700">
+    <div class="px-4 py-4 space-y-2">
+      {[...navLinks, ...learnLinks].map(link => (
+        <a
+          href={link.path}
+          class="block px-3 py-2 rounded-lg text-gray-400 hover:text-white hover:bg-surface-700 transition-colors"
+        >
+          {link.name}
+        </a>
+      ))}
+      <a
+        href="/dashboard"
+        class="block px-3 py-2 rounded-lg text-njord-400 hover:bg-surface-700 transition-colors font-medium"
+      >
+        My Dashboard
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Learn dropdown
+  const toggle = document.getElementById('learn-toggle')
+  const menu = document.getElementById('learn-menu')
+  if (toggle && menu) {
+    toggle.addEventListener('click', () => menu.classList.toggle('hidden'))
+    document.addEventListener('click', (e) => {
+      if (!document.getElementById('learn-dropdown')?.contains(e.target as Node)) {
+        menu.classList.add('hidden')
+      }
+    })
+  }
+
+  // Mobile nav
+  const mobileToggle = document.getElementById('mobile-toggle')
+  const mobileNav = document.getElementById('mobile-nav')
+  const openIcon = document.getElementById('menu-open-icon')
+  const closeIcon = document.getElementById('menu-close-icon')
+  if (mobileToggle && mobileNav && openIcon && closeIcon) {
+    mobileToggle.addEventListener('click', () => {
+      mobileNav.classList.toggle('hidden')
+      openIcon.classList.toggle('hidden')
+      closeIcon.classList.toggle('hidden')
+    })
+  }
+</script>

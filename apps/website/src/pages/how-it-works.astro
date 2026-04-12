@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Breadcrumbs from '../components/Breadcrumbs.astro'
+
+const title = 'How Njord Protocol Works | Decentralized Affiliate Marketing on Solana'
+const description = 'Learn how Njord Protocol enables decentralized affiliate marketing on Solana with on-chain escrow, real-time settlement in 3 seconds, and transparent commission payouts.'
+
+const flowSteps = [
+  { actor: 'Company', title: 'Create Campaign', description: 'A company creates a new affiliate campaign, setting the budget, commission rate, target action (purchase, signup, etc.), and affiliate requirements. Campaign parameters are stored on-chain.', color: 'bg-purple-600/20 text-purple-400', actorBadge: 'bg-purple-900/50 text-purple-400' },
+  { actor: 'Company', title: 'Fund Escrow', description: 'The company deposits USDC or SOL into a secure on-chain escrow account tied to the campaign. Funds are locked until distributed to affiliates or the campaign ends.', color: 'bg-purple-600/20 text-purple-400', actorBadge: 'bg-purple-900/50 text-purple-400' },
+  { actor: 'Affiliate', title: 'Join Campaign', description: 'Affiliates browse available campaigns and join ones that match their audience. They receive a unique affiliate ID for tracking. Some campaigns require approval, others are open.', color: 'bg-blue-600/20 text-blue-400', actorBadge: 'bg-blue-900/50 text-blue-400' },
+  { actor: 'Affiliate', title: 'Share & Promote', description: 'Affiliates generate unique tracking links and share them with their audience through blogs, social media, videos, or newsletters. Every click is tracked.', color: 'bg-blue-600/20 text-blue-400', actorBadge: 'bg-blue-900/50 text-blue-400' },
+  { actor: 'Customer', title: 'Customer Acts', description: 'A customer clicks an affiliate link and completes the target action (makes a purchase, signs up, installs an app). The experience is seamless — customers don\'t need a wallet.', color: 'bg-green-600/20 text-green-400', actorBadge: 'bg-green-900/50 text-green-400' },
+  { actor: 'Bridge', title: 'Record Attribution', description: 'The bridge operator (or company SDK) records the conversion event on Solana. The smart contract validates the campaign, affiliate, and escrow, then calculates the commission.', color: 'bg-amber-600/20 text-amber-400', actorBadge: 'bg-amber-900/50 text-amber-400' },
+  { actor: 'Protocol', title: 'Commission Paid', description: 'The smart contract automatically releases the commission from escrow to the affiliate\'s wallet, minus a small protocol fee (2.5%) and bridge fee (1%). The entire process takes ~3 seconds.', color: 'bg-njord-600/20 text-njord-400', actorBadge: 'bg-njord-900/50 text-njord-400' },
+]
+
+const timeline = [
+  { time: 'T+0s', action: 'Customer clicks "Buy"' },
+  { time: 'T+2s', action: 'Payment confirmed' },
+  { time: 'T+2.5s', action: 'Attribution submitted' },
+  { time: 'T+3s', action: 'On-chain confirmed' },
+  { time: 'T+3s', action: 'Commission released' },
+]
+
+const jsonLd = {
+  '@type': 'HowTo',
+  name: 'How Decentralized Affiliate Marketing Works on Njord Protocol',
+  description: 'A step-by-step guide to how Njord Protocol enables decentralized affiliate marketing on the Solana blockchain with real-time settlement.',
+  totalTime: 'PT3S',
+  step: flowSteps.map((step, i) => ({
+    '@type': 'HowToStep',
+    position: i + 1,
+    name: step.title,
+    text: step.description,
+  })),
+}
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <Breadcrumbs items={[{ name: 'How It Works' }]} />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <header class="text-center mb-16">
+      <h1 class="section-title mb-4">How Does Decentralized Affiliate Marketing Work?</h1>
+      <p class="section-subtitle mx-auto">
+        A step-by-step walkthrough of how Njord Protocol settles affiliate commissions on Solana in under 3 seconds
+      </p>
+    </header>
+
+    <!-- Protocol Flow Steps -->
+    <section aria-label="Protocol flow steps" class="max-w-3xl mx-auto space-y-8 mb-20">
+      <h2 class="sr-only">Step-by-Step Process</h2>
+      {flowSteps.map((step, i) => (
+        <div class="flex gap-6">
+          <div class="flex flex-col items-center">
+            <div class={`w-12 h-12 rounded-2xl flex items-center justify-center text-lg font-bold shrink-0 ${step.color}`}>
+              {i + 1}
+            </div>
+            {i < flowSteps.length - 1 && (
+              <div class="w-0.5 flex-1 bg-surface-700 mt-2" />
+            )}
+          </div>
+          <div class="card flex-1 mb-2">
+            <div class="flex items-center gap-2 mb-2">
+              <span class={`badge text-xs ${step.actorBadge}`}>{step.actor}</span>
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-2">{step.title}</h3>
+            <p class="text-gray-400">{step.description}</p>
+          </div>
+        </div>
+      ))}
+    </section>
+
+    <!-- Settlement Speed -->
+    <section aria-label="Real-time settlement timeline" class="card bg-gradient-to-r from-njord-950 to-surface-800 mb-20">
+      <div class="text-center py-8">
+        <h2 class="text-2xl font-bold text-white mb-2">How Fast Is Real-Time Settlement?</h2>
+        <p class="text-gray-400 mb-6">From purchase to commission payout in approximately <time datetime="PT3S">3 seconds</time></p>
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 max-w-3xl mx-auto">
+          {timeline.map((t) => (
+            <div class="text-center">
+              <p class="text-njord-400 font-mono text-sm mb-1">{t.time}</p>
+              <p class="text-white text-sm font-medium">{t.action}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Alternative Flows -->
+    <section aria-label="Participation paths" class="mb-16">
+      <h2 class="section-title text-center mb-10">What Are the Different Ways to Participate?</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="card-hover">
+          <h3 class="text-lg font-semibold text-white mb-3">Crypto-Native</h3>
+          <p class="text-gray-400 text-sm mb-4">For users with Solana wallets. Connect directly, receive USDC/SOL commissions to your wallet.</p>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2 text-gray-300">
+              <span class="text-green-400">&#10003;</span> Direct wallet connection
+            </li>
+            <li class="flex items-center gap-2 text-gray-300">
+              <span class="text-green-400">&#10003;</span> Instant USDC payouts
+            </li>
+            <li class="flex items-center gap-2 text-gray-300">
+              <span class="text-green-400">&#10003;</span> Full on-chain transparency
+            </li>
+          </ul>
+        </article>
+        <article class="card-hover">
+          <h3 class="text-lg font-semibold text-white mb-3">Via Bridge (Fiat)</h3>
+          <p class="text-gray-400 text-sm mb-4">For mainstream users. Pay and get paid in your local currency through bridge operators.</p>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2 text-gray-300">
+              <span class="text-green-400">&#10003;</span> No wallet required
+            </li>
+            <li class="flex items-center gap-2 text-gray-300">
+              <span class="text-green-400">&#10003;</span> Credit card / bank transfer
+            </li>
+            <li class="flex items-center gap-2 text-gray-300">
+              <span class="text-green-400">&#10003;</span> Withdraw to bank account
+            </li>
+          </ul>
+        </article>
+        <article class="card-hover">
+          <h3 class="text-lg font-semibold text-white mb-3">Hybrid</h3>
+          <p class="text-gray-400 text-sm mb-4">The most common scenario. Companies pay via bridge, affiliates receive crypto directly.</p>
+          <ul class="space-y-2 text-sm">
+            <li class="flex items-center gap-2 text-gray-300">
+              <span class="text-green-400">&#10003;</span> Flexible for all parties
+            </li>
+            <li class="flex items-center gap-2 text-gray-300">
+              <span class="text-green-400">&#10003;</span> Best of both worlds
+            </li>
+            <li class="flex items-center gap-2 text-gray-300">
+              <span class="text-green-400">&#10003;</span> Most common setup
+            </li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <div class="text-center">
+      <a href="/getting-started" class="btn-primary">Get Started Now</a>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,150 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Breadcrumbs from '../components/Breadcrumbs.astro'
+
+const siteUrl = 'https://njord.cryptuon.com'
+
+const campaignFeatures = [
+  {
+    title: 'Flexible Commission Structures',
+    description: 'Campaigns support both percentage-based and flat-rate commissions. Companies set the rate, and affiliates earn transparently with every verified conversion.',
+  },
+  {
+    title: 'Tiered Affiliate Access',
+    description: 'Campaigns can require a minimum affiliate tier (New, Verified, Trusted, or Elite) to ensure quality promotion. Higher-tier affiliates unlock premium campaigns.',
+  },
+  {
+    title: 'On-Chain Escrow Budget',
+    description: 'Campaign budgets are locked in on-chain escrow smart contracts, guaranteeing that affiliates will be paid for valid conversions. Budget usage is fully transparent.',
+  },
+  {
+    title: 'Configurable Hold Periods',
+    description: 'Companies set hold periods for each campaign, giving time for fraud verification before commissions are settled. This protects both parties from invalid conversions.',
+  },
+  {
+    title: 'Real-Time Performance Tracking',
+    description: 'Track unique affiliates, total conversions, budget utilization, and commission payouts in real time through the dashboard.',
+  },
+  {
+    title: 'Campaign Lifecycle Management',
+    description: 'Companies can create, activate, pause, and end campaigns. Affiliates see campaign status at a glance so they can focus on active opportunities.',
+  },
+]
+
+const affiliateTiers = [
+  { name: 'New', description: 'Entry-level tier for newly registered affiliates. Access to basic campaigns with standard commission rates.', color: 'text-gray-400' },
+  { name: 'Verified', description: 'Affiliates who have completed identity verification and have a track record of valid conversions.', color: 'text-blue-400' },
+  { name: 'Trusted', description: 'Proven affiliates with consistent performance, low fraud scores, and positive challenge history.', color: 'text-purple-400' },
+  { name: 'Elite', description: 'Top-performing affiliates with extensive history, highest trust scores, and access to premium campaigns.', color: 'text-amber-400' },
+]
+
+const jsonLd = {
+  '@type': 'WebPage',
+  name: 'Affiliate Marketing Campaigns on Njord Protocol',
+  description: 'Discover how affiliate marketing campaigns work on Njord Protocol. Learn about commission structures, tiered access, on-chain escrow budgets, and real-time performance tracking.',
+  url: `${siteUrl}/campaigns`,
+}
+---
+
+<BaseLayout
+  title="Affiliate Marketing Campaigns - How Campaigns Work on Njord Protocol"
+  description="Discover how affiliate marketing campaigns work on Njord Protocol. Learn about commission structures, tiered access, on-chain escrow budgets, and real-time tracking on Solana."
+  jsonLd={jsonLd}
+>
+  <Breadcrumbs items={[{ name: 'Campaigns' }]} />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <header class="text-center mb-16">
+      <h1 class="section-title mb-4">How Do Affiliate Campaigns Work on Njord?</h1>
+      <p class="section-subtitle mx-auto">
+        Browse and join transparent, on-chain affiliate marketing campaigns with guaranteed payouts
+      </p>
+    </header>
+
+    <!-- Campaign Features -->
+    <section aria-label="Campaign features and capabilities" class="mb-20">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">What Makes Njord Campaigns Different?</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {campaignFeatures.map(feature => (
+          <article class="card-hover">
+            <h3 class="text-white font-semibold mb-2">{feature.title}</h3>
+            <p class="text-gray-400 text-sm">{feature.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Affiliate Tiers -->
+    <section aria-label="Affiliate tier system" class="mb-20">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">What Are the Affiliate Tiers?</h2>
+      <div class="max-w-3xl mx-auto grid sm:grid-cols-2 gap-4">
+        {affiliateTiers.map(tier => (
+          <article class="card">
+            <h3 class={`font-semibold mb-2 ${tier.color}`}>{tier.name}</h3>
+            <p class="text-gray-400 text-sm">{tier.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- How a Campaign Looks -->
+    <section aria-label="Example campaign structure" class="mb-20">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">What Does a Campaign Include?</h2>
+      <div class="max-w-2xl mx-auto card">
+        <div class="space-y-4 text-sm">
+          <div class="flex justify-between py-2 border-b border-surface-700">
+            <span class="text-gray-400">Campaign Name</span>
+            <span class="text-white">Set by the company</span>
+          </div>
+          <div class="flex justify-between py-2 border-b border-surface-700">
+            <span class="text-gray-400">Status</span>
+            <span class="text-white">Active, Paused, or Ended</span>
+          </div>
+          <div class="flex justify-between py-2 border-b border-surface-700">
+            <span class="text-gray-400">Commission</span>
+            <span class="text-white">Percentage or flat rate</span>
+          </div>
+          <div class="flex justify-between py-2 border-b border-surface-700">
+            <span class="text-gray-400">Minimum Tier</span>
+            <span class="text-white">New / Verified / Trusted / Elite</span>
+          </div>
+          <div class="flex justify-between py-2 border-b border-surface-700">
+            <span class="text-gray-400">Hold Period</span>
+            <span class="text-white">Configurable per campaign</span>
+          </div>
+          <div class="flex justify-between py-2 border-b border-surface-700">
+            <span class="text-gray-400">Budget</span>
+            <span class="text-white">Locked in on-chain escrow</span>
+          </div>
+          <div class="flex justify-between py-2">
+            <span class="text-gray-400">Tracking</span>
+            <span class="text-white">Affiliates, conversions, payouts</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Campaign Browser Notice -->
+    <section aria-label="Interactive campaign browser information" class="mb-16">
+      <div class="card border-njord-600/30 max-w-3xl mx-auto text-center">
+        <div class="py-4">
+          <h2 class="text-xl font-semibold text-white mb-3">Browse Live Campaigns in the Dashboard</h2>
+          <p class="text-gray-400 text-sm mb-4">
+            The interactive campaign browser is available in the Njord dashboard application. Filter campaigns by status, commission rate, category, and tier requirements. View real-time budget utilization, affiliate counts, and conversion metrics for each campaign.
+          </p>
+          <p class="text-gray-500 text-xs mb-6">
+            JavaScript and a wallet connection are required to browse and join live campaigns.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="/dashboard" class="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-njord-600 text-white rounded-lg font-medium text-sm hover:bg-njord-500 transition-colors">
+              Open Dashboard
+            </a>
+            <a href="/getting-started" class="inline-flex items-center justify-center gap-2 px-6 py-2.5 bg-surface-700 text-white rounded-lg font-medium text-sm hover:bg-surface-600 transition-colors">
+              Getting Started Guide
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

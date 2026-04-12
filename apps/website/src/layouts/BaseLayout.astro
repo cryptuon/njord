@@ -1,0 +1,63 @@
+---
+import SEO from '../components/SEO.astro'
+import JsonLd from '../components/JsonLd.astro'
+import Navbar from '../components/Navbar.astro'
+import Footer from '../components/Footer.astro'
+import '../styles/global.css'
+
+interface Props {
+  title: string
+  description: string
+  ogImage?: string
+  ogType?: string
+  article?: {
+    publishedTime: string
+    modifiedTime?: string
+    author: string
+    tags?: string[]
+  }
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[]
+  noindex?: boolean
+}
+
+const { title, description, ogImage, ogType, article, jsonLd, noindex } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#003234" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="preload"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      as="style"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <SEO
+      title={title}
+      description={description}
+      ogImage={ogImage}
+      ogType={ogType}
+      article={article}
+      noindex={noindex}
+    />
+    {jsonLd && <JsonLd data={jsonLd} />}
+  </head>
+  <body class="bg-surface-900 text-gray-100 antialiased">
+    <div class="min-h-screen flex flex-col">
+      <Navbar />
+      <main class="flex-1">
+        <slot />
+      </main>
+      <Footer />
+    </div>
+  </body>
+</html>

@@ -1,0 +1,112 @@
+---
+import BaseLayout from './BaseLayout.astro'
+import Breadcrumbs from '../components/Breadcrumbs.astro'
+
+interface Props {
+  title: string
+  description: string
+  pubDate: Date
+  updatedDate?: Date
+  author: string
+  heroImage?: string
+  tags?: string[]
+}
+
+const { title, description, pubDate, updatedDate, author, heroImage, tags = [] } = Astro.props
+const siteUrl = 'https://njord.cryptuon.com'
+
+const articleJsonLd = {
+  '@type': 'Article',
+  headline: title,
+  description,
+  datePublished: pubDate.toISOString(),
+  ...(updatedDate ? { dateModified: updatedDate.toISOString() } : {}),
+  author: { '@type': 'Person', name: author },
+  publisher: {
+    '@type': 'Organization',
+    name: 'Njord Protocol',
+    logo: { '@type': 'ImageObject', url: `${siteUrl}/og-default.png` },
+  },
+  ...(heroImage ? { image: heroImage.startsWith('http') ? heroImage : `${siteUrl}${heroImage}` } : {}),
+  mainEntityOfPage: { '@type': 'WebPage', '@id': `${siteUrl}${Astro.url.pathname}` },
+}
+
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+})
+
+const formattedUpdatedDate = updatedDate?.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+})
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  ogType="article"
+  ogImage={heroImage}
+  article={{
+    publishedTime: pubDate.toISOString(),
+    modifiedTime: updatedDate?.toISOString(),
+    author,
+    tags,
+  }}
+  jsonLd={articleJsonLd}
+>
+  <Breadcrumbs items={[{ name: 'Blog', href: '/blog' }, { name: title }]} />
+
+  <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <header class="mb-10">
+      <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-4">{title}</h1>
+      <div class="flex flex-wrap items-center gap-4 text-sm text-gray-400">
+        <span>By <span class="text-gray-200">{author}</span></span>
+        <time datetime={pubDate.toISOString()}>{formattedDate}</time>
+        {formattedUpdatedDate && (
+          <span>
+            (Updated <time datetime={updatedDate!.toISOString()}>{formattedUpdatedDate}</time>)
+          </span>
+        )}
+      </div>
+      {tags.length > 0 && (
+        <div class="flex flex-wrap gap-2 mt-4">
+          {tags.map(tag => (
+            <a
+              href={`/blog/tag/${tag}`}
+              class="badge bg-njord-600/20 text-njord-400 hover:bg-njord-600/30 transition-colors"
+            >
+              {tag}
+            </a>
+          ))}
+        </div>
+      )}
+    </header>
+
+    {heroImage && (
+      <img
+        src={heroImage}
+        alt={title}
+        class="w-full rounded-2xl mb-10"
+        width="1200"
+        height="630"
+      />
+    )}
+
+    <div class="prose prose-invert prose-njord max-w-none
+      prose-headings:text-white prose-headings:font-bold
+      prose-p:text-gray-300 prose-p:leading-relaxed
+      prose-a:text-njord-400 prose-a:no-underline hover:prose-a:underline
+      prose-strong:text-white
+      prose-code:text-njord-300 prose-code:bg-surface-800 prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded
+      prose-pre:bg-surface-800 prose-pre:border prose-pre:border-surface-700
+      prose-blockquote:border-njord-600 prose-blockquote:text-gray-400
+      prose-li:text-gray-300
+      prose-table:text-gray-300 prose-th:text-white prose-td:border-surface-700 prose-th:border-surface-700
+    ">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

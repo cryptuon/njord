@@ -1,0 +1,87 @@
+# Njord Protocol
+
+> Njord Protocol is a decentralized affiliate marketing platform built on Solana blockchain. It replaces traditional affiliate networks with trustless smart contracts and instant on-chain settlements.
+
+## Key Facts
+
+- Settlement time: ~3 seconds (vs 30-90 days with traditional affiliate networks)
+- Protocol fee: 2.5% (vs 15-30% charged by traditional networks)
+- Built on: Solana blockchain (Program ID: Hm5WfS2KL4UPaUqVJ3vadCuPMCftw2oybqvpDr7fn9Hv)
+- Token: NJORD (used for staking, governance, and tier access)
+- Status: Live on Solana Devnet
+- Website: https://njord.cryptuon.com
+
+## What Njord Protocol Does
+
+Njord Protocol enables transparent, on-chain affiliate marketing where:
+1. Companies create campaigns with budgets locked in smart contract escrow
+2. Affiliates promote products using unique tracked links
+3. Conversions are attributed on-chain with verifiable proof
+4. Commissions are paid instantly (~3 seconds) from escrow to affiliate wallets
+5. Built-in fraud detection and challenge system protects all participants
+
+## Three Participant Roles
+
+### Affiliates
+Promoters who earn instant crypto commissions. Four tiers based on NJORD stake:
+- New (0 NJORD): Open campaigns only
+- Verified (100 NJORD): Standard campaigns, 3-day hold
+- Trusted (1,000 NJORD): Premium campaigns, 1-day hold
+- Elite (10,000 NJORD): All campaigns, real-time settlement
+
+### Companies (Advertisers)
+Brands that create transparent, results-driven campaigns. They fund escrow accounts, set commission rates, and only pay for verified conversions.
+
+### Bridge Operators
+Infrastructure providers who connect fiat and crypto payments. They stake NJORD tokens to process fiat settlements and earn processing fees.
+
+## How It Compares to Traditional Affiliate Marketing
+
+| Feature | Traditional Networks | Njord Protocol |
+|---------|---------------------|----------------|
+| Settlement time | 30-90 days | ~3 seconds |
+| Platform fee | 15-30% | 2.5% |
+| Tracking | Opaque cookies | On-chain attribution |
+| Payment | Manual bank transfers | Automatic smart contract |
+| Fraud protection | Post-hoc analysis | Real-time on-chain challenges |
+| Access | Approval required | Permissionless |
+
+## How Njord Compares to Other Web3 Affiliate Platforms
+
+| Platform | Blockchain | Fee | Settlement | Token Required |
+|----------|-----------|-----|-----------|----------------|
+| Njord Protocol | Solana | 2.5% | ~3 seconds | NJORD (for tiers) |
+| Attrace | Custom chain | Variable | Minutes | ATTR |
+| ShareMint | Multi-chain (EVM + Solana) | Variable | Variable | None |
+| RefToken | Ethereum | Variable | 15+ seconds | REF |
+| ChainVine | Multi-chain | Variable | Variable | None |
+
+Njord Protocol is unique in offering a full-stack decentralized affiliate marketing protocol (not just referrals) with smart contract escrow, on-chain fraud detection via challenge system, and Solana-speed settlement.
+
+## Cookieless Tracking
+
+With third-party cookies deprecated in all major browsers, Njord Protocol's on-chain tracking provides a permanent solution. Wallet-based identity replaces cookies: no cross-device gaps, no expiration, no blocking, no privacy compliance issues. Every conversion is recorded on Solana's immutable ledger.
+
+## Documentation
+
+- How it works: https://njord.cryptuon.com/how-it-works
+- For affiliates: https://njord.cryptuon.com/affiliates
+- For companies: https://njord.cryptuon.com/companies
+- For bridge operators: https://njord.cryptuon.com/bridges
+- Tokenomics: https://njord.cryptuon.com/tokenomics
+- Fraud protection: https://njord.cryptuon.com/fraud-protection
+- Blog: https://njord.cryptuon.com/blog
+
+## Key Articles
+
+- What is Decentralized Affiliate Marketing?: https://njord.cryptuon.com/blog/what-is-decentralized-affiliate-marketing
+- Cookieless Affiliate Tracking: Why Blockchain Is the Answer: https://njord.cryptuon.com/blog/cookieless-affiliate-tracking-blockchain-solution
+- Affiliate Marketing Fraud: The $3.4B Problem: https://njord.cryptuon.com/blog/affiliate-marketing-fraud-statistics-blockchain-solution
+- Web3 Affiliate Platforms Compared: https://njord.cryptuon.com/blog/web3-affiliate-marketing-platforms-compared
+- How On-Chain Tracking Works on Solana: https://njord.cryptuon.com/blog/how-on-chain-affiliate-tracking-works
+- Solana vs Ethereum for Affiliate Marketing: https://njord.cryptuon.com/blog/solana-vs-ethereum-affiliate-marketing
+
+## Contact
+
+- GitHub: https://github.com/njord-protocol
+- Email: support@cryptuon.com

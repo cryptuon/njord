@@ -1,0 +1,299 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import JsonLd from '../components/JsonLd.astro'
+
+const siteUrl = 'https://njord.cryptuon.com'
+
+const organizationJsonLd = [
+  {
+    '@type': 'Organization',
+    name: 'Njord Protocol',
+    url: siteUrl,
+    logo: `${siteUrl}/og-default.png`,
+    description: 'Decentralized affiliate marketing protocol on Solana with instant on-chain settlements',
+    sameAs: ['https://github.com/njord-protocol'],
+    foundingDate: '2025',
+    knowsAbout: ['affiliate marketing', 'blockchain', 'Solana', 'DeFi', 'Web3', 'smart contracts'],
+  },
+  {
+    '@type': 'WebSite',
+    name: 'Njord Protocol',
+    url: siteUrl,
+    description: 'Decentralized affiliate marketing protocol on Solana',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: `${siteUrl}/blog?q={search_term_string}`,
+      'query-input': 'required name=search_term_string',
+    },
+  },
+  {
+    '@type': 'SoftwareApplication',
+    name: 'Njord Protocol',
+    applicationCategory: 'DeFi',
+    operatingSystem: 'Web',
+    description: 'Decentralized affiliate marketing protocol built on Solana blockchain with instant settlement, transparent tracking, and 2.5% fees.',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+  },
+]
+
+const steps = [
+  {
+    title: 'Create a Campaign',
+    description: 'Companies set up campaigns with budgets, commission rates, and targeting. Funds are locked in a secure on-chain escrow.',
+  },
+  {
+    title: 'Promote & Convert',
+    description: 'Affiliates browse campaigns, generate unique links, and promote products to their audience. Every conversion is tracked on Solana.',
+  },
+  {
+    title: 'Earn Instantly',
+    description: 'Commissions are calculated and paid automatically from escrow. Settlement in ~3 seconds with full transparency.',
+  },
+]
+---
+
+<BaseLayout
+  title="Home"
+  description="Njord Protocol is a decentralized affiliate marketing platform on Solana. Transparent campaigns, instant commission payouts in ~3 seconds, and on-chain fraud protection. 2.5% fees vs 15-30% traditional."
+  jsonLd={organizationJsonLd}
+>
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden" aria-label="Hero">
+    <div class="absolute inset-0 bg-gradient-to-b from-njord-950/30 to-surface-900"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+      <div class="text-center max-w-4xl mx-auto">
+        <p class="text-gray-300 text-lg mb-8 max-w-2xl mx-auto">
+          Njord Protocol is a decentralized affiliate marketing platform built on Solana that replaces traditional affiliate networks with trustless smart contracts and instant on-chain settlements.
+        </p>
+        <h1 class="text-4xl md:text-6xl font-extrabold mb-6">
+          <span class="text-white">Decentralized</span>
+          <br />
+          <span class="gradient-text">Affiliate Marketing</span>
+          <br />
+          <span class="text-white">on Solana</span>
+        </h1>
+        <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto">
+          Transparent, instant, and trustless commissions. Create campaigns, promote products,
+          and earn rewards &mdash; all settled on-chain in seconds.
+        </p>
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="/campaigns" class="btn-primary text-lg">
+            Explore Campaigns
+          </a>
+          <a href="/getting-started" class="btn-secondary text-lg">
+            Get Started
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section class="border-y border-surface-700 bg-surface-800/50" aria-label="Protocol statistics">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="text-center">
+          <p class="text-2xl md:text-3xl font-bold text-white">~3s</p>
+          <p class="text-sm text-gray-400 mt-1">Settlement Time</p>
+        </div>
+        <div class="text-center">
+          <p class="text-2xl md:text-3xl font-bold text-white">2.5%</p>
+          <p class="text-sm text-gray-400 mt-1">Protocol Fee</p>
+        </div>
+        <div class="text-center">
+          <p class="text-2xl md:text-3xl font-bold text-white">100%</p>
+          <p class="text-sm text-gray-400 mt-1">On-Chain Transparent</p>
+        </div>
+        <div class="text-center">
+          <p class="text-2xl md:text-3xl font-bold text-white">24/7</p>
+          <p class="text-sm text-gray-400 mt-1">Permissionless Access</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Preview -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20" aria-label="How it works">
+    <div class="text-center mb-16">
+      <h2 class="section-title mb-4">How Does Decentralized Affiliate Marketing Work?</h2>
+      <p class="section-subtitle mx-auto">Three simple steps to transparent, on-chain affiliate marketing</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      {steps.map((step, i) => (
+        <div class="card-hover text-center">
+          <div class="w-14 h-14 rounded-2xl bg-njord-600/20 text-njord-400 flex items-center justify-center mx-auto mb-4 text-2xl font-bold">
+            {i + 1}
+          </div>
+          <h3 class="text-xl font-semibold text-white mb-2">{step.title}</h3>
+          <p class="text-gray-400">{step.description}</p>
+        </div>
+      ))}
+    </div>
+    <div class="text-center mt-10">
+      <a href="/how-it-works" class="btn-secondary">
+        Learn More
+      </a>
+    </div>
+  </section>
+
+  <!-- Comparison Table — AI-extractable -->
+  <section class="bg-surface-800/30 border-y border-surface-700" aria-label="Comparison with traditional affiliate marketing">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-16">
+        <h2 class="section-title mb-4">Why Choose Njord Protocol Over Traditional Networks?</h2>
+        <p class="section-subtitle mx-auto">A side-by-side comparison of decentralized vs traditional affiliate marketing</p>
+      </div>
+      <div class="max-w-3xl mx-auto">
+        <table class="w-full text-left">
+          <caption class="sr-only">Njord Protocol vs Traditional Affiliate Networks comparison</caption>
+          <thead>
+            <tr class="border-b border-surface-700">
+              <th class="py-3 px-4 text-gray-400 font-medium">Feature</th>
+              <th class="py-3 px-4 text-gray-400 font-medium">Traditional</th>
+              <th class="py-3 px-4 text-njord-400 font-medium">Njord Protocol</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-300">
+            <tr class="border-b border-surface-700/50">
+              <td class="py-3 px-4">Settlement Time</td>
+              <td class="py-3 px-4 text-gray-500">30-90 days</td>
+              <td class="py-3 px-4 text-white font-medium">~3 seconds</td>
+            </tr>
+            <tr class="border-b border-surface-700/50">
+              <td class="py-3 px-4">Platform Fee</td>
+              <td class="py-3 px-4 text-gray-500">15-30%</td>
+              <td class="py-3 px-4 text-white font-medium">2.5%</td>
+            </tr>
+            <tr class="border-b border-surface-700/50">
+              <td class="py-3 px-4">Tracking</td>
+              <td class="py-3 px-4 text-gray-500">Opaque cookies</td>
+              <td class="py-3 px-4 text-white font-medium">On-chain attribution</td>
+            </tr>
+            <tr class="border-b border-surface-700/50">
+              <td class="py-3 px-4">Payment</td>
+              <td class="py-3 px-4 text-gray-500">Manual bank transfers</td>
+              <td class="py-3 px-4 text-white font-medium">Automatic smart contract</td>
+            </tr>
+            <tr class="border-b border-surface-700/50">
+              <td class="py-3 px-4">Fraud Protection</td>
+              <td class="py-3 px-4 text-gray-500">Post-hoc analysis</td>
+              <td class="py-3 px-4 text-white font-medium">Real-time on-chain challenges</td>
+            </tr>
+            <tr>
+              <td class="py-3 px-4">Access</td>
+              <td class="py-3 px-4 text-gray-500">Approval required</td>
+              <td class="py-3 px-4 text-white font-medium">Permissionless</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Roles Overview -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20" aria-label="Participant roles">
+    <div class="text-center mb-16">
+      <h2 class="section-title mb-4">Who Can Participate in Njord Protocol?</h2>
+      <p class="section-subtitle mx-auto">Everyone has a part to play in the decentralized affiliate marketing ecosystem</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <a href="/affiliates" class="card-hover group">
+        <div class="w-12 h-12 rounded-xl bg-blue-600/20 text-blue-400 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" /></svg>
+        </div>
+        <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-njord-400 transition-colors">Affiliates</h3>
+        <p class="text-gray-400 text-sm">Promote products you believe in and earn instant crypto commissions. Build your reputation and unlock higher tiers.</p>
+      </a>
+      <a href="/companies" class="card-hover group">
+        <div class="w-12 h-12 rounded-xl bg-purple-600/20 text-purple-400 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+        </div>
+        <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-njord-400 transition-colors">Companies</h3>
+        <p class="text-gray-400 text-sm">Launch transparent, results-driven campaigns. Only pay for verified conversions with built-in fraud protection.</p>
+      </a>
+      <a href="/bridges" class="card-hover group">
+        <div class="w-12 h-12 rounded-xl bg-amber-600/20 text-amber-400 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 14v3m4-3v3m4-3v3M3 21h18M3 10h18M3 7l9-4 9 4M4 10h16v11H4V10z" /></svg>
+        </div>
+        <h3 class="text-xl font-semibold text-white mb-2 group-hover:text-njord-400 transition-colors">Bridge Operators</h3>
+        <p class="text-gray-400 text-sm">Power the fiat infrastructure. Process payments, earn fees, and stake NJORD tokens for higher tiers.</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- Cookieless Future / Future-Proof -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20" aria-label="Future-proof affiliate tracking">
+    <div class="text-center mb-16">
+      <h2 class="section-title mb-4">Is Your Affiliate Tracking Ready for the Cookieless Future?</h2>
+      <p class="section-subtitle mx-auto">Third-party cookies are dead. On-chain tracking is the permanent replacement.</p>
+    </div>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="card text-center">
+        <div class="text-4xl font-bold text-red-400 mb-2">0%</div>
+        <p class="text-gray-400 text-sm">Third-party cookie support in Safari, Firefox, and Chrome</p>
+      </div>
+      <div class="card text-center">
+        <div class="text-4xl font-bold text-amber-400 mb-2">$3.4B</div>
+        <p class="text-gray-400 text-sm">Lost annually to affiliate marketing fraud that on-chain tracking prevents</p>
+      </div>
+      <div class="card text-center">
+        <div class="text-4xl font-bold text-njord-400 mb-2">100%</div>
+        <p class="text-gray-400 text-sm">Of Njord conversions are verifiable on Solana's public ledger</p>
+      </div>
+    </div>
+    <div class="text-center mt-10">
+      <a href="/blog/cookieless-affiliate-tracking-blockchain-solution" class="btn-secondary">
+        Read: Cookieless Tracking Guide
+      </a>
+    </div>
+  </section>
+
+  <!-- From the Blog -->
+  <section class="bg-surface-800/30 border-y border-surface-700" aria-label="Latest articles">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div class="text-center mb-16">
+        <h2 class="section-title mb-4">Latest from the Njord Protocol Blog</h2>
+        <p class="section-subtitle mx-auto">Insights, tutorials, and industry analysis on decentralized affiliate marketing</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        <a href="/blog/what-is-decentralized-affiliate-marketing" class="card-hover group">
+          <span class="badge bg-njord-600/20 text-njord-400 text-xs mb-3">Thought Leadership</span>
+          <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-njord-400 transition-colors">What is Decentralized Affiliate Marketing?</h3>
+          <p class="text-gray-400 text-sm">How blockchain smart contracts are replacing traditional affiliate networks in the $17B industry.</p>
+        </a>
+        <a href="/blog/affiliate-marketing-payment-delays-solved" class="card-hover group">
+          <span class="badge bg-njord-600/20 text-njord-400 text-xs mb-3">Guide</span>
+          <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-njord-400 transition-colors">Why Affiliate Payments Take 30-90 Days (And How to Fix It)</h3>
+          <p class="text-gray-400 text-sm">How smart contract escrow eliminates the payment delay that plagues traditional affiliate marketing.</p>
+        </a>
+        <a href="/blog/web3-affiliate-marketing-platforms-compared" class="card-hover group">
+          <span class="badge bg-njord-600/20 text-njord-400 text-xs mb-3">Comparison</span>
+          <h3 class="text-lg font-semibold text-white mb-2 group-hover:text-njord-400 transition-colors">Web3 Affiliate Platforms Compared: Which One Should You Use?</h3>
+          <p class="text-gray-400 text-sm">An honest comparison of Njord, Attrace, ShareMint, and other blockchain affiliate marketing platforms.</p>
+        </a>
+      </div>
+      <div class="text-center mt-10">
+        <a href="/blog" class="btn-secondary">
+          View All Articles
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20" aria-label="Call to action">
+    <div class="card bg-gradient-to-r from-njord-950 to-surface-800 text-center py-16">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Ready to Get Started?</h2>
+      <p class="text-gray-400 mb-8 max-w-lg mx-auto">
+        Connect your wallet to explore campaigns, track earnings, and manage your participation in the Njord network.
+      </p>
+      <a href="/dashboard" class="btn-primary text-lg">
+        Launch Dashboard
+      </a>
+    </div>
+  </section>
+</BaseLayout>

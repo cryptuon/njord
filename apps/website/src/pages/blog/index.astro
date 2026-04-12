@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro'
+import Breadcrumbs from '../../components/Breadcrumbs.astro'
+import { getCollection } from 'astro:content'
+
+const posts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+
+const allTags = [...new Set(posts.flatMap(p => p.data.tags))]
+---
+
+<BaseLayout
+  title="Blog"
+  description="Articles, tutorials, and insights about decentralized affiliate marketing, on-chain tracking, Solana DeFi, and the future of Web3 marketing from the Njord Protocol team."
+  jsonLd={{
+    '@type': 'CollectionPage',
+    name: 'Njord Protocol Blog',
+    description: 'Articles about decentralized affiliate marketing on Solana',
+    url: 'https://njord.cryptuon.com/blog',
+  }}
+>
+  <Breadcrumbs items={[{ name: 'Blog' }]} />
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" aria-label="Blog posts">
+    <div class="text-center mb-16">
+      <h1 class="section-title mb-4">Njord Protocol Blog</h1>
+      <p class="section-subtitle mx-auto">
+        Insights, tutorials, and updates about decentralized affiliate marketing on Solana
+      </p>
+    </div>
+
+    {allTags.length > 0 && (
+      <div class="flex flex-wrap justify-center gap-2 mb-12">
+        <a href="/blog" class="badge bg-njord-600/30 text-njord-400">All</a>
+        {allTags.map(tag => (
+          <a href={`/blog/tag/${tag}`} class="badge bg-surface-700 text-gray-300 hover:bg-surface-600 transition-colors">
+            {tag}
+          </a>
+        ))}
+      </div>
+    )}
+
+    {posts.length === 0 ? (
+      <div class="text-center py-20">
+        <p class="text-gray-400 text-lg">No articles published yet. Check back soon!</p>
+      </div>
+    ) : (
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {posts.map(post => (
+          <a href={`/blog/${post.slug}`} class="card-hover group flex flex-col">
+            {post.data.heroImage && (
+              <img
+                src={post.data.heroImage}
+                alt={post.data.title}
+                class="w-full h-48 object-cover rounded-xl mb-4"
+                width="400"
+                height="200"
+              />
+            )}
+            <div class="flex-1">
+              <div class="flex flex-wrap gap-2 mb-3">
+                <span class="badge bg-njord-600/20 text-njord-400 text-xs">{post.data.category}</span>
+                {post.data.tags.slice(0, 2).map(tag => (
+                  <span class="badge bg-surface-700 text-gray-400 text-xs">{tag}</span>
+                ))}
+              </div>
+              <h2 class="text-xl font-semibold text-white mb-2 group-hover:text-njord-400 transition-colors">
+                {post.data.title}
+              </h2>
+              <p class="text-gray-400 text-sm mb-4 line-clamp-3">{post.data.description}</p>
+            </div>
+            <div class="flex items-center justify-between text-sm text-gray-500">
+              <span>{post.data.author}</span>
+              <time datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+              </time>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </section>
+</BaseLayout>

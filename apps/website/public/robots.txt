@@ -1,0 +1,36 @@
+# Njord Protocol — Decentralized Affiliate Marketing on Solana
+# https://njord.cryptuon.com
+
+User-agent: *
+Allow: /
+Disallow: /dashboard
+
+Sitemap: https://njord.cryptuon.com/sitemap-index.xml
+
+# AI Search Crawlers — explicitly allowed for AI search retrieval
+User-agent: GPTBot
+Allow: /
+Disallow: /dashboard
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /dashboard
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /dashboard
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /dashboard
+
+User-agent: Bytespider
+Allow: /
+Disallow: /dashboard
+
+User-agent: Amazonbot
+Allow: /
+Disallow: /dashboard

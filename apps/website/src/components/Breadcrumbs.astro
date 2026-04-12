@@ -1,0 +1,45 @@
+---
+import JsonLd from './JsonLd.astro'
+
+interface BreadcrumbItem {
+  name: string
+  href?: string
+}
+
+interface Props {
+  items: BreadcrumbItem[]
+}
+
+const { items } = Astro.props
+const siteUrl = 'https://njord.cryptuon.com'
+
+const breadcrumbJsonLd = {
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: siteUrl },
+    ...items.map((item, i) => ({
+      '@type': 'ListItem',
+      position: i + 2,
+      name: item.name,
+      ...(item.href ? { item: `${siteUrl}${item.href}` } : {}),
+    })),
+  ],
+}
+---
+
+<JsonLd data={breadcrumbJsonLd} />
+<nav aria-label="Breadcrumb" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+  <ol class="flex items-center gap-2 text-sm text-gray-500">
+    <li><a href="/" class="hover:text-gray-300 transition-colors">Home</a></li>
+    {items.map((item, i) => (
+      <li class="flex items-center gap-2">
+        <span>/</span>
+        {item.href && i < items.length - 1 ? (
+          <a href={item.href} class="hover:text-gray-300 transition-colors">{item.name}</a>
+        ) : (
+          <span class="text-gray-300">{item.name}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

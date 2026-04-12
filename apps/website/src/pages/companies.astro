@@ -1,0 +1,175 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Breadcrumbs from '../components/Breadcrumbs.astro'
+
+const title = 'Njord for Companies | Launch Transparent Affiliate Campaigns on Solana'
+const description = 'Create affiliate marketing campaigns with on-chain escrow, automatic payouts, and built-in fraud protection on Njord Protocol. Only pay for verified conversions with full transparency.'
+
+const benefits = [
+  { title: 'Pay for Results', desc: 'Only pay commissions on verified conversions. No upfront ad spend risk.' },
+  { title: 'On-Chain Transparency', desc: 'Every attribution and payout is recorded on Solana for complete auditability.' },
+  { title: 'Fraud Protection', desc: 'Built-in challenge system and fraud scoring. Bad actors get slashed, not rewarded.' },
+  { title: 'Global Reach', desc: 'Bridge operators in multiple regions enable fiat payments from anywhere.' },
+]
+
+const params = [
+  { name: 'Budget', desc: 'Total amount to allocate for affiliate payouts', example: 'e.g., 10,000 USDC' },
+  { name: 'Commission Type', desc: 'Percentage of sale, flat fee per action, or tiered rates', example: 'e.g., 10% of sale value' },
+  { name: 'Target Action', desc: 'What action triggers a commission', example: 'Purchase, Signup, App Install, Subscription' },
+  { name: 'Attribution Model', desc: 'How credit is assigned for conversions', example: 'Last Click or First Click' },
+  { name: 'Min Affiliate Tier', desc: 'Required reputation level for affiliates to join', example: 'New, Verified, Trusted, or Elite' },
+  { name: 'Hold Period', desc: 'Time before commissions are released (fraud protection)', example: '0-7 days, customizable per campaign' },
+]
+
+const faqs = [
+  {
+    question: 'How much does it cost to run an affiliate campaign on Njord?',
+    answer: 'There are no upfront fees or monthly charges. You only pay when a verified conversion happens. The protocol charges a 2% fee on commissions paid out, and bridge operators charge an additional 1% if fiat processing is involved. For example, on a $10 commission, you would pay $10.30 total ($10 to the affiliate + $0.20 protocol fee + $0.10 bridge fee). Companies can also stake NJORD tokens for fee discounts of up to 50%.',
+  },
+  {
+    question: 'How do I create an affiliate campaign on Njord Protocol?',
+    answer: 'You can create a campaign in two ways: Crypto-native (connect a Solana wallet like Phantom, fund it with USDC or SOL, then create and fund your campaign escrow directly) or via a bridge operator (sign up with a bridge in your region, configure your campaign through their dashboard, and pay with credit card or bank transfer). Both methods result in an on-chain campaign with transparent escrow.',
+  },
+  {
+    question: 'How does Njord prevent affiliate fraud?',
+    answer: 'Njord has multiple layers of fraud protection. Bridge operators run detection infrastructure to filter suspicious activity before it reaches the chain. On-chain, there is a challenge system where fraudulent attributions can be disputed. Affiliates have tiered reputation levels with hold periods (up to 7 days for new affiliates), giving time to detect fraud. Bad actors get their stakes slashed, creating strong economic disincentives against fraud.',
+  },
+  {
+    question: 'What types of campaigns can I run on Njord?',
+    answer: 'Njord supports multiple campaign types including pay-per-sale (percentage of sale value), pay-per-action (flat fee for signups, app installs, subscriptions), and tiered commission structures. You can set your own attribution model (last click or first click), minimum affiliate tier requirements, custom hold periods, and budget caps. The protocol is flexible enough for e-commerce, SaaS, mobile apps, and DeFi products.',
+  },
+]
+
+const jsonLd = [
+  {
+    '@type': 'WebPage',
+    name: 'Njord Protocol for Companies',
+    description: description,
+    url: 'https://njord.cryptuon.com/companies',
+  },
+  {
+    '@type': 'FAQPage',
+    mainEntity: faqs.map(faq => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: faq.answer,
+      },
+    })),
+  },
+]
+---
+
+<BaseLayout title={title} description={description} jsonLd={jsonLd}>
+  <Breadcrumbs items={[{ name: 'For Companies' }]} />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <header class="text-center mb-16">
+      <h1 class="section-title mb-4">How Can Companies Launch Transparent Affiliate Campaigns?</h1>
+      <p class="section-subtitle mx-auto">
+        Create affiliate campaigns with on-chain escrow, automatic payouts, and built-in fraud protection.
+        Only pay for verified conversions.
+      </p>
+    </header>
+
+    <!-- Benefits -->
+    <section aria-label="Benefits for companies" class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+      {benefits.map((b) => (
+        <article class="card-hover">
+          <h3 class="text-white font-semibold mb-1">{b.title}</h3>
+          <p class="text-gray-400 text-sm">{b.desc}</p>
+        </article>
+      ))}
+    </section>
+
+    <!-- Campaign Parameters -->
+    <section aria-label="Campaign configuration options" class="mb-20">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">What Can You Configure in a Campaign?</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {params.map((param) => (
+          <article class="card">
+            <h4 class="text-white font-medium mb-1">{param.name}</h4>
+            <p class="text-gray-500 text-sm">{param.desc}</p>
+            <p class="text-njord-400 text-xs mt-2">{param.example}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Fee Structure -->
+    <section aria-label="Fee breakdown" class="mb-20">
+      <h2 class="text-2xl font-bold text-white text-center mb-4">What Does It Cost? A Simple Fee Breakdown</h2>
+      <p class="text-gray-400 text-center mb-10">Only a small protocol fee on successful conversions</p>
+      <div class="card max-w-2xl mx-auto">
+        <dl class="space-y-4">
+          <div class="flex justify-between items-center py-2 border-b border-surface-700">
+            <dt class="text-gray-400">Customer purchases</dt>
+            <dd class="text-white font-medium">$100.00</dd>
+          </div>
+          <div class="flex justify-between items-center py-2 border-b border-surface-700">
+            <dt class="text-gray-400">Commission (10%)</dt>
+            <dd class="text-white font-medium">$10.00</dd>
+          </div>
+          <div class="flex justify-between items-center py-2 border-b border-surface-700">
+            <dt class="text-gray-400">Protocol fee (2%)</dt>
+            <dd class="text-red-400 font-medium">-$0.20</dd>
+          </div>
+          <div class="flex justify-between items-center py-2 border-b border-surface-700">
+            <dt class="text-gray-400">Bridge fee (1%)</dt>
+            <dd class="text-red-400 font-medium">-$0.10</dd>
+          </div>
+          <div class="flex justify-between items-center py-2">
+            <dt class="text-white font-semibold">Affiliate receives</dt>
+            <dd class="text-green-400 font-bold text-lg">$9.70</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- Getting Started Paths -->
+    <section aria-label="Getting started options" class="mb-16">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">How Do I Get Started? Two Paths Available</h2>
+      <div class="grid md:grid-cols-2 gap-8">
+        <article class="card-hover">
+          <h3 class="text-lg font-semibold text-white mb-4">Crypto-Native</h3>
+          <ol class="space-y-3 text-sm text-gray-400">
+            <li class="flex gap-3"><span class="text-njord-400 font-bold">1.</span> Install a Solana wallet (Phantom, Solflare)</li>
+            <li class="flex gap-3"><span class="text-njord-400 font-bold">2.</span> Fund wallet with USDC or SOL</li>
+            <li class="flex gap-3"><span class="text-njord-400 font-bold">3.</span> Connect wallet to Njord dashboard</li>
+            <li class="flex gap-3"><span class="text-njord-400 font-bold">4.</span> Create campaign and fund escrow</li>
+          </ol>
+        </article>
+        <article class="card-hover">
+          <h3 class="text-lg font-semibold text-white mb-4">Via Bridge (Fiat)</h3>
+          <ol class="space-y-3 text-sm text-gray-400">
+            <li class="flex gap-3"><span class="text-njord-400 font-bold">1.</span> Choose a bridge operator in your region</li>
+            <li class="flex gap-3"><span class="text-njord-400 font-bold">2.</span> Create account on bridge platform</li>
+            <li class="flex gap-3"><span class="text-njord-400 font-bold">3.</span> Configure campaign via bridge dashboard</li>
+            <li class="flex gap-3"><span class="text-njord-400 font-bold">4.</span> Pay with credit card or bank transfer</li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section aria-label="Frequently asked questions" class="mb-16 max-w-3xl mx-auto">
+      <h2 class="text-2xl font-bold text-white text-center mb-10">Frequently Asked Questions</h2>
+      <div class="space-y-4">
+        {faqs.map((faq) => (
+          <details class="card group">
+            <summary class="flex items-center justify-between cursor-pointer text-white font-medium list-none">
+              <span>{faq.question}</span>
+              <span class="text-gray-400 group-open:rotate-45 transition-transform text-xl">+</span>
+            </summary>
+            <p class="text-gray-400 text-sm mt-4 leading-relaxed">{faq.answer}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <div class="text-center">
+      <a href="/getting-started" class="btn-primary">Get Started</a>
+    </div>
+  </div>
+</BaseLayout>

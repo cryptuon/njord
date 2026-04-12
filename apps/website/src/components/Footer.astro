@@ -1,0 +1,60 @@
+---
+const currentYear = new Date().getFullYear()
+---
+
+<footer class="border-t border-surface-700 bg-surface-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <!-- Brand -->
+      <div class="space-y-4">
+        <div class="flex items-center gap-2">
+          <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-njord-400 to-njord-600 flex items-center justify-center">
+            <span class="text-white font-bold text-sm">N</span>
+          </div>
+          <span class="text-white font-bold text-lg">Njord Protocol</span>
+        </div>
+        <p class="text-gray-500 text-sm">
+          Decentralized affiliate marketing protocol built on Solana.
+          Transparent, instant, and trustless commissions.
+        </p>
+      </div>
+
+      <!-- Protocol -->
+      <div>
+        <h4 class="text-white font-semibold mb-4">Protocol</h4>
+        <div class="space-y-2">
+          <a href="/how-it-works" class="block text-gray-500 hover:text-gray-300 text-sm transition-colors">How It Works</a>
+          <a href="/tokenomics" class="block text-gray-500 hover:text-gray-300 text-sm transition-colors">Tokenomics</a>
+          <a href="/fraud-protection" class="block text-gray-500 hover:text-gray-300 text-sm transition-colors">Fraud Protection</a>
+          <a href="/roadmap" class="block text-gray-500 hover:text-gray-300 text-sm transition-colors">Roadmap</a>
+          <a href="/blog" class="block text-gray-500 hover:text-gray-300 text-sm transition-colors">Blog</a>
+        </div>
+      </div>
+
+      <!-- Participate -->
+      <div>
+        <h4 class="text-white font-semibold mb-4">Participate</h4>
+        <div class="space-y-2">
+          <a href="/affiliates" class="block text-gray-500 hover:text-gray-300 text-sm transition-colors">For Affiliates</a>
+          <a href="/companies" class="block text-gray-500 hover:text-gray-300 text-sm transition-colors">For Companies</a>
+          <a href="/bridges" class="block text-gray-500 hover:text-gray-300 text-sm transition-colors">For Bridges</a>
+          <a href="/getting-started" class="block text-gray-500 hover:text-gray-300 text-sm transition-colors">Getting Started</a>
+        </div>
+      </div>
+
+      <!-- Explore -->
+      <div>
+        <h4 class="text-white font-semibold mb-4">Explore</h4>
+        <div class="space-y-2">
+          <a href="/stats" class="block text-gray-500 hover:text-gray-300 text-sm transition-colors">Network Stats</a>
+          <a href="/campaigns" class="block text-gray-500 hover:text-gray-300 text-sm transition-colors">Campaigns</a>
+          <a href="/dashboard" class="block text-gray-500 hover:text-gray-300 text-sm transition-colors">Dashboard</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="border-t border-surface-700 mt-8 pt-8 text-center text-gray-600 text-sm">
+      &copy; {currentYear} Njord Protocol &mdash; Built on Solana
+    </div>
+  </div>
+</footer>

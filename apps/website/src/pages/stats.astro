@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro'
+import Breadcrumbs from '../components/Breadcrumbs.astro'
+
+const siteUrl = 'https://njord.cryptuon.com'
+
+const statCategories = [
+  { label: 'Total Campaigns', description: 'Number of affiliate campaigns created on the protocol, including active and completed campaigns.' },
+  { label: 'Total Volume', description: 'Cumulative USD value of all attribution events processed through the Njord network.' },
+  { label: 'Total Affiliates', description: 'Number of unique affiliate wallets registered across all campaigns.' },
+  { label: 'Total Bridges', description: 'Number of active bridge operators processing attributions and handling fiat conversions.' },
+  { label: 'Total Attributions', description: 'Count of all conversion events (purchases, signups, installs) tracked on-chain.' },
+  { label: 'Total Commissions', description: 'Cumulative USD value of commissions paid out to affiliates through escrow settlements.' },
+  { label: 'Total Challenges', description: 'Number of fraud challenges submitted through the dispute resolution system.' },
+  { label: 'Challenge Success Rate', description: 'Percentage of fraud challenges that were upheld, indicating the accuracy of fraud detection.' },
+]
+
+const jsonLd = {
+  '@type': 'WebPage',
+  name: 'Njord Protocol Network Statistics',
+  description: 'View live network statistics for the Njord decentralized affiliate marketing protocol on Solana, including campaigns, volume, affiliates, and fraud challenge data.',
+  url: `${siteUrl}/stats`,
+}
+---
+
+<BaseLayout
+  title="Network Statistics - Njord Protocol Live Metrics on Solana"
+  description="View live network statistics for the Njord decentralized affiliate marketing protocol on Solana, including campaigns, volume, affiliates, and fraud challenge data."
+  jsonLd={jsonLd}
+>
+  <Breadcrumbs items={[{ name: 'Network Stats' }]} />
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <header class="text-center mb-12">
+      <h1 class="section-title mb-4">What Are the Njord Network Statistics?</h1>
+      <p class="section-subtitle mx-auto">
+        Live statistics from the Njord protocol on Solana
+      </p>
+    </header>
+
+    <!-- Static Stats Overview -->
+    <section aria-label="Available network metrics" class="mb-12">
+      <h2 class="text-2xl font-bold text-white text-center mb-8">Available Metrics</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {statCategories.map(stat => (
+          <article class="card text-center">
+            <h3 class="text-white font-semibold text-sm mb-2">{stat.label}</h3>
+            <p class="text-gray-500 text-xs">{stat.description}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- Interactive Notice -->
+    <section aria-label="Live dashboard information" class="mb-12">
+      <div class="card border-njord-600/30 max-w-3xl mx-auto text-center">
+        <div class="py-4">
+          <h2 class="text-xl font-semibold text-white mb-3">Live Statistics Require the Dashboard</h2>
+          <p class="text-gray-400 text-sm mb-4">
+            Real-time network statistics, interactive charts, and historical data are available in the Njord dashboard application. The dashboard connects directly to the Solana blockchain and protocol indexer to display up-to-the-minute data.
+          </p>
+          <p class="text-gray-500 text-xs mb-6">
+            JavaScript and a wallet connection are required to view live statistics.
+          </p>
+          <a href="/dashboard" class="inline-flex items-center gap-2 px-6 py-2.5 bg-njord-600 text-white rounded-lg font-medium text-sm hover:bg-njord-500 transition-colors">
+            Go to Dashboard
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Charts Placeholder -->
+    <section aria-label="Historical data charts" class="mb-12">
+      <h2 class="text-2xl font-bold text-white text-center mb-8">Historical Data</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <article class="card">
+          <h3 class="text-lg font-semibold text-white mb-4">Volume (30 Days)</h3>
+          <div class="h-64 flex items-center justify-center text-gray-500">
+            <p class="text-sm">Connect to the dashboard to view historical volume data</p>
+          </div>
+        </article>
+        <article class="card">
+          <h3 class="text-lg font-semibold text-white mb-4">Attributions (30 Days)</h3>
+          <div class="h-64 flex items-center justify-center text-gray-500">
+            <p class="text-sm">Connect to the dashboard to view historical attribution data</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Protocol Info -->
+    <section aria-label="Protocol information">
+      <h2 class="text-2xl font-bold text-white text-center mb-8">Protocol Information</h2>
+      <article class="card max-w-3xl mx-auto">
+        <div class="grid sm:grid-cols-2 gap-4 text-sm">
+          <div class="flex justify-between py-2 border-b border-surface-700">
+            <span class="text-gray-400">Network</span>
+            <span class="text-white">Solana Mainnet</span>
+          </div>
+          <div class="flex justify-between py-2 border-b border-surface-700">
+            <span class="text-gray-400">Protocol Fee</span>
+            <span class="text-white">2.5%</span>
+          </div>
+          <div class="flex justify-between py-2 border-b border-surface-700">
+            <span class="text-gray-400">Blockchain</span>
+            <span class="text-white">Solana</span>
+          </div>
+          <div class="flex justify-between py-2 border-b border-surface-700">
+            <span class="text-gray-400">Settlement</span>
+            <span class="text-white">On-chain escrow</span>
+          </div>
+        </div>
+      </article>
+    </section>
+  </div>
+</BaseLayout>
