@@ -1,6 +1,8 @@
 site_name: Njord Protocol
 site_description: Decentralized Affiliate Marketing on Solana — Where Every Click Pays. Instantly. On-Chain.
-site_url: https://njord.cryptuon.com
+site_url: https://njord.docs.cryptuon.com/
+repo_url: https://github.com/cryptuon/njord
+repo_name: cryptuon/njord
 
 theme:
   name: material
@@ -50,7 +52,7 @@ markdown_extensions:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/njord-protocol/njord
+      link: https://github.com/cryptuon/njord
   generator: false
 
 extra_javascript:
