@@ -16,6 +16,7 @@ theme:
   features:
     - navigation.tabs
     - navigation.sections
+    - navigation.indexes
     - navigation.top
     - search.highlight
     - content.tabs.link
@@ -23,14 +24,16 @@ theme:
 
 nav:
   - Home: index.md
-  - How It Works: how-it-works.md
-  - For Affiliates: for-affiliates.md
-  - For Companies: for-companies.md
-  - For Bridge Operators: for-bridge-operators.md
-  - Tokenomics: tokenomics.md
-  - Fraud Protection: fraud-protection.md
-  - Roadmap: roadmap.md
-  - FAQ: faq.md
+  - Docs:
+      - How It Works: how-it-works.md
+      - Tokenomics: tokenomics.md
+      - Fraud Protection: fraud-protection.md
+      - Roadmap: roadmap.md
+      - FAQ: faq.md
+  - Project:
+      - For Affiliates: for-affiliates.md
+      - For Companies: for-companies.md
+      - For Bridge Operators: for-bridge-operators.md
 
 markdown_extensions:
   - admonition
